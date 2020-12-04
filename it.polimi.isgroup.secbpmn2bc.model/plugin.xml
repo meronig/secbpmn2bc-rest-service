@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Secbpmn2bc -->
+      <package
+            uri="http://it.polimi.isgroup.secbpmn2bc.model/1.0"
+            class="it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage"
+            genModel="model/secbpmn2bc.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated Secbpmn2bc -->
+      <parser
+            type="secbpmn2bc"
+            class="it.polimi.isgroup.secbpmn2bc.model.util.SecBPMN2BCResourceFactoryImpl"/>
+   </extension>
+
+</plugin>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="secbpmn2bc" nsURI="http://it.polimi.isgroup.secbpmn2bc.model/1.0"
+    nsPrefix="secbpmn2bc">
+  <eClassifiers xsi:type="ecore:EClass" name="PrivitySphere" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Scope" lowerBound="1" eType="#//PrivityScope"
+        defaultValueLiteral="Public"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enforceability" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Scope" lowerBound="1" eType="#//EnforceabilityScope"
+        defaultValueLiteral="Public"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserDefinedUsers" upperBound="-1"
+        eType="ecore:EClass ../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//User"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnforceabilityScope">
+    <eLiterals name="Public"/>
+    <eLiterals name="Private" value="1"/>
+    <eLiterals name="UserDefined" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PrivityScope">
+    <eLiterals name="Public"/>
+    <eLiterals name="Private" value="1"/>
+    <eLiterals name="Static" value="2"/>
+    <eLiterals name="WeakDynamic" value="3"/>
+    <eLiterals name="StrongDynamic" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Process">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OnChainData">
+    <eLiterals name="None"/>
+    <eLiterals name="Digest" value="1"/>
+    <eLiterals name="Encrypted" value="2"/>
+    <eLiterals name="Unencrypted" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BlockchainType">
+    <eLiterals name="Public" literal="Public"/>
+    <eLiterals name="Private" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataItems" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataItems">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainData" eType="#//OnChainData"
+        defaultValueLiteral="Digest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Task">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainExecution" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Group">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Definitions" eSuperTypes="../../it.unitn.disi.sweng.gmt.model/model/GMT.ecore#//GMTNamedNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="BlockchainType" eType="#//BlockchainType"
+        defaultValueLiteral="Public"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+</ecore:EPackage>

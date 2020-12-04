@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.polimi.isgroup.secbpmn2bc.model/src" creationSubmenus="true"
+    modelPluginID="it.polimi.isgroup.secbpmn2bc.model" templateDirectory="it.polimi.isgroup.secbpmn2bc.model/templates"
+    dynamicTemplates="true" modelName="Secbpmn2bc" editPluginClass="it.polimi.isgroup.secbpmn2bc.model.edit.internal.Activator"
+    editorPluginClass="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Activator"
+    updateClasspath="false" generateSchema="true" nonNLSMarkers="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    suppressGenModelAnnotations="false" copyrightFields="false" usedGenPackages="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.genmodel#//secbpmn ../../it.unitn.disi.sweng.gmt.model/model/GMT.genmodel#//gmt"
+    operationReflection="true" runtimePlatform="RCP" importOrganizing="true" pluginKey="Secbpmn2bc"
+    decoration="Manual" cleanup="true">
+  <foreignModel>secbpmn2bc.ecore</foreignModel>
+  <genPackages prefix="SecBPMN2BC" basePackage="it.polimi.isgroup" resource="XMI"
+      disposableProviderFactory="true" interfacePackageSuffix="model" metaDataPackageSuffix="model.meta"
+      classPackageSuffix="model.impl" utilityPackageSuffix="model.util" providerPackageSuffix="model.edit.provider"
+      presentationPackageSuffix="model.editor.presentation" testsPackageSuffix="model.tests"
+      dataTypeConverters="true" ecorePackage="secbpmn2bc.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="secbpmn2bc.ecore#//EnforceabilityScope">
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//EnforceabilityScope/Public"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//EnforceabilityScope/Private"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//EnforceabilityScope/UserDefined"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="secbpmn2bc.ecore#//PrivityScope">
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//PrivityScope/Public"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//PrivityScope/Private"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//PrivityScope/Static"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//PrivityScope/WeakDynamic"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//PrivityScope/StrongDynamic"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="secbpmn2bc.ecore#//OnChainData">
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//OnChainData/None"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//OnChainData/Digest"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//OnChainData/Encrypted"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//OnChainData/Unencrypted"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="secbpmn2bc.ecore#//BlockchainType">
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//BlockchainType/Public"/>
+      <genEnumLiterals ecoreEnumLiteral="secbpmn2bc.ecore#//BlockchainType/Private"/>
+    </genEnums>
+    <genClasses ecoreClass="secbpmn2bc.ecore#//PrivitySphere">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//PrivitySphere/Scope"/>
+    </genClasses>
+    <genClasses ecoreClass="secbpmn2bc.ecore#//Enforceability">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//Enforceability/Scope"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference secbpmn2bc.ecore#//Enforceability/UserDefinedUsers"/>
+    </genClasses>
+    <genClasses ecoreClass="secbpmn2bc.ecore#//Process">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//Process/OnChainModel"/>
+    </genClasses>
+    <genClasses ecoreClass="secbpmn2bc.ecore#//DataItems">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//DataItems/OnChainData"/>
+    </genClasses>
+    <genClasses ecoreClass="secbpmn2bc.ecore#//Task">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//Task/OnChainExecution"/>
+    </genClasses>
+    <genClasses ecoreClass="secbpmn2bc.ecore#//Group">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//Group/OnChainModel"/>
+    </genClasses>
+    <genClasses ecoreClass="secbpmn2bc.ecore#//Definitions">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//Definitions/BlockchainType"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference secbpmn2bc.ecore#//Definitions/Processes"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference secbpmn2bc.ecore#//Definitions/Participants"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference secbpmn2bc.ecore#//Definitions/MessageFlows"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute secbpmn2bc.ecore#//Definitions/OnChainModel"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
