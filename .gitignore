@@ -21,3 +21,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Eclipse workspace files
+.JETEmitters/
+.metadata/
+.classpath
+.project
+
+# confidential source code that must not be redistributed
+it.unitn.disi.sweng.*
