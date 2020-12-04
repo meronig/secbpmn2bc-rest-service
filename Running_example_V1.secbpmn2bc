@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<secbpmn2bc:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:secbpmn="http://it.unitn.disi.sweng.secbpmn.model/1.0" xmlns:secbpmn2bc="http://it.polimi.isgroup.secbpmn2bc.model/1.0" uuid="d364f8bb-ad24-4441-abce-0eff336417b0">
+  <nodes xsi:type="secbpmn:Participant" uuid="Participant_1" name="Process 1 Pool" processRef="Process_1"/>
+  <nodes xsi:type="secbpmn:Participant" uuid="Participant_2" incomingConnections="3cfe0587-bf05-42a5-a22a-81c72a436efd" name="Citizen" processRef="Process_3"/>
+  <nodes xsi:type="secbpmn:Participant" uuid="Participant_3" incomingConnections="7b69b56b-7360-4827-8de6-7899a45db932" name="Municipality" processRef="Process_2"/>
+  <nodes xsi:type="secbpmn:Process" uuid="Process_1" name="Process 1">
+    <nodes xsi:type="secbpmn:DataObject" uuid="DataObject_2" incomingConnections="25ecfa38-134b-4e2f-bb38-62bdbeaa120e c844f5f8-7780-461e-900c-2f372b5f6013 552fc0bb-65d8-42f3-b0ac-cb5a783ddd6c" outgoingConnections="f075807e-c9e6-4d24-bdef-ccac97b83282 d90c5623-c534-4e1b-aaa4-8d7983ebbf89" name="Citizen's personal data"/>
+    <nodes xsi:type="secbpmn:DataObject" uuid="DataObject_4" incomingConnections="d4f47764-dd63-4d85-8ef6-3816d862bd8e 368fb515-649c-4137-aee5-538056645ae6" outgoingConnections="14071655-6c61-42fe-bbfe-f55a5cee3fb2 aa53b4b3-81bf-4fb9-830e-7c4209a6a10a dbaea4ec-3d86-4de5-b90b-62b4bc05de32" name="Claim description"/>
+    <nodes xsi:type="secbpmn:DataObject" uuid="DataObject_6" incomingConnections="99e8d5c7-a3d7-4905-9ad4-03d87730596e b0d21028-0cca-41dc-af3e-72558180f477" name="General renovation plan"/>
+    <nodes xsi:type="secbpmn:Integrity" uuid="bb0558aa-dd3c-4313-b676-0164c20fb836" outgoingConnections="c844f5f8-7780-461e-900c-2f372b5f6013" documentation="" securityAssociation="c844f5f8-7780-461e-900c-2f372b5f6013"/>
+    <nodes xsi:type="secbpmn:SeparationOfDuty" uuid="3b89a93d-27ac-4a17-91c7-66800fc3c85a" outgoingConnections="3cfe0587-bf05-42a5-a22a-81c72a436efd 7b69b56b-7360-4827-8de6-7899a45db932" securityAssociation="3cfe0587-bf05-42a5-a22a-81c72a436efd 7b69b56b-7360-4827-8de6-7899a45db932"/>
+    <nodes xsi:type="secbpmn:Availability" uuid="fe486148-c97d-4395-a9aa-ba39d3724872" outgoingConnections="7ef18d50-640b-4972-91fe-c2a0659b15a9" securityAssociation="7ef18d50-640b-4972-91fe-c2a0659b15a9"/>
+    <nodes xsi:type="secbpmn2bc:PrivitySphere" uuid="bb0558aa-dd3c-4313-b676-0164c20fb830" outgoingConnections="552fc0bb-65d8-42f3-b0ac-cb5a783ddd6c" securityAssociation="552fc0bb-65d8-42f3-b0ac-cb5a783ddd6c" Scope="StrongDynamic"/>
+    <nodes xsi:type="secbpmn2bc:PrivitySphere" uuid="bb0558aa-dd3c-4313-b676-0164c20fb831" outgoingConnections="368fb515-649c-4137-aee5-538056645ae6" securityAssociation="368fb515-649c-4137-aee5-538056645ae6"/>
+    <nodes xsi:type="secbpmn2bc:PrivitySphere" uuid="bb0558aa-dd3c-4313-b676-0164c20fb832" outgoingConnections="b0d21028-0cca-41dc-af3e-72558180f477" securityAssociation="b0d21028-0cca-41dc-af3e-72558180f477"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="f075807e-c9e6-4d24-bdef-ccac97b83282" source="DataObject_2" target="Task_6"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="d90c5623-c534-4e1b-aaa4-8d7983ebbf89" source="DataObject_2" target="Task_2"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="25ecfa38-134b-4e2f-bb38-62bdbeaa120e" source="Task_1" target="DataObject_2"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="d4f47764-dd63-4d85-8ef6-3816d862bd8e" source="Task_1" target="DataObject_4"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="14071655-6c61-42fe-bbfe-f55a5cee3fb2" source="DataObject_4" target="Task_3"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="aa53b4b3-81bf-4fb9-830e-7c4209a6a10a" source="DataObject_4" target="Task_4"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="dbaea4ec-3d86-4de5-b90b-62b4bc05de32" source="DataObject_4" target="Task_5"/>
+    <relations xsi:type="secbpmn:DataAssociation" uuid="99e8d5c7-a3d7-4905-9ad4-03d87730596e" source="Task_5" target="DataObject_6"/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="3cfe0587-bf05-42a5-a22a-81c72a436efd" source="3b89a93d-27ac-4a17-91c7-66800fc3c85a" target="Participant_2" description=""/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="7b69b56b-7360-4827-8de6-7899a45db932" source="3b89a93d-27ac-4a17-91c7-66800fc3c85a" target="Participant_3" description=""/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="7ef18d50-640b-4972-91fe-c2a0659b15a9" source="fe486148-c97d-4395-a9aa-ba39d3724872" target="Task_4" description=""/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="552fc0bb-65d8-42f3-b0ac-cb5a783ddd6c" source="bb0558aa-dd3c-4313-b676-0164c20fb830" target="DataObject_2" description=""/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="368fb515-649c-4137-aee5-538056645ae6" source="bb0558aa-dd3c-4313-b676-0164c20fb831" target="DataObject_4" description=""/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="b0d21028-0cca-41dc-af3e-72558180f477" source="bb0558aa-dd3c-4313-b676-0164c20fb832" target="DataObject_6" description=""/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="c844f5f8-7780-461e-900c-2f372b5f6013" source="bb0558aa-dd3c-4313-b676-0164c20fb836" target="DataObject_2" description=""/>
+  </nodes>
+  <nodes xsi:type="secbpmn:Process" uuid="Process_2" name="Monicipality Process">
+    <nodes xsi:type="secbpmn:Lane" uuid="Lane_1" name="Resident registration">
+      <flowNodes xsi:type="secbpmn:StartEvent" uuid="StartEvent_2" incomingConnections="TransferClaim" outgoingConnections="SequenceFlow_2" name="Receive claim"/>
+      <flowNodes xsi:type="secbpmn:Task" uuid="Task_2" incomingConnections="SequenceFlow_2 d90c5623-c534-4e1b-aaa4-8d7983ebbf89" outgoingConnections="SequenceFlow_3" name="Check claim"/>
+      <flowNodes xsi:type="secbpmn:ExclusiveGateway" uuid="ExclusiveGateway_1" incomingConnections="SequenceFlow_3" outgoingConnections="SequenceFlow_4 SequenceFlow_11" name="Local citizen?"/>
+      <flowNodes xsi:type="secbpmn:Task" uuid="Task_3" incomingConnections="SequenceFlow_4 14071655-6c61-42fe-bbfe-f55a5cee3fb2" outgoingConnections="SequenceFlow_5" name="Assess urgency"/>
+      <flowNodes xsi:type="secbpmn:ExclusiveGateway" uuid="ExclusiveGateway_2" incomingConnections="SequenceFlow_5 aa1abd70-0977-4d5b-bb3b-189400f4c130" outgoingConnections="SequenceFlow_6 SequenceFlow_7" name="Urgent?"/>
+      <flowNodes xsi:type="secbpmn:EndEvent" uuid="EndEvent_3" incomingConnections="SequenceFlow_11" name="End Event 3"/>
+    </nodes>
+    <nodes xsi:type="secbpmn:Lane" uuid="Lane_2" name="Timber yard">
+      <nodes xsi:type="secbpmn:Lane" uuid="Lane_3" name="Road worker">
+        <flowNodes xsi:type="secbpmn:Task" uuid="Task_4" incomingConnections="SequenceFlow_6 aa53b4b3-81bf-4fb9-830e-7c4209a6a10a 7ef18d50-640b-4972-91fe-c2a0659b15a9" outgoingConnections="SequenceFlow_8" name="Repair with high priority"/>
+      </nodes>
+      <nodes xsi:type="secbpmn:Lane" uuid="Lane_4" name="Mid-term planner">
+        <flowNodes xsi:type="secbpmn:Task" uuid="Task_5" incomingConnections="SequenceFlow_7 dbaea4ec-3d86-4de5-b90b-62b4bc05de32" outgoingConnections="SequenceFlow_15 99e8d5c7-a3d7-4905-9ad4-03d87730596e" name="Add case to muuid-term plan"/>
+      </nodes>
+    </nodes>
+    <nodes xsi:type="secbpmn:Lane" uuid="Lane_5" name="Mayor's office">
+      <flowNodes xsi:type="secbpmn:Task" uuid="Task_6" incomingConnections="SequenceFlow_8 f075807e-c9e6-4d24-bdef-ccac97b83282" outgoingConnections="SequenceFlow_14" name="Send gift card"/>
+      <flowNodes xsi:type="secbpmn:ThrowEvent" uuid="IntermediateThrowEvent_1" incomingConnections="SequenceFlow_16" outgoingConnections="SequenceFlow_9 TransferNotification" name="Notify citizen"/>
+      <flowNodes xsi:type="secbpmn:ExclusiveGateway" uuid="ExclusiveGateway_3" incomingConnections="SequenceFlow_14 SequenceFlow_15" outgoingConnections="SequenceFlow_16"/>
+      <flowNodes xsi:type="secbpmn:EndEvent" uuid="EndEvent_1" incomingConnections="SequenceFlow_9" name="End Event 1"/>
+    </nodes>
+    <nodes xsi:type="secbpmn2bc:Enforceability" uuid="8ca14738-c9de-47ef-9ba1-a2cf90c59512" outgoingConnections="aa1abd70-0977-4d5b-bb3b-189400f4c130" securityAssociation="aa1abd70-0977-4d5b-bb3b-189400f4c130"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_2" source="StartEvent_2" target="Task_2"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_3" source="Task_2" target="ExclusiveGateway_1"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_4" source="ExclusiveGateway_1" target="Task_3"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_5" source="Task_3" target="ExclusiveGateway_2"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_6" source="ExclusiveGateway_2" target="Task_4"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_7" source="ExclusiveGateway_2" target="Task_5"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_8" source="Task_4" target="Task_6"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_11" source="ExclusiveGateway_1" target="EndEvent_3"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_14" source="Task_6" target="ExclusiveGateway_3"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_15" source="Task_5" target="ExclusiveGateway_3"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_16" source="ExclusiveGateway_3" target="IntermediateThrowEvent_1"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_9" source="IntermediateThrowEvent_1" target="EndEvent_1"/>
+    <relations xsi:type="secbpmn:SecurityAssociation" uuid="aa1abd70-0977-4d5b-bb3b-189400f4c130" source="8ca14738-c9de-47ef-9ba1-a2cf90c59512" target="ExclusiveGateway_2" description=""/>
+  </nodes>
+  <nodes xsi:type="secbpmn:Process" uuid="Process_3" name="Citizen Process">
+    <nodes xsi:type="secbpmn:EndEvent" uuid="EndEvent_5" incomingConnections="SequenceFlow_17" name="End Event 5"/>
+    <nodes xsi:type="secbpmn:CatchEvent" uuid="IntermediateCatchEvent_1" incomingConnections="SequenceFlow_13 TransferNotification" outgoingConnections="SequenceFlow_17" name="Receive notifiocation"/>
+    <nodes xsi:type="secbpmn:StartEvent" uuid="StartEvent_1" outgoingConnections="SequenceFlow_1" name="Start Event 1"/>
+    <nodes xsi:type="secbpmn:Task" uuid="Task_1" incomingConnections="SequenceFlow_1" outgoingConnections="SequenceFlow_13 TransferClaim 25ecfa38-134b-4e2f-bb38-62bdbeaa120e d4f47764-dd63-4d85-8ef6-3816d862bd8e" name="Report claim"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_1" source="StartEvent_1" target="Task_1"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_13" source="Task_1" target="IntermediateCatchEvent_1"/>
+    <relations xsi:type="secbpmn:SequenceFlow" uuid="SequenceFlow_17" source="IntermediateCatchEvent_1" target="EndEvent_5"/>
+  </nodes>
+  <nodes xsi:type="secbpmn:Message" uuid="68c4c587-4a74-4584-a4b9-cca00a1b3b58" name="TransferClaim"/>
+  <nodes xsi:type="secbpmn:Message" uuid="ee201473-7ad6-47c9-b154-5d33f5ed7eae" name="TransferNotification"/>
+  <relations xsi:type="secbpmn:MessageFlow" uuid="TransferClaim" source="Task_1" target="StartEvent_2" message="68c4c587-4a74-4584-a4b9-cca00a1b3b58"/>
+  <relations xsi:type="secbpmn:MessageFlow" uuid="TransferNotification" source="IntermediateThrowEvent_1" target="IntermediateCatchEvent_1" message="ee201473-7ad6-47c9-b154-5d33f5ed7eae"/>
+</secbpmn2bc:Definitions>

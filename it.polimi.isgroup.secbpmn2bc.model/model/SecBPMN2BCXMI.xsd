@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:gmt="http://it.unitn.disi.sweng.gmt.model/1.0" xmlns:secbpmn="http://it.unitn.disi.sweng.secbpmn.model/1.0" xmlns:secbpmn2bc="http://it.polimi.isgroup.secbpmn2bc.model/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://it.polimi.isgroup.secbpmn2bc.model/1.0">
+  <xsd:import namespace="http://it.unitn.disi.sweng.gmt.model/1.0" schemaLocation="gmt.xsd"/>
+  <xsd:import namespace="http://it.unitn.disi.sweng.secbpmn.model/1.0" schemaLocation="secbpmn.xsd"/>
+  <xsd:simpleType name="EnforceabilityScope">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="Public"/>
+      <xsd:enumeration value="Private"/>
+      <xsd:enumeration value="UserDefined"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PrivityScope">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="Public"/>
+      <xsd:enumeration value="Private"/>
+      <xsd:enumeration value="Static"/>
+      <xsd:enumeration value="WeakDynamic"/>
+      <xsd:enumeration value="StrongDynamic"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="OnChainData">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="None"/>
+      <xsd:enumeration value="Digest"/>
+      <xsd:enumeration value="Encrypted"/>
+      <xsd:enumeration value="Unencrypted"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="BlockchainType">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="Public"/>
+      <xsd:enumeration value="Private"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="PrivitySphere">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:SecurityAnnotation">
+        <xsd:attribute name="Scope" type="secbpmn2bc:PrivityScope" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="PrivitySphere" type="secbpmn2bc:PrivitySphere"/>
+  <xsd:complexType name="Enforceability">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:SecurityAnnotation">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="UserDefinedUsers" type="secbpmn:User"/>
+        </xsd:choice>
+        <xsd:attribute name="Scope" type="secbpmn2bc:EnforceabilityScope" use="required"/>
+        <xsd:attribute name="UserDefinedUsers" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Enforceability" type="secbpmn2bc:Enforceability"/>
+  <xsd:complexType name="Process">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:Process">
+        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Process" type="secbpmn2bc:Process"/>
+  <xsd:complexType name="DataItems">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:DataItems">
+        <xsd:attribute name="OnChainData" type="secbpmn2bc:OnChainData"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="DataItems" type="secbpmn2bc:DataItems"/>
+  <xsd:complexType name="Task">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:Task">
+        <xsd:attribute name="OnChainExecution" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Task" type="secbpmn2bc:Task"/>
+  <xsd:complexType name="Group">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:Group">
+        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Group" type="secbpmn2bc:Group"/>
+  <xsd:complexType name="Definitions">
+    <xsd:complexContent>
+      <xsd:extension base="gmt:GMTNamedNode">
+        <xsd:attribute name="BlockchainType" type="secbpmn2bc:BlockchainType"/>
+        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Definitions" type="secbpmn2bc:Definitions"/>
+</xsd:schema>

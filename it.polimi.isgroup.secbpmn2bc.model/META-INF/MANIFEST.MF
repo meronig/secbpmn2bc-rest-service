@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SecBPMN2BC Model
+Bundle-SymbolicName: it.polimi.isgroup.secbpmn2bc.model; singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: it.polimi.isgroup
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ it.unitn.disi.sweng.secbpmn.model;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: it.polimi.isgroup.secbpmn2bc.model.Activator
+Export-Package: it.polimi.isgroup.secbpmn2bc.model,
+ it.polimi.isgroup.secbpmn2bc.model.infer,
+ it.polimi.isgroup.secbpmn2bc.model.meta,
+ it.polimi.isgroup.secbpmn2bc.model.util

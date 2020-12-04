@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension
+         point="org.eclipse.core.runtime.applications"
+         id="Secbpmn2bcEditorAdvisorApplication">
+      <!-- @generated Secbpmn2bc -->
+      <application>
+         <run class="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisor$Application"/>
+      </application>
+   </extension>
+
+   <extension point="org.eclipse.ui.perspectives">
+      <!-- @generated Secbpmn2bc -->
+      <perspective
+            name="%_UI_Perspective_label"
+            class="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisor$Perspective"
+            id="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorPerspective">
+      </perspective>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands">
+      <!-- @generated Secbpmn2bc -->
+      <command
+            name="%_UI_Menu_OpenURI_label"
+            description="%_UI_Menu_OpenURI_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenURICommand"/>
+      <command
+            name="%_UI_Menu_Open_label"
+            description="%_UI_Menu_Open_description"
+            categoryId="org.eclipse.ui.category.file"
+            id="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenCommand"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.bindings">
+      <!-- @generated Secbpmn2bc -->
+      <key
+            commandId="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenURICommand"
+            sequence="M1+U"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            commandId="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenCommand"
+            sequence="M1+O"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated Secbpmn2bc -->
+      <actionSet
+            label="%_UI_Secbpmn2bcEditorAdvisor_ActionSet_label"
+            visible="true"
+            id="Secbpmn2bcEditorAdvisorActionSet">
+         <action
+               label="%_UI_Menu_About_label"
+               class="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisor$AboutAction"
+               menubarPath="help/additions"
+               id="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorAboutAction"/>
+         <action
+               label="%_UI_Menu_OpenURI_label"
+               definitionId="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenURICommand"
+               class="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisor$OpenURIAction"
+               menubarPath="file/additions"
+               id="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenURIAction"/>
+         <action
+               label="%_UI_Menu_Open_label"
+               definitionId="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenCommand"
+               class="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisor$OpenAction"
+               menubarPath="file/additions"
+               id="it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisorOpenAction"/>
+      </actionSet>
+   </extension>
+
+   <extension point="org.eclipse.ui.actionSets">
+      <!-- @generated Secbpmn2bc -->
+      <actionSet
+            label="%_UI_SecBPMN2BCModelWizard_ActionSet_label"
+            visible="true"
+            id="it.polimi.isgroup.secbpmn2bc.model.editor.presentation.SecBPMN2BCActionBarContributorActionSet">
+         <action
+               label="%_UI_SecBPMN2BCModelWizard_label"
+               class="it.polimi.isgroup.secbpmn2bc.model.editor.presentation.SecBPMN2BCActionBarContributor$NewAction"
+               menubarPath="file/new/additions"
+               id="it.polimi.isgroup.secbpmn2bc.model.editor.presentation.SecBPMN2BCActionBarContributorNewAction"/>
+      </actionSet>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated Secbpmn2bc -->
+      <editor
+            id="it.polimi.isgroup.secbpmn2bc.model.editor.presentation.SecBPMN2BCEditorID"
+            name="%_UI_SecBPMN2BCEditor_label"
+            icon="icons/full/obj16/SecBPMN2BCModelFile.gif"
+            extensions="secbpmn2bc"
+            class="it.polimi.isgroup.secbpmn2bc.model.editor.presentation.SecBPMN2BCEditor"
+            contributorClass="it.polimi.isgroup.secbpmn2bc.model.editor.presentation.SecBPMN2BCActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
