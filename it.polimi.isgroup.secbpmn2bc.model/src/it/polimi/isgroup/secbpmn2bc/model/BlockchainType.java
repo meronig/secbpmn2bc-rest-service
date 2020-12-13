@@ -36,7 +36,16 @@ public enum BlockchainType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PRIVATE(1, "Private", "Private"); //$NON-NLS-1$ //$NON-NLS-2$
+	PRIVATE(1, "Private", "Private"),
+	/**
+	* The '<em><b>Undefined</b></em>' literal object.
+	* <!-- begin-user-doc -->
+	* <!-- end-user-doc -->
+	* @see #UNDEFINED_VALUE
+	* @generated
+	* @ordered
+	*/
+	UNDEFINED(-1, "Undefined", "Undefined"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>Public</b></em>' literal value.
@@ -69,12 +78,27 @@ public enum BlockchainType implements Enumerator {
 	public static final int PRIVATE_VALUE = 1;
 
 	/**
+	 * The '<em><b>Undefined</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Undefined</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNDEFINED
+	 * @model name="Undefined"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNDEFINED_VALUE = -1;
+
+	/**
 	 * An array of all the '<em><b>Blockchain Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final BlockchainType[] VALUES_ARRAY = new BlockchainType[] { PUBLIC, PRIVATE, };
+	private static final BlockchainType[] VALUES_ARRAY = new BlockchainType[] { PUBLIC, PRIVATE, UNDEFINED, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Blockchain Type</b></em>' enumerators.
@@ -134,6 +158,8 @@ public enum BlockchainType implements Enumerator {
 			return PUBLIC;
 		case PRIVATE_VALUE:
 			return PRIVATE;
+		case UNDEFINED_VALUE:
+			return UNDEFINED;
 		}
 		return null;
 	}

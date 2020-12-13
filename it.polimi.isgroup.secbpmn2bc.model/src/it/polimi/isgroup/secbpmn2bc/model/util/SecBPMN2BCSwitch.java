@@ -2,11 +2,17 @@
  */
 package it.polimi.isgroup.secbpmn2bc.model.util;
 
+import it.polimi.isgroup.secbpmn2bc.model.DataInput;
 import it.polimi.isgroup.secbpmn2bc.model.DataItems;
+import it.polimi.isgroup.secbpmn2bc.model.DataObject;
+import it.polimi.isgroup.secbpmn2bc.model.DataOutput;
+import it.polimi.isgroup.secbpmn2bc.model.DataStore;
 import it.polimi.isgroup.secbpmn2bc.model.Definitions;
 import it.polimi.isgroup.secbpmn2bc.model.Enforceability;
-import it.polimi.isgroup.secbpmn2bc.model.Group;
+import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.PrivitySphere;
+import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
 
@@ -166,23 +172,6 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case SecBPMN2BCPackage.GROUP: {
-			Group group = (Group) theEObject;
-			T result = caseGroup(group);
-			if (result == null)
-				result = caseSecBPMN_Group(group);
-			if (result == null)
-				result = caseGMTNamedNode(group);
-			if (result == null)
-				result = caseSecBpmnElement(group);
-			if (result == null)
-				result = caseGMTNode(group);
-			if (result == null)
-				result = caseGMTElement(group);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case SecBPMN2BCPackage.DEFINITIONS: {
 			Definitions definitions = (Definitions) theEObject;
 			T result = caseDefinitions(definitions);
@@ -192,6 +181,155 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 				result = caseGMTNode(definitions);
 			if (result == null)
 				result = caseGMTElement(definitions);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case SecBPMN2BCPackage.DATA_STORE: {
+			DataStore dataStore = (DataStore) theEObject;
+			T result = caseDataStore(dataStore);
+			if (result == null)
+				result = caseSecBPMN_DataStore(dataStore);
+			if (result == null)
+				result = caseDataItems(dataStore);
+			if (result == null)
+				result = caseSecBPMN_DataItems(dataStore);
+			if (result == null)
+				result = caseGMTNamedNode(dataStore);
+			if (result == null)
+				result = caseSecBpmnElement(dataStore);
+			if (result == null)
+				result = caseGMTNode(dataStore);
+			if (result == null)
+				result = caseGMTElement(dataStore);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case SecBPMN2BCPackage.DATA_OBJECT: {
+			DataObject dataObject = (DataObject) theEObject;
+			T result = caseDataObject(dataObject);
+			if (result == null)
+				result = caseSecBPMN_DataObject(dataObject);
+			if (result == null)
+				result = caseDataItems(dataObject);
+			if (result == null)
+				result = caseSecBPMN_DataItems(dataObject);
+			if (result == null)
+				result = caseGMTNamedNode(dataObject);
+			if (result == null)
+				result = caseSecBpmnElement(dataObject);
+			if (result == null)
+				result = caseGMTNode(dataObject);
+			if (result == null)
+				result = caseGMTElement(dataObject);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case SecBPMN2BCPackage.DATA_INPUT: {
+			DataInput dataInput = (DataInput) theEObject;
+			T result = caseDataInput(dataInput);
+			if (result == null)
+				result = caseDataItems(dataInput);
+			if (result == null)
+				result = caseSecBPMN_DataInput(dataInput);
+			if (result == null)
+				result = caseSecBPMN_DataItems(dataInput);
+			if (result == null)
+				result = caseGMTNamedNode(dataInput);
+			if (result == null)
+				result = caseSecBpmnElement(dataInput);
+			if (result == null)
+				result = caseGMTNode(dataInput);
+			if (result == null)
+				result = caseGMTElement(dataInput);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case SecBPMN2BCPackage.DATA_OUTPUT: {
+			DataOutput dataOutput = (DataOutput) theEObject;
+			T result = caseDataOutput(dataOutput);
+			if (result == null)
+				result = caseSecBPMN_DataOutput(dataOutput);
+			if (result == null)
+				result = caseDataItems(dataOutput);
+			if (result == null)
+				result = caseSecBPMN_DataItems(dataOutput);
+			if (result == null)
+				result = caseGMTNamedNode(dataOutput);
+			if (result == null)
+				result = caseSecBpmnElement(dataOutput);
+			if (result == null)
+				result = caseGMTNode(dataOutput);
+			if (result == null)
+				result = caseGMTElement(dataOutput);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case SecBPMN2BCPackage.MESSAGE: {
+			Message message = (Message) theEObject;
+			T result = caseMessage(message);
+			if (result == null)
+				result = caseDataItems(message);
+			if (result == null)
+				result = caseSecBPMN_Message(message);
+			if (result == null)
+				result = caseSecBPMN_DataItems(message);
+			if (result == null)
+				result = caseGMTNamedNode(message);
+			if (result == null)
+				result = caseSecBpmnElement(message);
+			if (result == null)
+				result = caseGMTNode(message);
+			if (result == null)
+				result = caseGMTElement(message);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case SecBPMN2BCPackage.MESSAGE_REF: {
+			MessageRef messageRef = (MessageRef) theEObject;
+			T result = caseMessageRef(messageRef);
+			if (result == null)
+				result = caseMessage(messageRef);
+			if (result == null)
+				result = caseDataItems(messageRef);
+			if (result == null)
+				result = caseSecBPMN_Message(messageRef);
+			if (result == null)
+				result = caseSecBPMN_DataItems(messageRef);
+			if (result == null)
+				result = caseGMTNamedNode(messageRef);
+			if (result == null)
+				result = caseSecBpmnElement(messageRef);
+			if (result == null)
+				result = caseGMTNode(messageRef);
+			if (result == null)
+				result = caseGMTElement(messageRef);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case SecBPMN2BCPackage.SUB_PROCESS: {
+			SubProcess subProcess = (SubProcess) theEObject;
+			T result = caseSubProcess(subProcess);
+			if (result == null)
+				result = caseSecBPMN_SubProcess(subProcess);
+			if (result == null)
+				result = caseActivity(subProcess);
+			if (result == null)
+				result = caseFlowNode(subProcess);
+			if (result == null)
+				result = caseGMTNamedNode(subProcess);
+			if (result == null)
+				result = caseSecBpmnElement(subProcess);
+			if (result == null)
+				result = caseGMTNode(subProcess);
+			if (result == null)
+				result = caseGMTElement(subProcess);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -277,21 +415,6 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Group</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGroup(Group object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Definitions</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -303,6 +426,111 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDefinitions(Definitions object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Store</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Store</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataStore(DataStore object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataObject(DataObject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Input</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataInput(DataInput object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Output</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Output</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataOutput(DataOutput object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Message</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMessage(Message object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Message Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Message Ref</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMessageRef(MessageRef object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sub Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sub Process</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSubProcess(SubProcess object) {
 		return null;
 	}
 
@@ -457,17 +685,92 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Group</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Data Store</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Group</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Data Store</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSecBPMN_Group(it.unitn.disi.sweng.secbpmn.model.Group object) {
+	public T caseSecBPMN_DataStore(it.unitn.disi.sweng.secbpmn.model.DataStore object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecBPMN_DataObject(it.unitn.disi.sweng.secbpmn.model.DataObject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Input</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecBPMN_DataInput(it.unitn.disi.sweng.secbpmn.model.DataInput object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Output</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Output</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecBPMN_DataOutput(it.unitn.disi.sweng.secbpmn.model.DataOutput object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Message</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecBPMN_Message(it.unitn.disi.sweng.secbpmn.model.Message object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sub Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sub Process</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecBPMN_SubProcess(it.unitn.disi.sweng.secbpmn.model.SubProcess object) {
 		return null;
 	}
 

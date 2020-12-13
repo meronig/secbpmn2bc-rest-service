@@ -2,7 +2,7 @@
  */
 package it.polimi.isgroup.secbpmn2bc.model.impl;
 
-import it.polimi.isgroup.secbpmn2bc.model.Group;
+import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
 
@@ -14,18 +14,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Group</b></em>'.
+ * An implementation of the model object '<em><b>Sub Process</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.GroupImpl#isOnChainModel <em>On Chain Model</em>}</li>
+ *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.SubProcessImpl#isOnChainModel <em>On Chain Model</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl implements Group {
+public class SubProcessImpl extends it.unitn.disi.sweng.secbpmn.model.impl.SubProcessImpl implements SubProcess {
 	/**
 	 * The default value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -34,7 +34,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = true;
+	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = false;
 
 	/**
 	 * The cached value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
@@ -51,7 +51,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GroupImpl() {
+	protected SubProcessImpl() {
 		super();
 	}
 
@@ -62,7 +62,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SecBPMN2BCPackage.Literals.GROUP;
+		return SecBPMN2BCPackage.Literals.SUB_PROCESS;
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 		boolean oldOnChainModel = onChainModel;
 		onChainModel = newOnChainModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SecBPMN2BCPackage.GROUP__ON_CHAIN_MODEL,
+			eNotify(new ENotificationImpl(this, Notification.SET, SecBPMN2BCPackage.SUB_PROCESS__ON_CHAIN_MODEL,
 					oldOnChainModel, onChainModel));
 	}
 
@@ -97,7 +97,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case SecBPMN2BCPackage.GROUP__ON_CHAIN_MODEL:
+		case SecBPMN2BCPackage.SUB_PROCESS__ON_CHAIN_MODEL:
 			return isOnChainModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -111,7 +111,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case SecBPMN2BCPackage.GROUP__ON_CHAIN_MODEL:
+		case SecBPMN2BCPackage.SUB_PROCESS__ON_CHAIN_MODEL:
 			setOnChainModel((Boolean) newValue);
 			return;
 		}
@@ -126,7 +126,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case SecBPMN2BCPackage.GROUP__ON_CHAIN_MODEL:
+		case SecBPMN2BCPackage.SUB_PROCESS__ON_CHAIN_MODEL:
 			setOnChainModel(ON_CHAIN_MODEL_EDEFAULT);
 			return;
 		}
@@ -141,7 +141,7 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case SecBPMN2BCPackage.GROUP__ON_CHAIN_MODEL:
+		case SecBPMN2BCPackage.SUB_PROCESS__ON_CHAIN_MODEL:
 			return onChainModel != ON_CHAIN_MODEL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -164,4 +164,4 @@ public class GroupImpl extends it.unitn.disi.sweng.secbpmn.model.impl.GroupImpl 
 		return result.toString();
 	}
 
-} //GroupImpl
+} //SubProcessImpl

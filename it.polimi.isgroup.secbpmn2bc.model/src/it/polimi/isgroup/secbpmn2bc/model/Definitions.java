@@ -24,7 +24,7 @@ import it.unitn.disi.sweng.gmt.model.GMTNamedNode;
 public interface Definitions extends GMTNamedNode {
 	/**
 	 * Returns the value of the '<em><b>Blockchain Type</b></em>' attribute.
-	 * The default value is <code>"Public"</code>.
+	 * The default value is <code>"Undefined"</code>.
 	 * The literals are from the enumeration {@link it.polimi.isgroup.secbpmn2bc.model.BlockchainType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -34,9 +34,11 @@ public interface Definitions extends GMTNamedNode {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Blockchain Type</em>' attribute.
 	 * @see it.polimi.isgroup.secbpmn2bc.model.BlockchainType
+	 * @see #isSetBlockchainType()
+	 * @see #unsetBlockchainType()
 	 * @see #setBlockchainType(BlockchainType)
 	 * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getDefinitions_BlockchainType()
-	 * @model default="Public"
+	 * @model default="Undefined" unsettable="true"
 	 * @generated
 	 */
 	BlockchainType getBlockchainType();
@@ -47,14 +49,39 @@ public interface Definitions extends GMTNamedNode {
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Blockchain Type</em>' attribute.
 	 * @see it.polimi.isgroup.secbpmn2bc.model.BlockchainType
+	 * @see #isSetBlockchainType()
+	 * @see #unsetBlockchainType()
 	 * @see #getBlockchainType()
 	 * @generated
 	 */
 	void setBlockchainType(BlockchainType value);
 
 	/**
+	 * Unsets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getBlockchainType <em>Blockchain Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetBlockchainType()
+	 * @see #getBlockchainType()
+	 * @see #setBlockchainType(BlockchainType)
+	 * @generated
+	 */
+	void unsetBlockchainType();
+
+	/**
+	 * Returns whether the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getBlockchainType <em>Blockchain Type</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Blockchain Type</em>' attribute is set.
+	 * @see #unsetBlockchainType()
+	 * @see #getBlockchainType()
+	 * @see #setBlockchainType(BlockchainType)
+	 * @generated
+	 */
+	boolean isSetBlockchainType();
+
+	/**
 	 * Returns the value of the '<em><b>On Chain Model</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>On Chain Model</em>' attribute isn't clear,
@@ -62,9 +89,11 @@ public interface Definitions extends GMTNamedNode {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>On Chain Model</em>' attribute.
+	 * @see #isSetOnChainModel()
+	 * @see #unsetOnChainModel()
 	 * @see #setOnChainModel(boolean)
 	 * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getDefinitions_OnChainModel()
-	 * @model default="true"
+	 * @model default="false" unsettable="true"
 	 * @generated
 	 */
 	boolean isOnChainModel();
@@ -74,9 +103,34 @@ public interface Definitions extends GMTNamedNode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>On Chain Model</em>' attribute.
+	 * @see #isSetOnChainModel()
+	 * @see #unsetOnChainModel()
 	 * @see #isOnChainModel()
 	 * @generated
 	 */
 	void setOnChainModel(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel <em>On Chain Model</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetOnChainModel()
+	 * @see #isOnChainModel()
+	 * @see #setOnChainModel(boolean)
+	 * @generated
+	 */
+	void unsetOnChainModel();
+
+	/**
+	 * Returns whether the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel <em>On Chain Model</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>On Chain Model</em>' attribute is set.
+	 * @see #unsetOnChainModel()
+	 * @see #isOnChainModel()
+	 * @see #setOnChainModel(boolean)
+	 * @generated
+	 */
+	boolean isSetOnChainModel();
 
 } // Definitions

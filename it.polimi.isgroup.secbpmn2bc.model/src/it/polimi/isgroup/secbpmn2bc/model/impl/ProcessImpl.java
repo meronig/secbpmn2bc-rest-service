@@ -33,7 +33,7 @@ public class ProcessImpl extends it.unitn.disi.sweng.secbpmn.model.impl.ProcessI
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = true;
+	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = false;
 
 	/**
 	 * The cached value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.

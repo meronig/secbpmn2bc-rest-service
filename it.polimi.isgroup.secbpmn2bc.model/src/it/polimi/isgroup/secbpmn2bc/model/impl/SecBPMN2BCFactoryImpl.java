@@ -3,14 +3,20 @@
 package it.polimi.isgroup.secbpmn2bc.model.impl;
 
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
+import it.polimi.isgroup.secbpmn2bc.model.DataInput;
 import it.polimi.isgroup.secbpmn2bc.model.DataItems;
+import it.polimi.isgroup.secbpmn2bc.model.DataObject;
+import it.polimi.isgroup.secbpmn2bc.model.DataOutput;
+import it.polimi.isgroup.secbpmn2bc.model.DataStore;
 import it.polimi.isgroup.secbpmn2bc.model.Definitions;
 import it.polimi.isgroup.secbpmn2bc.model.Enforceability;
 import it.polimi.isgroup.secbpmn2bc.model.EnforceabilityScope;
-import it.polimi.isgroup.secbpmn2bc.model.Group;
+import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.OnChainData;
 import it.polimi.isgroup.secbpmn2bc.model.PrivityScope;
 import it.polimi.isgroup.secbpmn2bc.model.PrivitySphere;
+import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCFactory;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
@@ -78,10 +84,22 @@ public class SecBPMN2BCFactoryImpl extends EFactoryImpl implements SecBPMN2BCFac
 			return createDataItems();
 		case SecBPMN2BCPackage.TASK:
 			return createTask();
-		case SecBPMN2BCPackage.GROUP:
-			return createGroup();
 		case SecBPMN2BCPackage.DEFINITIONS:
 			return createDefinitions();
+		case SecBPMN2BCPackage.DATA_STORE:
+			return createDataStore();
+		case SecBPMN2BCPackage.DATA_OBJECT:
+			return createDataObject();
+		case SecBPMN2BCPackage.DATA_INPUT:
+			return createDataInput();
+		case SecBPMN2BCPackage.DATA_OUTPUT:
+			return createDataOutput();
+		case SecBPMN2BCPackage.MESSAGE:
+			return createMessage();
+		case SecBPMN2BCPackage.MESSAGE_REF:
+			return createMessageRef();
+		case SecBPMN2BCPackage.SUB_PROCESS:
+			return createSubProcess();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -190,9 +208,9 @@ public class SecBPMN2BCFactoryImpl extends EFactoryImpl implements SecBPMN2BCFac
 	 * @generated
 	 */
 	@Override
-	public Group createGroup() {
-		GroupImpl group = new GroupImpl();
-		return group;
+	public Definitions createDefinitions() {
+		DefinitionsImpl definitions = new DefinitionsImpl();
+		return definitions;
 	}
 
 	/**
@@ -201,9 +219,75 @@ public class SecBPMN2BCFactoryImpl extends EFactoryImpl implements SecBPMN2BCFac
 	 * @generated
 	 */
 	@Override
-	public Definitions createDefinitions() {
-		DefinitionsImpl definitions = new DefinitionsImpl();
-		return definitions;
+	public DataStore createDataStore() {
+		DataStoreImpl dataStore = new DataStoreImpl();
+		return dataStore;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataObject createDataObject() {
+		DataObjectImpl dataObject = new DataObjectImpl();
+		return dataObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataInput createDataInput() {
+		DataInputImpl dataInput = new DataInputImpl();
+		return dataInput;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataOutput createDataOutput() {
+		DataOutputImpl dataOutput = new DataOutputImpl();
+		return dataOutput;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Message createMessage() {
+		MessageImpl message = new MessageImpl();
+		return message;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public MessageRef createMessageRef() {
+		MessageRefImpl messageRef = new MessageRefImpl();
+		return messageRef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SubProcess createSubProcess() {
+		SubProcessImpl subProcess = new SubProcessImpl();
+		return subProcess;
 	}
 
 	/**

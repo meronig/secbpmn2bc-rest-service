@@ -2,11 +2,17 @@
  */
 package it.polimi.isgroup.secbpmn2bc.model.util;
 
+import it.polimi.isgroup.secbpmn2bc.model.DataInput;
 import it.polimi.isgroup.secbpmn2bc.model.DataItems;
+import it.polimi.isgroup.secbpmn2bc.model.DataObject;
+import it.polimi.isgroup.secbpmn2bc.model.DataOutput;
+import it.polimi.isgroup.secbpmn2bc.model.DataStore;
 import it.polimi.isgroup.secbpmn2bc.model.Definitions;
 import it.polimi.isgroup.secbpmn2bc.model.Enforceability;
-import it.polimi.isgroup.secbpmn2bc.model.Group;
+import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.PrivitySphere;
+import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
 
@@ -107,13 +113,43 @@ public class SecBPMN2BCAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseGroup(Group object) {
-			return createGroupAdapter();
+		public Adapter caseDefinitions(Definitions object) {
+			return createDefinitionsAdapter();
 		}
 
 		@Override
-		public Adapter caseDefinitions(Definitions object) {
-			return createDefinitionsAdapter();
+		public Adapter caseDataStore(DataStore object) {
+			return createDataStoreAdapter();
+		}
+
+		@Override
+		public Adapter caseDataObject(DataObject object) {
+			return createDataObjectAdapter();
+		}
+
+		@Override
+		public Adapter caseDataInput(DataInput object) {
+			return createDataInputAdapter();
+		}
+
+		@Override
+		public Adapter caseDataOutput(DataOutput object) {
+			return createDataOutputAdapter();
+		}
+
+		@Override
+		public Adapter caseMessage(Message object) {
+			return createMessageAdapter();
+		}
+
+		@Override
+		public Adapter caseMessageRef(MessageRef object) {
+			return createMessageRefAdapter();
+		}
+
+		@Override
+		public Adapter caseSubProcess(SubProcess object) {
+			return createSubProcessAdapter();
 		}
 
 		@Override
@@ -167,8 +203,33 @@ public class SecBPMN2BCAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseSecBPMN_Group(it.unitn.disi.sweng.secbpmn.model.Group object) {
-			return createSecBPMN_GroupAdapter();
+		public Adapter caseSecBPMN_DataStore(it.unitn.disi.sweng.secbpmn.model.DataStore object) {
+			return createSecBPMN_DataStoreAdapter();
+		}
+
+		@Override
+		public Adapter caseSecBPMN_DataObject(it.unitn.disi.sweng.secbpmn.model.DataObject object) {
+			return createSecBPMN_DataObjectAdapter();
+		}
+
+		@Override
+		public Adapter caseSecBPMN_DataInput(it.unitn.disi.sweng.secbpmn.model.DataInput object) {
+			return createSecBPMN_DataInputAdapter();
+		}
+
+		@Override
+		public Adapter caseSecBPMN_DataOutput(it.unitn.disi.sweng.secbpmn.model.DataOutput object) {
+			return createSecBPMN_DataOutputAdapter();
+		}
+
+		@Override
+		public Adapter caseSecBPMN_Message(it.unitn.disi.sweng.secbpmn.model.Message object) {
+			return createSecBPMN_MessageAdapter();
+		}
+
+		@Override
+		public Adapter caseSecBPMN_SubProcess(it.unitn.disi.sweng.secbpmn.model.SubProcess object) {
+			return createSecBPMN_SubProcessAdapter();
 		}
 
 		@Override
@@ -261,20 +322,6 @@ public class SecBPMN2BCAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.Group <em>Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see it.polimi.isgroup.secbpmn2bc.model.Group
-	 * @generated
-	 */
-	public Adapter createGroupAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions <em>Definitions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -285,6 +332,104 @@ public class SecBPMN2BCAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinitionsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.DataStore <em>Data Store</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.polimi.isgroup.secbpmn2bc.model.DataStore
+	 * @generated
+	 */
+	public Adapter createDataStoreAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.DataObject <em>Data Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.polimi.isgroup.secbpmn2bc.model.DataObject
+	 * @generated
+	 */
+	public Adapter createDataObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.DataInput <em>Data Input</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.polimi.isgroup.secbpmn2bc.model.DataInput
+	 * @generated
+	 */
+	public Adapter createDataInputAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.DataOutput <em>Data Output</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.polimi.isgroup.secbpmn2bc.model.DataOutput
+	 * @generated
+	 */
+	public Adapter createDataOutputAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.Message <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.polimi.isgroup.secbpmn2bc.model.Message
+	 * @generated
+	 */
+	public Adapter createMessageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.MessageRef <em>Message Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.polimi.isgroup.secbpmn2bc.model.MessageRef
+	 * @generated
+	 */
+	public Adapter createMessageRefAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.polimi.isgroup.secbpmn2bc.model.SubProcess <em>Sub Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.polimi.isgroup.secbpmn2bc.model.SubProcess
+	 * @generated
+	 */
+	public Adapter createSubProcessAdapter() {
 		return null;
 	}
 
@@ -429,16 +574,86 @@ public class SecBPMN2BCAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.Group <em>Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.DataStore <em>Data Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see it.unitn.disi.sweng.secbpmn.model.Group
+	 * @see it.unitn.disi.sweng.secbpmn.model.DataStore
 	 * @generated
 	 */
-	public Adapter createSecBPMN_GroupAdapter() {
+	public Adapter createSecBPMN_DataStoreAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.DataObject <em>Data Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.unitn.disi.sweng.secbpmn.model.DataObject
+	 * @generated
+	 */
+	public Adapter createSecBPMN_DataObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.DataInput <em>Data Input</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.unitn.disi.sweng.secbpmn.model.DataInput
+	 * @generated
+	 */
+	public Adapter createSecBPMN_DataInputAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.DataOutput <em>Data Output</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.unitn.disi.sweng.secbpmn.model.DataOutput
+	 * @generated
+	 */
+	public Adapter createSecBPMN_DataOutputAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.Message <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.unitn.disi.sweng.secbpmn.model.Message
+	 * @generated
+	 */
+	public Adapter createSecBPMN_MessageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.SubProcess <em>Sub Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.unitn.disi.sweng.secbpmn.model.SubProcess
+	 * @generated
+	 */
+	public Adapter createSecBPMN_SubProcessAdapter() {
 		return null;
 	}
 

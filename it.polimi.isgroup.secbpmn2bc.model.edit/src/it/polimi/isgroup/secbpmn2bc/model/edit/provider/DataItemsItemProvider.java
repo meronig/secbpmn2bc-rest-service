@@ -142,11 +142,29 @@ public class DataItemsItemProvider extends it.unitn.disi.sweng.secbpmn.model.edi
 		newChildDescriptors.add(
 				createChildParameter(GMTPackage.Literals.GMT_NODE__NODES, SecBPMN2BCFactory.eINSTANCE.createTask()));
 
-		newChildDescriptors.add(
-				createChildParameter(GMTPackage.Literals.GMT_NODE__NODES, SecBPMN2BCFactory.eINSTANCE.createGroup()));
-
 		newChildDescriptors.add(createChildParameter(GMTPackage.Literals.GMT_NODE__NODES,
 				SecBPMN2BCFactory.eINSTANCE.createDefinitions()));
+
+		newChildDescriptors.add(createChildParameter(GMTPackage.Literals.GMT_NODE__NODES,
+				SecBPMN2BCFactory.eINSTANCE.createDataStore()));
+
+		newChildDescriptors.add(createChildParameter(GMTPackage.Literals.GMT_NODE__NODES,
+				SecBPMN2BCFactory.eINSTANCE.createDataObject()));
+
+		newChildDescriptors.add(createChildParameter(GMTPackage.Literals.GMT_NODE__NODES,
+				SecBPMN2BCFactory.eINSTANCE.createDataInput()));
+
+		newChildDescriptors.add(createChildParameter(GMTPackage.Literals.GMT_NODE__NODES,
+				SecBPMN2BCFactory.eINSTANCE.createDataOutput()));
+
+		newChildDescriptors.add(
+				createChildParameter(GMTPackage.Literals.GMT_NODE__NODES, SecBPMN2BCFactory.eINSTANCE.createMessage()));
+
+		newChildDescriptors.add(createChildParameter(GMTPackage.Literals.GMT_NODE__NODES,
+				SecBPMN2BCFactory.eINSTANCE.createMessageRef()));
+
+		newChildDescriptors.add(createChildParameter(GMTPackage.Literals.GMT_NODE__NODES,
+				SecBPMN2BCFactory.eINSTANCE.createSubProcess()));
 	}
 
 	/**
