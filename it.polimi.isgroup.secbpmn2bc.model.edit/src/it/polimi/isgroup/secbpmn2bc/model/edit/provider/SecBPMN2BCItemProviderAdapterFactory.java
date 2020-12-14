@@ -188,29 +188,6 @@ public class SecBPMN2BCItemProviderAdapterFactory extends SecBPMN2BCAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.Group} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected GroupItemProvider groupItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.Group}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createGroupAdapter() {
-		if (groupItemProvider == null) {
-			groupItemProvider = new GroupItemProvider(this);
-		}
-
-		return groupItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.Definitions} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,6 +208,167 @@ public class SecBPMN2BCItemProviderAdapterFactory extends SecBPMN2BCAdapterFacto
 		}
 
 		return definitionsItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.DataStore} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataStoreItemProvider dataStoreItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.DataStore}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataStoreAdapter() {
+		if (dataStoreItemProvider == null) {
+			dataStoreItemProvider = new DataStoreItemProvider(this);
+		}
+
+		return dataStoreItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.DataObject} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataObjectItemProvider dataObjectItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.DataObject}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataObjectAdapter() {
+		if (dataObjectItemProvider == null) {
+			dataObjectItemProvider = new DataObjectItemProvider(this);
+		}
+
+		return dataObjectItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.DataInput} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataInputItemProvider dataInputItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.DataInput}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataInputAdapter() {
+		if (dataInputItemProvider == null) {
+			dataInputItemProvider = new DataInputItemProvider(this);
+		}
+
+		return dataInputItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.DataOutput} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataOutputItemProvider dataOutputItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.DataOutput}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataOutputAdapter() {
+		if (dataOutputItemProvider == null) {
+			dataOutputItemProvider = new DataOutputItemProvider(this);
+		}
+
+		return dataOutputItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.Message} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MessageItemProvider messageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.Message}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMessageAdapter() {
+		if (messageItemProvider == null) {
+			messageItemProvider = new MessageItemProvider(this);
+		}
+
+		return messageItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.MessageRef} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MessageRefItemProvider messageRefItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.MessageRef}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMessageRefAdapter() {
+		if (messageRefItemProvider == null) {
+			messageRefItemProvider = new MessageRefItemProvider(this);
+		}
+
+		return messageRefItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link it.polimi.isgroup.secbpmn2bc.model.SubProcess} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SubProcessItemProvider subProcessItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link it.polimi.isgroup.secbpmn2bc.model.SubProcess}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSubProcessAdapter() {
+		if (subProcessItemProvider == null) {
+			subProcessItemProvider = new SubProcessItemProvider(this);
+		}
+
+		return subProcessItemProvider;
 	}
 
 	/**
@@ -348,10 +486,22 @@ public class SecBPMN2BCItemProviderAdapterFactory extends SecBPMN2BCAdapterFacto
 			dataItemsItemProvider.dispose();
 		if (taskItemProvider != null)
 			taskItemProvider.dispose();
-		if (groupItemProvider != null)
-			groupItemProvider.dispose();
 		if (definitionsItemProvider != null)
 			definitionsItemProvider.dispose();
+		if (dataStoreItemProvider != null)
+			dataStoreItemProvider.dispose();
+		if (dataObjectItemProvider != null)
+			dataObjectItemProvider.dispose();
+		if (dataInputItemProvider != null)
+			dataInputItemProvider.dispose();
+		if (dataOutputItemProvider != null)
+			dataOutputItemProvider.dispose();
+		if (messageItemProvider != null)
+			messageItemProvider.dispose();
+		if (messageRefItemProvider != null)
+			messageRefItemProvider.dispose();
+		if (subProcessItemProvider != null)
+			subProcessItemProvider.dispose();
 	}
 
 }

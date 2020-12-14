@@ -26,34 +26,42 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Process">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true"/>
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OnChainData">
     <eLiterals name="None"/>
     <eLiterals name="Digest" value="1"/>
     <eLiterals name="Encrypted" value="2"/>
     <eLiterals name="Unencrypted" value="3"/>
+    <eLiterals name="Undefined" value="-1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BlockchainType">
     <eLiterals name="Public" literal="Public"/>
     <eLiterals name="Private" value="1"/>
+    <eLiterals name="Undefined" value="-1" literal="Undefined"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataItems" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataItems">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainData" eType="#//OnChainData"
-        defaultValueLiteral="Digest"/>
+        defaultValueLiteral="Undefined" unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Task">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainExecution" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Group">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true"/>
+        defaultValueLiteral="false" unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definitions" eSuperTypes="../../it.unitn.disi.sweng.gmt.model/model/GMT.ecore#//GMTNamedNode">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="BlockchainType" eType="#//BlockchainType"
-        defaultValueLiteral="Public"/>
+        defaultValueLiteral="Undefined" unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true"/>
+        defaultValueLiteral="false" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataStore" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataStore #//DataItems"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataObject" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataObject #//DataItems"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataInput" eSuperTypes="#//DataItems ../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataInput"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataOutput" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataOutput #//DataItems"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//DataItems ../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Message"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageRef" eSuperTypes="#//Message"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubProcess" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//SubProcess">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
 </ecore:EPackage>

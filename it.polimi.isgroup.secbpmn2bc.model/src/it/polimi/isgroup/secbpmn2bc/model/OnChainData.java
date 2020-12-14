@@ -56,7 +56,16 @@ public enum OnChainData implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNENCRYPTED(3, "Unencrypted", "Unencrypted"); //$NON-NLS-1$ //$NON-NLS-2$
+	UNENCRYPTED(3, "Unencrypted", "Unencrypted"),
+	/**
+	* The '<em><b>Undefined</b></em>' literal object.
+	* <!-- begin-user-doc -->
+	* <!-- end-user-doc -->
+	* @see #UNDEFINED_VALUE
+	* @generated
+	* @ordered
+	*/
+	UNDEFINED(-1, "Undefined", "Undefined"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>None</b></em>' literal value.
@@ -119,12 +128,28 @@ public enum OnChainData implements Enumerator {
 	public static final int UNENCRYPTED_VALUE = 3;
 
 	/**
+	 * The '<em><b>Undefined</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Undefined</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNDEFINED
+	 * @model name="Undefined"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNDEFINED_VALUE = -1;
+
+	/**
 	 * An array of all the '<em><b>On Chain Data</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final OnChainData[] VALUES_ARRAY = new OnChainData[] { NONE, DIGEST, ENCRYPTED, UNENCRYPTED, };
+	private static final OnChainData[] VALUES_ARRAY = new OnChainData[] { NONE, DIGEST, ENCRYPTED, UNENCRYPTED,
+			UNDEFINED, };
 
 	/**
 	 * A public read-only list of all the '<em><b>On Chain Data</b></em>' enumerators.
@@ -188,6 +213,8 @@ public enum OnChainData implements Enumerator {
 			return ENCRYPTED;
 		case UNENCRYPTED_VALUE:
 			return UNENCRYPTED;
+		case UNDEFINED_VALUE:
+			return UNDEFINED;
 		}
 		return null;
 	}

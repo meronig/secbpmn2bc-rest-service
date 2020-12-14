@@ -24,12 +24,14 @@
       <xsd:enumeration value="Digest"/>
       <xsd:enumeration value="Encrypted"/>
       <xsd:enumeration value="Unencrypted"/>
+      <xsd:enumeration value="Undefined"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="BlockchainType">
     <xsd:restriction base="xsd:NCName">
       <xsd:enumeration value="Public"/>
       <xsd:enumeration value="Private"/>
+      <xsd:enumeration value="Undefined"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:complexType name="PrivitySphere">
@@ -76,14 +78,6 @@
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Task" type="secbpmn2bc:Task"/>
-  <xsd:complexType name="Group">
-    <xsd:complexContent>
-      <xsd:extension base="secbpmn:Group">
-        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
-      </xsd:extension>
-    </xsd:complexContent>
-  </xsd:complexType>
-  <xsd:element name="Group" type="secbpmn2bc:Group"/>
   <xsd:complexType name="Definitions">
     <xsd:complexContent>
       <xsd:extension base="gmt:GMTNamedNode">
@@ -93,4 +87,61 @@
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Definitions" type="secbpmn2bc:Definitions"/>
+  <xsd:complexType name="DataStore">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:DataStore">
+        <xsd:attribute name="OnChainData" type="secbpmn2bc:OnChainData"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="DataStore" type="secbpmn2bc:DataStore"/>
+  <xsd:complexType name="DataObject">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:DataObject">
+        <xsd:attribute name="OnChainData" type="secbpmn2bc:OnChainData"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="DataObject" type="secbpmn2bc:DataObject"/>
+  <xsd:complexType name="DataInput">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn2bc:DataItems">
+        <xsd:attribute name="isCollection" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="DataInput" type="secbpmn2bc:DataInput"/>
+  <xsd:complexType name="DataOutput">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:DataOutput">
+        <xsd:attribute name="OnChainData" type="secbpmn2bc:OnChainData"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="DataOutput" type="secbpmn2bc:DataOutput"/>
+  <xsd:complexType name="Message">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn2bc:DataItems">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="references" type="secbpmn:MessageRef"/>
+        </xsd:choice>
+        <xsd:attribute name="references" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Message" type="secbpmn2bc:Message"/>
+  <xsd:complexType name="MessageRef">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn2bc:Message"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="MessageRef" type="secbpmn2bc:MessageRef"/>
+  <xsd:complexType name="SubProcess">
+    <xsd:complexContent>
+      <xsd:extension base="secbpmn:SubProcess">
+        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="SubProcess" type="secbpmn2bc:SubProcess"/>
 </xsd:schema>

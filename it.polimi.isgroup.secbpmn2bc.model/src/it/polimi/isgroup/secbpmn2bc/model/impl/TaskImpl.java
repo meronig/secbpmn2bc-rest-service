@@ -34,7 +34,7 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ON_CHAIN_EXECUTION_EDEFAULT = true;
+	protected static final boolean ON_CHAIN_EXECUTION_EDEFAULT = false;
 
 	/**
 	 * The cached value of the '{@link #isOnChainExecution() <em>On Chain Execution</em>}' attribute.
@@ -45,6 +45,15 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	 * @ordered
 	 */
 	protected boolean onChainExecution = ON_CHAIN_EXECUTION_EDEFAULT;
+
+	/**
+	 * This is true if the On Chain Execution attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean onChainExecutionESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,9 +93,37 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	public void setOnChainExecution(boolean newOnChainExecution) {
 		boolean oldOnChainExecution = onChainExecution;
 		onChainExecution = newOnChainExecution;
+		boolean oldOnChainExecutionESet = onChainExecutionESet;
+		onChainExecutionESet = true;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecBPMN2BCPackage.TASK__ON_CHAIN_EXECUTION,
-					oldOnChainExecution, onChainExecution));
+					oldOnChainExecution, onChainExecution, !oldOnChainExecutionESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetOnChainExecution() {
+		boolean oldOnChainExecution = onChainExecution;
+		boolean oldOnChainExecutionESet = onChainExecutionESet;
+		onChainExecution = ON_CHAIN_EXECUTION_EDEFAULT;
+		onChainExecutionESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, SecBPMN2BCPackage.TASK__ON_CHAIN_EXECUTION,
+					oldOnChainExecution, ON_CHAIN_EXECUTION_EDEFAULT, oldOnChainExecutionESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetOnChainExecution() {
+		return onChainExecutionESet;
 	}
 
 	/**
@@ -127,7 +164,7 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.TASK__ON_CHAIN_EXECUTION:
-			setOnChainExecution(ON_CHAIN_EXECUTION_EDEFAULT);
+			unsetOnChainExecution();
 			return;
 		}
 		super.eUnset(featureID);
@@ -142,7 +179,7 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.TASK__ON_CHAIN_EXECUTION:
-			return onChainExecution != ON_CHAIN_EXECUTION_EDEFAULT;
+			return isSetOnChainExecution();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -159,7 +196,10 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (OnChainExecution: "); //$NON-NLS-1$
-		result.append(onChainExecution);
+		if (onChainExecutionESet)
+			result.append(onChainExecution);
+		else
+			result.append("<unset>"); //$NON-NLS-1$
 		result.append(')');
 		return result.toString();
 	}

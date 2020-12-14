@@ -139,6 +139,7 @@ import it.polimi.isgroup.secbpmn2bc.model.edit.provider.SecBPMN2BCItemProviderAd
 
 import it.polimi.isgroup.secbpmn2bc.model.editor.internal.Activator;
 import it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisor;
+import it.polimi.isgroup.secbpmn2bc.model.infer.ConsoleMessage;
 import it.polimi.isgroup.secbpmn2bc.model.infer.InferBCProperties;
 import it.unitn.disi.sweng.gmt.model.edit.provider.GMTItemProviderAdapterFactory;
 
@@ -154,26 +155,27 @@ import org.eclipse.emf.edit.ui.provider.DiagnosticDecorator;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 /**
- * This is an example of a SecBPMN2BC model editor.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is an example of a SecBPMN2BC model editor. <!-- begin-user-doc --> <!--
+ * end-user-doc -->
+ * 
  * @generated
  */
 public class SecBPMN2BCEditor extends MultiPageEditorPart
 		implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider {
 	/**
-	 * The filters for file extensions supported by the editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The filters for file extensions supported by the editor. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final List<String> FILE_EXTENSION_FILTERS = prefixExtensions(SecBPMN2BCModelWizard.FILE_EXTENSIONS,
 			"*."); //$NON-NLS-1$
 
 	/**
-	 * Returns a new unmodifiable list containing prefixed versions of the extensions in the given list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns a new unmodifiable list containing prefixed versions of the
+	 * extensions in the given list. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	private static List<String> prefixExtensions(List<String> extensions, String prefix) {
@@ -185,148 +187,147 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This keeps track of the editing domain that is used to track all changes to the model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the editing domain that is used to track all changes
+	 * to the model. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected AdapterFactoryEditingDomain editingDomain;
 
 	/**
 	 * This is the one adapter factory used for providing views of the model.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ComposedAdapterFactory adapterFactory;
 
 	/**
-	 * This is the content outline page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the content outline page. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IContentOutlinePage contentOutlinePage;
 
 	/**
-	 * This is a kludge...
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is a kludge... <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IStatusLineManager contentOutlineStatusLineManager;
 
 	/**
-	 * This is the content outline page's viewer.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the content outline page's viewer. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TreeViewer contentOutlineViewer;
 
 	/**
-	 * This is the property sheet page.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the property sheet page. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected List<PropertySheetPage> propertySheetPages = new ArrayList<PropertySheetPage>();
 
 	/**
-	 * This is the viewer that shadows the selection in the content outline.
-	 * The parent relation must be correctly defined for this to work.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the viewer that shadows the selection in the content outline. The
+	 * parent relation must be correctly defined for this to work. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TreeViewer selectionViewer;
 
 	/**
-	 * This inverts the roll of parent and child in the content provider and show parents as a tree.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This inverts the roll of parent and child in the content provider and
+	 * show parents as a tree. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TreeViewer parentViewer;
 
 	/**
-	 * This shows how a tree view works.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This shows how a tree view works. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TreeViewer treeViewer;
 
 	/**
-	 * This shows how a list view works.
-	 * A list viewer doesn't support icons.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This shows how a list view works. A list viewer doesn't support icons.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ListViewer listViewer;
 
 	/**
-	 * This shows how a table view works.
-	 * A table can be used as a list with icons.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This shows how a table view works. A table can be used as a list with
+	 * icons. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TableViewer tableViewer;
 
 	/**
-	 * This shows how a tree view with columns works.
-	 * <!-- begin-user-doc -->
+	 * This shows how a tree view with columns works. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TreeViewer treeViewerWithColumns;
 
 	/**
-	 * This keeps track of the active viewer pane, in the book.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the active viewer pane, in the book. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ViewerPane currentViewerPane;
 
 	/**
-	 * This keeps track of the active content viewer, which may be either one of the viewers in the pages or the content outline viewer.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the active content viewer, which may be either one of
+	 * the viewers in the pages or the content outline viewer. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Viewer currentViewer;
 
 	/**
-	 * This listens to which ever viewer is active.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This listens to which ever viewer is active. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ISelectionChangedListener selectionChangedListener;
 
 	/**
-	 * This keeps track of all the {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are listening to this editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of all the
+	 * {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are
+	 * listening to this editor. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
 
 	/**
-	 * This keeps track of the selection of the editor as a whole.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This keeps track of the selection of the editor as a whole. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ISelection editorSelection = StructuredSelection.EMPTY;
 
 	/**
-	 * This listens for when the outline becomes active
-	 * <!-- begin-user-doc -->
+	 * This listens for when the outline becomes active <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected IPartListener partListener = new IPartListener() {
@@ -370,49 +371,49 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	};
 
 	/**
-	 * Resources that have been removed since last activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Resources that have been removed since last activation. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
 	/**
-	 * Resources that have been changed since last activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Resources that have been changed since last activation. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<Resource> changedResources = new ArrayList<Resource>();
 
 	/**
-	 * Resources that have been saved.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Resources that have been saved. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	protected Collection<Resource> savedResources = new ArrayList<Resource>();
 
 	/**
-	 * Map to store the diagnostic associated with a resource.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Map to store the diagnostic associated with a resource. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<Resource, Diagnostic>();
 
 	/**
-	 * Controls whether the problem indication should be updated.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Controls whether the problem indication should be updated. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected boolean updateProblemIndication = true;
 
 	/**
-	 * Adapter used to update the problem indication when resources are demanded loaded.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Adapter used to update the problem indication when resources are demanded
+	 * loaded. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected EContentAdapter problemIndicationAdapter = new EContentAdapter() {
@@ -468,9 +469,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	};
 
 	/**
-	 * Handles activation of the editor or it's associated views.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Handles activation of the editor or it's associated views. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void handleActivate() {
@@ -501,9 +502,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * Handles what to do with changed resources on activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Handles what to do with changed resources on activation. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void handleChangedResources() {
@@ -537,9 +538,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * Updates the problems indication with the information described in the specified diagnostic.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Updates the problems indication with the information described in the
+	 * specified diagnostic. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void updateProblemIndication() {
@@ -574,9 +575,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * Shows a dialog that asks if conflicting changes should be discarded.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Shows a dialog that asks if conflicting changes should be discarded. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected boolean handleDirtyConflict() {
@@ -585,9 +586,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This creates a model editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This creates a model editor. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	public SecBPMN2BCEditor() {
@@ -596,9 +597,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This sets up the editing domain for the model editor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This sets up the editing domain for the model editor. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void initializeEditingDomain() {
@@ -612,11 +613,13 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 		adapterFactory.addAdapterFactory(new GMTItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
-		// Create the command stack that will notify this editor as commands are executed.
+		// Create the command stack that will notify this editor as commands are
+		// executed.
 		//
 		BasicCommandStack commandStack = new BasicCommandStack();
 
-		// Add a listener to set the most recent command's affected objects to be the selection of the viewer with focus.
+		// Add a listener to set the most recent command's affected objects to
+		// be the selection of the viewer with focus.
 		//
 		commandStack.addCommandStackListener(new CommandStackListener() {
 			@Override
@@ -651,9 +654,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This is here for the listener to be able to call it.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is here for the listener to be able to call it. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -662,9 +665,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This sets the selection into whichever viewer is active.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This sets the selection into whichever viewer is active. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setSelectionToViewer(Collection<?> collection) {
@@ -675,7 +678,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 			Runnable runnable = new Runnable() {
 				@Override
 				public void run() {
-					// Try to select the items in the current content viewer of the editor.
+					// Try to select the items in the current content viewer of
+					// the editor.
 					//
 					if (currentViewer != null) {
 						currentViewer.setSelection(new StructuredSelection(theSelection.toArray()), true);
@@ -687,11 +691,12 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This returns the editing domain as required by the {@link IEditingDomainProvider} interface.
-	 * This is important for implementing the static methods of {@link AdapterFactoryEditingDomain}
+	 * This returns the editing domain as required by the
+	 * {@link IEditingDomainProvider} interface. This is important for
+	 * implementing the static methods of {@link AdapterFactoryEditingDomain}
 	 * and for supporting {@link org.eclipse.emf.edit.ui.action.CommandAction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -700,14 +705,14 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public class ReverseAdapterFactoryContentProvider extends AdapterFactoryContentProvider {
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public ReverseAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
@@ -715,8 +720,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		@Override
@@ -726,8 +731,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		@Override
@@ -737,8 +742,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		@Override
@@ -748,8 +753,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 		}
 
 		/**
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		@Override
@@ -759,8 +764,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setCurrentViewerPane(ViewerPane viewerPane) {
@@ -774,10 +779,10 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This makes sure that one content viewer, either for the current page or the outline view, if it has focus,
-	 * is the current one.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This makes sure that one content viewer, either for the current page or
+	 * the outline view, if it has focus, is the current one. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setCurrentViewer(Viewer viewer) {
@@ -788,7 +793,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 				// Create the listener on demand.
 				//
 				selectionChangedListener = new ISelectionChangedListener() {
-					// This just notifies those things that are affected by the section.
+					// This just notifies those things that are affected by the
+					// section.
 					//
 					@Override
 					public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
@@ -813,16 +819,17 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 			//
 			currentViewer = viewer;
 
-			// Set the editors selection based on the current viewer's selection.
+			// Set the editors selection based on the current viewer's
+			// selection.
 			//
 			setSelection(currentViewer == null ? StructuredSelection.EMPTY : currentViewer.getSelection());
 		}
 	}
 
 	/**
-	 * This returns the viewer as required by the {@link IViewerProvider} interface.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the viewer as required by the {@link IViewerProvider}
+	 * interface. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -831,9 +838,10 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This creates a context menu for the viewer and adds a listener as well registering the menu for extension.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This creates a context menu for the viewer and adds a listener as well
+	 * registering the menu for extension. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void createContextMenuFor(StructuredViewer viewer) {
@@ -853,9 +861,10 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is the method called to load a resource into the editing domain's
+	 * resource set based on the editor's input. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void createModel() {
@@ -879,10 +888,10 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * Returns a diagnostic describing the errors and warnings listed in the resource
-	 * and the specified exception (if any).
-	 * <!-- begin-user-doc -->
+	 * Returns a diagnostic describing the errors and warnings listed in the
+	 * resource and the specified exception (if any). <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
@@ -905,8 +914,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 
 	/**
 	 * This is the method used by the framework to install your own controls.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1171,10 +1180,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * If there is just one page in the multi-page editor part,
-	 * this hides the single tab at the bottom.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * If there is just one page in the multi-page editor part, this hides the
+	 * single tab at the bottom. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void hideTabs() {
@@ -1189,10 +1197,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * If there is more than one page in the multi-page editor part,
-	 * this shows the tabs at the bottom.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * If there is more than one page in the multi-page editor part, this shows
+	 * the tabs at the bottom. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void showTabs() {
@@ -1207,9 +1214,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This is used to track the active viewer.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is used to track the active viewer. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1222,9 +1229,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This is how the framework determines which interfaces we implement.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is how the framework determines which interfaces we implement. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("rawtypes")
@@ -1240,9 +1247,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This accesses a cached version of the content outliner.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This accesses a cached version of the content outliner. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public IContentOutlinePage getContentOutlinePage() {
@@ -1311,9 +1318,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This accesses a cached version of the property sheet.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This accesses a cached version of the property sheet. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public IPropertySheetPage getPropertySheetPage() {
@@ -1338,9 +1345,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This deals with how we want selection in the outliner to affect the other views.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This deals with how we want selection in the outliner to affect the other
+	 * views. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
@@ -1351,7 +1358,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 				//
 				Object selectedElement = selectedElements.next();
 
-				// If it's the selection viewer, then we want it to select the same selection as this selection.
+				// If it's the selection viewer, then we want it to select the
+				// same selection as this selection.
 				//
 				if (currentViewerPane.getViewer() == selectionViewer) {
 					ArrayList<Object> selectionList = new ArrayList<Object>();
@@ -1376,30 +1384,43 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This is for implementing {@link IEditorPart} and simply tests the command stack.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is for implementing {@link IEditorPart} and simply tests the command
+	 * stack. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean isDirty() {
 		return ((BasicCommandStack) editingDomain.getCommandStack()).isSaveNeeded();
 	}
-	
-	public void doExtend() {
+
+	public void doAnnotate() {
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
 			InferBCProperties p = new InferBCProperties();
 			MessageConsole myConsole = SecBPMN2BCActionBarContributor.findConsole("MyConsole");
-			   MessageConsoleStream out = myConsole.newMessageStream();
-			String log = p.inferResource(resource);
-			   out.println(log);
+			MessageConsoleStream out = myConsole.newMessageStream();
+
+			List<ConsoleMessage> log = p.inferResource(resource);
+			for (ConsoleMessage m : log) {
+				out.println(m.toString());
+			}
+			if (p.checkForErrors(log)) {
+				MessageDialog.openError(getSite().getShell(), "Annotate with BC properties", 
+						"One or more security annotation conflicts were detected. Please check the console log for further details.");
+			} else if (p.checkForWarnings(log)) {
+				MessageDialog.openWarning(getSite().getShell(), "Annotate with BC properties", 
+						"Model annotation completed with warnings. Please check the console log for further details.");
+			} else {
+				MessageDialog.openInformation(getSite().getShell(), "Annotate with BC properties", 
+						"Model was succesfully annotated with blockchain properties.");
+			}
 		}
 	}
 
 	/**
-	 * This is for implementing {@link IEditorPart} and simply saves the model file.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is for implementing {@link IEditorPart} and simply saves the model
+	 * file. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1410,7 +1431,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 
-		// Do the work within an operation because this is a long running activity that modifies the workbench.
+		// Do the work within an operation because this is a long running
+		// activity that modifies the workbench.
 		//
 		IRunnableWithProgress operation = new IRunnableWithProgress() {
 			// This is the method that gets invoked when the operation runs.
@@ -1458,10 +1480,11 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This returns whether something has been persisted to the URI of the specified resource.
-	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns whether something has been persisted to the URI of the
+	 * specified resource. The implementation uses the URI converter from the
+	 * editor's resource set to try to open an input stream. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected boolean isPersisted(Resource resource) {
@@ -1479,9 +1502,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This always returns true because it is not currently supported.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This always returns true because it is not currently supported. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1490,9 +1513,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This also changes the editor's input.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This also changes the editor's input. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1506,8 +1529,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
@@ -1520,9 +1543,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This is called during startup.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This is called during startup. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1535,8 +1558,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1550,8 +1573,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 
 	/**
 	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1561,8 +1584,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 
 	/**
 	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1571,9 +1594,10 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to return this editor's overall selection.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to
+	 * return this editor's overall selection. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1582,10 +1606,10 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to set this editor's overall selection.
-	 * Calling this result will notify the listeners.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to
+	 * set this editor's overall selection. Calling this result will notify the
+	 * listeners. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1599,8 +1623,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setStatusLineManager(ISelection selection) {
@@ -1633,9 +1657,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This looks up a string in the plugin's plugin.properties file.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This looks up a string in the plugin's plugin.properties file. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static String getString(String key) {
@@ -1643,9 +1667,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This looks up a string in plugin.properties, making a substitution.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This looks up a string in plugin.properties, making a substitution. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
@@ -1653,9 +1677,10 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * This implements {@link org.eclipse.jface.action.IMenuListener} to help fill the context menus with contributions from the Edit menu.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This implements {@link org.eclipse.jface.action.IMenuListener} to help
+	 * fill the context menus with contributions from the Edit menu. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1664,8 +1689,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EditingDomainActionBarContributor getActionBarContributor() {
@@ -1673,8 +1698,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public IActionBars getActionBars() {
@@ -1682,8 +1707,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public AdapterFactory getAdapterFactory() {
@@ -1691,8 +1716,8 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -1719,9 +1744,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	}
 
 	/**
-	 * Returns whether the outline view should be presented to the user.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns whether the outline view should be presented to the user. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected boolean showOutlineView() {

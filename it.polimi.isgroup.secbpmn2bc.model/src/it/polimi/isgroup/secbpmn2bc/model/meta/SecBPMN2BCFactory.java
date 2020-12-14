@@ -3,15 +3,21 @@
 package it.polimi.isgroup.secbpmn2bc.model.meta;
 
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
+import it.polimi.isgroup.secbpmn2bc.model.DataInput;
 import it.polimi.isgroup.secbpmn2bc.model.DataItems;
+import it.polimi.isgroup.secbpmn2bc.model.DataObject;
+import it.polimi.isgroup.secbpmn2bc.model.DataOutput;
+import it.polimi.isgroup.secbpmn2bc.model.DataStore;
 import it.polimi.isgroup.secbpmn2bc.model.Definitions;
 import it.polimi.isgroup.secbpmn2bc.model.Enforceability;
 import it.polimi.isgroup.secbpmn2bc.model.EnforceabilityScope;
-import it.polimi.isgroup.secbpmn2bc.model.Group;
+import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.OnChainData;
 import it.polimi.isgroup.secbpmn2bc.model.PrivityScope;
 import it.polimi.isgroup.secbpmn2bc.model.PrivitySphere;
 
+import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import org.eclipse.emf.ecore.EFactory;
 
@@ -78,15 +84,6 @@ public interface SecBPMN2BCFactory extends EFactory {
 	Task createTask();
 
 	/**
-	 * Returns a new object of class '<em>Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Group</em>'.
-	 * @generated
-	 */
-	Group createGroup();
-
-	/**
 	 * Returns a new object of class '<em>Definitions</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,6 +91,69 @@ public interface SecBPMN2BCFactory extends EFactory {
 	 * @generated
 	 */
 	Definitions createDefinitions();
+
+	/**
+	 * Returns a new object of class '<em>Data Store</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Store</em>'.
+	 * @generated
+	 */
+	DataStore createDataStore();
+
+	/**
+	 * Returns a new object of class '<em>Data Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Object</em>'.
+	 * @generated
+	 */
+	DataObject createDataObject();
+
+	/**
+	 * Returns a new object of class '<em>Data Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Input</em>'.
+	 * @generated
+	 */
+	DataInput createDataInput();
+
+	/**
+	 * Returns a new object of class '<em>Data Output</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Output</em>'.
+	 * @generated
+	 */
+	DataOutput createDataOutput();
+
+	/**
+	 * Returns a new object of class '<em>Message</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Message</em>'.
+	 * @generated
+	 */
+	Message createMessage();
+
+	/**
+	 * Returns a new object of class '<em>Message Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Message Ref</em>'.
+	 * @generated
+	 */
+	MessageRef createMessageRef();
+
+	/**
+	 * Returns a new object of class '<em>Sub Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sub Process</em>'.
+	 * @generated
+	 */
+	SubProcess createSubProcess();
 
 	/**
 	 * Returns an instance of data type '<em>Enforceability Scope</em>' corresponding the given literal.

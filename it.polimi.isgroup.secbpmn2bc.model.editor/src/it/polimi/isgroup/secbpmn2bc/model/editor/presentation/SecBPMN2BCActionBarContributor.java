@@ -120,12 +120,12 @@ public class SecBPMN2BCActionBarContributor extends EditingDomainActionBarContri
 	protected ISelectionProvider selectionProvider;
 
 	
-	protected IAction enrichAction = new Action ("Enrich model") {
+	protected IAction enrichAction = new Action ("Annotate with BC properties") {
 		@Override
 		public void run() {
 			IWorkbenchPage page = getPage();
 			SecBPMN2BCEditor editor = (SecBPMN2BCEditor) page.getActiveEditor();
-			editor.doExtend();
+			editor.doAnnotate();
 		}
 	};
 	
@@ -140,7 +140,6 @@ public class SecBPMN2BCActionBarContributor extends EditingDomainActionBarContri
 				IConsoleView view = (IConsoleView) page.showView(id);
 				view.display(findConsole("MyConsole"));
 			} catch (PartInitException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

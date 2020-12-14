@@ -35,7 +35,7 @@ public class DataItemsImpl extends it.unitn.disi.sweng.secbpmn.model.impl.DataIt
 	 * @generated
 	 * @ordered
 	 */
-	protected static final OnChainData ON_CHAIN_DATA_EDEFAULT = OnChainData.DIGEST;
+	protected static final OnChainData ON_CHAIN_DATA_EDEFAULT = OnChainData.UNDEFINED;
 
 	/**
 	 * The cached value of the '{@link #getOnChainData() <em>On Chain Data</em>}' attribute.
@@ -46,6 +46,15 @@ public class DataItemsImpl extends it.unitn.disi.sweng.secbpmn.model.impl.DataIt
 	 * @ordered
 	 */
 	protected OnChainData onChainData = ON_CHAIN_DATA_EDEFAULT;
+
+	/**
+	 * This is true if the On Chain Data attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean onChainDataESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,9 +94,37 @@ public class DataItemsImpl extends it.unitn.disi.sweng.secbpmn.model.impl.DataIt
 	public void setOnChainData(OnChainData newOnChainData) {
 		OnChainData oldOnChainData = onChainData;
 		onChainData = newOnChainData == null ? ON_CHAIN_DATA_EDEFAULT : newOnChainData;
+		boolean oldOnChainDataESet = onChainDataESet;
+		onChainDataESet = true;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecBPMN2BCPackage.DATA_ITEMS__ON_CHAIN_DATA,
-					oldOnChainData, onChainData));
+					oldOnChainData, onChainData, !oldOnChainDataESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetOnChainData() {
+		OnChainData oldOnChainData = onChainData;
+		boolean oldOnChainDataESet = onChainDataESet;
+		onChainData = ON_CHAIN_DATA_EDEFAULT;
+		onChainDataESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, SecBPMN2BCPackage.DATA_ITEMS__ON_CHAIN_DATA,
+					oldOnChainData, ON_CHAIN_DATA_EDEFAULT, oldOnChainDataESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetOnChainData() {
+		return onChainDataESet;
 	}
 
 	/**
@@ -128,7 +165,7 @@ public class DataItemsImpl extends it.unitn.disi.sweng.secbpmn.model.impl.DataIt
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.DATA_ITEMS__ON_CHAIN_DATA:
-			setOnChainData(ON_CHAIN_DATA_EDEFAULT);
+			unsetOnChainData();
 			return;
 		}
 		super.eUnset(featureID);
@@ -143,7 +180,7 @@ public class DataItemsImpl extends it.unitn.disi.sweng.secbpmn.model.impl.DataIt
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.DATA_ITEMS__ON_CHAIN_DATA:
-			return onChainData != ON_CHAIN_DATA_EDEFAULT;
+			return isSetOnChainData();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -160,7 +197,10 @@ public class DataItemsImpl extends it.unitn.disi.sweng.secbpmn.model.impl.DataIt
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (OnChainData: "); //$NON-NLS-1$
-		result.append(onChainData);
+		if (onChainDataESet)
+			result.append(onChainData);
+		else
+			result.append("<unset>"); //$NON-NLS-1$
 		result.append(')');
 		return result.toString();
 	}

@@ -21,7 +21,7 @@ package it.polimi.isgroup.secbpmn2bc.model;
 public interface Process extends it.unitn.disi.sweng.secbpmn.model.Process {
 	/**
 	 * Returns the value of the '<em><b>On Chain Model</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>On Chain Model</em>' attribute isn't clear,
@@ -31,7 +31,7 @@ public interface Process extends it.unitn.disi.sweng.secbpmn.model.Process {
 	 * @return the value of the '<em>On Chain Model</em>' attribute.
 	 * @see #setOnChainModel(boolean)
 	 * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getProcess_OnChainModel()
-	 * @model default="true"
+	 * @model default="false"
 	 * @generated
 	 */
 	boolean isOnChainModel();

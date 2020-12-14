@@ -34,7 +34,7 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BlockchainType BLOCKCHAIN_TYPE_EDEFAULT = BlockchainType.PUBLIC;
+	protected static final BlockchainType BLOCKCHAIN_TYPE_EDEFAULT = BlockchainType.UNDEFINED;
 
 	/**
 	 * The cached value of the '{@link #getBlockchainType() <em>Blockchain Type</em>}' attribute.
@@ -47,6 +47,15 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	protected BlockchainType blockchainType = BLOCKCHAIN_TYPE_EDEFAULT;
 
 	/**
+	 * This is true if the Blockchain Type attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean blockchainTypeESet;
+
+	/**
 	 * The default value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,7 +63,16 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = true;
+	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = false;
+
+	/**
+	 * The default value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOnChainModel()
+	 * @generated
+	 * @ordered
+	 */
 
 	/**
 	 * The cached value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
@@ -65,6 +83,15 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 * @ordered
 	 */
 	protected boolean onChainModel = ON_CHAIN_MODEL_EDEFAULT;
+
+	/**
+	 * This is true if the On Chain Model attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean onChainModelESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,9 +131,37 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	public void setBlockchainType(BlockchainType newBlockchainType) {
 		BlockchainType oldBlockchainType = blockchainType;
 		blockchainType = newBlockchainType == null ? BLOCKCHAIN_TYPE_EDEFAULT : newBlockchainType;
+		boolean oldBlockchainTypeESet = blockchainTypeESet;
+		blockchainTypeESet = true;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecBPMN2BCPackage.DEFINITIONS__BLOCKCHAIN_TYPE,
-					oldBlockchainType, blockchainType));
+					oldBlockchainType, blockchainType, !oldBlockchainTypeESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetBlockchainType() {
+		BlockchainType oldBlockchainType = blockchainType;
+		boolean oldBlockchainTypeESet = blockchainTypeESet;
+		blockchainType = BLOCKCHAIN_TYPE_EDEFAULT;
+		blockchainTypeESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, SecBPMN2BCPackage.DEFINITIONS__BLOCKCHAIN_TYPE,
+					oldBlockchainType, BLOCKCHAIN_TYPE_EDEFAULT, oldBlockchainTypeESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetBlockchainType() {
+		return blockchainTypeESet;
 	}
 
 	/**
@@ -128,9 +183,37 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	public void setOnChainModel(boolean newOnChainModel) {
 		boolean oldOnChainModel = onChainModel;
 		onChainModel = newOnChainModel;
+		boolean oldOnChainModelESet = onChainModelESet;
+		onChainModelESet = true;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecBPMN2BCPackage.DEFINITIONS__ON_CHAIN_MODEL,
-					oldOnChainModel, onChainModel));
+					oldOnChainModel, onChainModel, !oldOnChainModelESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetOnChainModel() {
+		boolean oldOnChainModel = onChainModel;
+		boolean oldOnChainModelESet = onChainModelESet;
+		onChainModel = ON_CHAIN_MODEL_EDEFAULT;
+		onChainModelESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, SecBPMN2BCPackage.DEFINITIONS__ON_CHAIN_MODEL,
+					oldOnChainModel, ON_CHAIN_MODEL_EDEFAULT, oldOnChainModelESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetOnChainModel() {
+		return onChainModelESet;
 	}
 
 	/**
@@ -177,10 +260,10 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.DEFINITIONS__BLOCKCHAIN_TYPE:
-			setBlockchainType(BLOCKCHAIN_TYPE_EDEFAULT);
+			unsetBlockchainType();
 			return;
 		case SecBPMN2BCPackage.DEFINITIONS__ON_CHAIN_MODEL:
-			setOnChainModel(ON_CHAIN_MODEL_EDEFAULT);
+			unsetOnChainModel();
 			return;
 		}
 		super.eUnset(featureID);
@@ -195,9 +278,9 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.DEFINITIONS__BLOCKCHAIN_TYPE:
-			return blockchainType != BLOCKCHAIN_TYPE_EDEFAULT;
+			return isSetBlockchainType();
 		case SecBPMN2BCPackage.DEFINITIONS__ON_CHAIN_MODEL:
-			return onChainModel != ON_CHAIN_MODEL_EDEFAULT;
+			return isSetOnChainModel();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,9 +297,15 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (BlockchainType: "); //$NON-NLS-1$
-		result.append(blockchainType);
+		if (blockchainTypeESet)
+			result.append(blockchainType);
+		else
+			result.append("<unset>"); //$NON-NLS-1$
 		result.append(", OnChainModel: "); //$NON-NLS-1$
-		result.append(onChainModel);
+		if (onChainModelESet)
+			result.append(onChainModel);
+		else
+			result.append("<unset>"); //$NON-NLS-1$
 		result.append(')');
 		return result.toString();
 	}

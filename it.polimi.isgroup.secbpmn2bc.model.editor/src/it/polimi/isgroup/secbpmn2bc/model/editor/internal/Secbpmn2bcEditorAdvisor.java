@@ -545,7 +545,6 @@ public final class Secbpmn2bcEditorAdvisor extends WorkbenchAdvisor {
 			IConsoleView view = (IConsoleView) page.showView(id);
 			view.display(findConsole("MyConsole"));
 		} catch (PartInitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

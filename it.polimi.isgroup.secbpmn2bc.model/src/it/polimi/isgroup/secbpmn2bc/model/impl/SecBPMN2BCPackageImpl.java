@@ -3,15 +3,21 @@
 package it.polimi.isgroup.secbpmn2bc.model.impl;
 
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
+import it.polimi.isgroup.secbpmn2bc.model.DataInput;
 import it.polimi.isgroup.secbpmn2bc.model.DataItems;
+import it.polimi.isgroup.secbpmn2bc.model.DataObject;
+import it.polimi.isgroup.secbpmn2bc.model.DataOutput;
+import it.polimi.isgroup.secbpmn2bc.model.DataStore;
 import it.polimi.isgroup.secbpmn2bc.model.Definitions;
 import it.polimi.isgroup.secbpmn2bc.model.Enforceability;
 import it.polimi.isgroup.secbpmn2bc.model.EnforceabilityScope;
-import it.polimi.isgroup.secbpmn2bc.model.Group;
+import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.OnChainData;
 import it.polimi.isgroup.secbpmn2bc.model.PrivityScope;
 import it.polimi.isgroup.secbpmn2bc.model.PrivitySphere;
 
+import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCFactory;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
@@ -73,14 +79,56 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass groupEClass = null;
+	private EClass definitionsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass definitionsEClass = null;
+	private EClass dataStoreEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataObjectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataInputEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataOutputEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass messageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass messageRefEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass subProcessEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -292,26 +340,6 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 	 * @generated
 	 */
 	@Override
-	public EClass getGroup() {
-		return groupEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getGroup_OnChainModel() {
-		return (EAttribute) groupEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getDefinitions() {
 		return definitionsEClass;
 	}
@@ -334,6 +362,86 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 	@Override
 	public EAttribute getDefinitions_OnChainModel() {
 		return (EAttribute) definitionsEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataStore() {
+		return dataStoreEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataObject() {
+		return dataObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataInput() {
+		return dataInputEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDataOutput() {
+		return dataOutputEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMessage() {
+		return messageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMessageRef() {
+		return messageRefEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSubProcess() {
+		return subProcessEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSubProcess_OnChainModel() {
+		return (EAttribute) subProcessEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -422,12 +530,24 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 		taskEClass = createEClass(TASK);
 		createEAttribute(taskEClass, TASK__ON_CHAIN_EXECUTION);
 
-		groupEClass = createEClass(GROUP);
-		createEAttribute(groupEClass, GROUP__ON_CHAIN_MODEL);
-
 		definitionsEClass = createEClass(DEFINITIONS);
 		createEAttribute(definitionsEClass, DEFINITIONS__BLOCKCHAIN_TYPE);
 		createEAttribute(definitionsEClass, DEFINITIONS__ON_CHAIN_MODEL);
+
+		dataStoreEClass = createEClass(DATA_STORE);
+
+		dataObjectEClass = createEClass(DATA_OBJECT);
+
+		dataInputEClass = createEClass(DATA_INPUT);
+
+		dataOutputEClass = createEClass(DATA_OUTPUT);
+
+		messageEClass = createEClass(MESSAGE);
+
+		messageRefEClass = createEClass(MESSAGE_REF);
+
+		subProcessEClass = createEClass(SUB_PROCESS);
+		createEAttribute(subProcessEClass, SUB_PROCESS__ON_CHAIN_MODEL);
 
 		// Create enums
 		enforceabilityScopeEEnum = createEEnum(ENFORCEABILITY_SCOPE);
@@ -475,8 +595,19 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 		processEClass.getESuperTypes().add(theSecBPMNPackage.getProcess());
 		dataItemsEClass.getESuperTypes().add(theSecBPMNPackage.getDataItems());
 		taskEClass.getESuperTypes().add(theSecBPMNPackage.getTask());
-		groupEClass.getESuperTypes().add(theSecBPMNPackage.getGroup());
 		definitionsEClass.getESuperTypes().add(theGMTPackage.getGMTNamedNode());
+		dataStoreEClass.getESuperTypes().add(theSecBPMNPackage.getDataStore());
+		dataStoreEClass.getESuperTypes().add(this.getDataItems());
+		dataObjectEClass.getESuperTypes().add(theSecBPMNPackage.getDataObject());
+		dataObjectEClass.getESuperTypes().add(this.getDataItems());
+		dataInputEClass.getESuperTypes().add(this.getDataItems());
+		dataInputEClass.getESuperTypes().add(theSecBPMNPackage.getDataInput());
+		dataOutputEClass.getESuperTypes().add(theSecBPMNPackage.getDataOutput());
+		dataOutputEClass.getESuperTypes().add(this.getDataItems());
+		messageEClass.getESuperTypes().add(this.getDataItems());
+		messageEClass.getESuperTypes().add(theSecBPMNPackage.getMessage());
+		messageRefEClass.getESuperTypes().add(this.getMessage());
+		subProcessEClass.getESuperTypes().add(theSecBPMNPackage.getSubProcess());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(privitySphereEClass, PrivitySphere.class, "PrivitySphere", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
@@ -495,32 +626,51 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 
 		initEClass(processEClass, it.polimi.isgroup.secbpmn2bc.model.Process.class, "Process", !IS_ABSTRACT, //$NON-NLS-1$
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProcess_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "true", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+		initEAttribute(getProcess_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
 				it.polimi.isgroup.secbpmn2bc.model.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataItemsEClass, DataItems.class, "DataItems", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDataItems_OnChainData(), this.getOnChainData(), "OnChainData", "Digest", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
-				DataItems.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+		initEAttribute(getDataItems_OnChainData(), this.getOnChainData(), "OnChainData", "Undefined", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+				DataItems.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskEClass, Task.class, "Task", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getTask_OnChainExecution(), ecorePackage.getEBoolean(), "OnChainExecution", "true", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
-				Task.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+		initEAttribute(getTask_OnChainExecution(), ecorePackage.getEBoolean(), "OnChainExecution", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+				Task.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-
-		initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getGroup_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "true", 0, 1, Group.class, //$NON-NLS-1$//$NON-NLS-2$
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(definitionsEClass, Definitions.class, "Definitions", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDefinitions_BlockchainType(), this.getBlockchainType(), "BlockchainType", "Public", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
-				Definitions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+		initEAttribute(getDefinitions_BlockchainType(), this.getBlockchainType(), "BlockchainType", "Undefined", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+				Definitions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDefinitions_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "true", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
-				Definitions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+		initEAttribute(getDefinitions_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+				Definitions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataStoreEClass, DataStore.class, "DataStore", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dataObjectEClass, DataObject.class, "DataObject", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dataInputEClass, DataInput.class, "DataInput", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dataOutputEClass, DataOutput.class, "DataOutput", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(messageRefEClass, MessageRef.class, "MessageRef", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(subProcessEClass, SubProcess.class, "SubProcess", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSubProcess_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+				SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
@@ -541,10 +691,12 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 		addEEnumLiteral(onChainDataEEnum, OnChainData.DIGEST);
 		addEEnumLiteral(onChainDataEEnum, OnChainData.ENCRYPTED);
 		addEEnumLiteral(onChainDataEEnum, OnChainData.UNENCRYPTED);
+		addEEnumLiteral(onChainDataEEnum, OnChainData.UNDEFINED);
 
 		initEEnum(blockchainTypeEEnum, BlockchainType.class, "BlockchainType"); //$NON-NLS-1$
 		addEEnumLiteral(blockchainTypeEEnum, BlockchainType.PUBLIC);
 		addEEnumLiteral(blockchainTypeEEnum, BlockchainType.PRIVATE);
+		addEEnumLiteral(blockchainTypeEEnum, BlockchainType.UNDEFINED);
 
 		// Create resource
 		createResource(eNS_URI);
