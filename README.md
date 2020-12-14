@@ -13,11 +13,11 @@ To correctly use it we suggest to follow these steps:
 3. Start the SecBPMN2BC software and load the SecBPMn2 model. the following interface will appear:
 ![initial interface](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/1-initialModel.png)
 4. To enrich the model with blockchain-related properties, clicjkn the **SecBPMn2BC Editor** and **annotate with BC properties**.
-![SecBPMN2BC menu](image.jpg)
+![SecBPMN2BC menu](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/2-openMenu.png)
 5. Once the analisys is completed, a pop-up will confirm that the analysis is complete
-![analysis complete](image.jpg)
+![analysis complete](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/3-completedOk.png)
 6. By selecting an element on the structure of the process in the main pane, the lower pane will its the properties. 
-![Element properies](image.jpg)
+![Element properies](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/4-annotatedModel.png)
 
 ## Installation instruction 
 Download the repository, navigate to the man folder and execute
