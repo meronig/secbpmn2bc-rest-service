@@ -34,7 +34,9 @@ To correctly use it we suggest to follow these steps:
 1. Create a SecBPMN2 model usiong STS-Tool with the SecBPMN2 plugin. STS-Tool and SecBPMN2 plugin can be downloaded [here](https://www.sts-tool.eu). 
 2. Export the XML file by navigating in the workspace of STS-Tool.
 3. Open eclipse with SecBNPMN2BC plugin installed.
-4. Open the SecBPMN2 exported file: *File* -> *Open File* and shose the SecBPMN2BC file. A similar interface will appear.
+4. Open the SecBPMN2 exported file: *File* -> *Open File* and shose the SecBPMN2BC file. 
+You can use the example files that you can find in */documentation/examples*. 
+A similar interface will appear.
 ![initial interface](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/1-initialModel.png)
 5. If the console pane is not open in Eclipse, open it: *SecBPMN2BC Editor* -> *Show console*.
 6. Enrich the model with blockchain-related properties: *SecBPMn2BC Editor* -> *annotate with BC properties*.
