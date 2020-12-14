@@ -2,14 +2,16 @@
 
 SecBPMN2BC is a method created to support the design of *secure business processes* to be executed in blockchain. It is composed of a modelling language, a suggested workflow and a software tool that partially support the workflow by identifying conflicts and the part of the busines process that can be executed in blockchain.
 
-This is the repository of SecBPMN2BC software tool, that supports the SecBPMN2BC medoth in identifing security and privity conflicts, and generating blockchain-related  properties for SecBPMN2 elements.
+This is the repository of SecBPMN2BC software tool, that supports the SecBPMN2BC medoth in identifing security and privity conflicts, and generating blockchain-related  properties for SecBPMN2 elements. This tool is based, and uses part of the libraries of on (STS-Tool)(https://www.sts-tool.eu).
 
 ## Repository content
-This repostory contains
+This repostory contains:
 * this guide
 * the compiled version of the software tool 
 * source code of the software tool
-* compiled library of STS-Tool
+* compiled library of [STS-Tool](https://www.sts-tool.eu)
+* a SecBPMn2BC example file, that can be used to try the tool.
+
 
 ## Requirements
 This is the software configuration tested. Other software versions or operative systems are not supported.
