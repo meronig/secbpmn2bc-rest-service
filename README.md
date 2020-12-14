@@ -6,10 +6,10 @@ This is the repository of SecBPMN2BC software tool, that supports the SecBPMN2BC
 
 ## Repository content
 This repostory contains
-*this guide
-*the compiled version of the software tool 
-*source code of the software tool
-*compiled library of STS-Tool
+* this guide
+* the compiled version of the software tool 
+* source code of the software tool
+* compiled library of STS-Tool
 
 ## Installation instruction 
 Download the SecBPMN2BC.jar file from this repository.
