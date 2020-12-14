@@ -4,6 +4,11 @@ SecBPMN2BC is a method created to support the design of secure business processe
 
 This repository contains the source code and the compiled executables of the software tool of SecBPMN2BC method.
 
+## Installation instruction 
+Download the repository, un-compress the folder if you downloaded it as a compressed folder.
+Navigate to the man folder and execute `java java`
+
+
 ## Usage
 The tool is a java-based application. 
 To correctly use it we suggest to follow these steps:
@@ -19,7 +24,4 @@ To correctly use it we suggest to follow these steps:
 6. By selecting an element on the structure of the process in the main pane, the lower pane will its the properties. 
 ![Element properies](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/4-annotatedModel.png)
 
-## Installation instruction 
-Download the repository, navigate to the man folder and execute
-`java java`
 
