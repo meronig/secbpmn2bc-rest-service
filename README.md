@@ -11,7 +11,7 @@ To correctly use it we suggest to follow these steps:
 1. Create a SecBPMN2 model usiong STS-Tool with the SecBPMN2 plugin. STS-Tool and SecBPMN2 plugin can be downloaded [here](https://www.sts-tool.eu). 
 2. Export the XML file by navigating in the workspace of STS-Tool.
 3. Start the SecBPMN2BC software and load the SecBPMn2 model. the following interface will appear:
-![initial interface](image.jpg)
+![initial interface](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/1-initialModel.png)
 4. To enrich the model with blockchain-related properties, clicjkn the **SecBPMn2BC Editor** and **annotate with BC properties**.
 ![SecBPMN2BC menu](image.jpg)
 5. Once the analisys is completed, a pop-up will confirm that the analysis is complete
