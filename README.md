@@ -20,30 +20,28 @@ This is the software configuration tested. Other software versions or operative 
 * Windows 10
 
 ## Installation and set-up instructions 
-1. Download the jar files from the *binaries* folder.
-2. Copy the juar files in the *dropin* folder of your eclipse installation
+1. Download the last SecBPMN2BC zip file from here: https://github.com/MattiaSalnitri/SecBPMN2BC/releases
+2. Copy the zip file inside Eclipse root directory and expand it there.
 3. Start Eclipse
-4. check if the plugin is installed: verify (do not click) if in the *File* -> *New* exists an element *SecBPMn2BD model*
-5. Open SecBPMN2BC *Window* -> *Perscetive* ->  *Open Perspective * -> *Other* -> *Secbpmn2bceclipse
+4. check if the plugin is installed: verify (do not click) if in the *File* -> *New* exists an element *SecBPMN2BC model*
+5. Open SecBPMN2BC perspective: *Window* -> *Perspective* ->  *Open Perspective * -> *Other* -> *Secbpmn2bc
 
 
 ## Usage
 The tool is a java-based application. 
 To correctly use it we suggest to follow these steps:
 
-1. Create a SecBPMN2 model usiong STS-Tool with the SecBPMN2 plugin. STS-Tool and SecBPMN2 plugin can be downloaded [here](https://www.sts-tool.eu). 
-2. Export the XML file by navigating in the workspace of STS-Tool.
-3. Open eclipse with SecBNPMN2BC plugin installed.
-4. Open the SecBPMN2 exported file: *File* -> *Open File* and shose the SecBPMN2BC file. 
-You can use the example files that you can find in */documentation/examples*. 
-A similar interface will appear.
+1. Open eclipse with SecBNPMN2BC plugin installed.
+2. Open the SecBPMN2 example files: *File* -> *Open File* and choose one of the SecBPMN2BC files in */documentation/examples*.
+Your Eclipse interface should now be similar to the following screenshot:
 ![initial interface](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/1-initialModel.png)
-5. If the console pane is not open in Eclipse, open it: *SecBPMN2BC Editor* -> *Show console*.
-6. Enrich the model with blockchain-related properties: *SecBPMn2BC Editor* -> *annotate with BC properties*.
+3. By selecting an element in the structure of the process in the main pane, the lower right pane will show its associated properties. For instance, the property Blockchain type of the Definitions element is currently set to Undefined.
+4. If the console pane is not open in Eclipse, open it: *SecBPMN2BC Editor* -> *Show console*.
+5. Automatically annotate the model with blockchain-related properties: *SecBPMn2BC Editor* -> *annotate with BC properties*.
 ![SecBPMN2BC menu](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/2-openMenu.png)
-5. Once the analisys is completed, a pop-up will confirm that the analysis is complete.
+6. Once the analisys is completed, a pop-up will confirm that the analysis is complete.
 ![analysis complete](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/3-completedOk.png)
-6. By selecting an element on the structure of the process in the main pane, the lower pane will its the properties. 
+7. After the analysis is complete, blockchain-specific properties of each process element will be automatically set to the best value satisfying the security requirements. For instance, the property Blockchain type of the Definitions element for the model Running_example_V1 will be now set to Public.
 ![Element properies](https://github.com/MattiaSalnitri/SecBPMN2BC/blob/main/documentation/images/4-annotatedModel.png)
 
 
