@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.ProcessImpl#isOnChainModel <em>On Chain Model</em>}</li>
+ *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.ProcessImpl#getOnChainModel <em>On Chain Model</em>}</li>
  * </ul>
  *
  * @generated
@@ -26,24 +26,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class ProcessImpl extends it.unitn.disi.sweng.secbpmn.model.impl.ProcessImpl
 		implements it.polimi.isgroup.secbpmn2bc.model.Process {
 	/**
-	 * The default value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
+	 * The default value of the '{@link #getOnChainModel() <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOnChainModel()
+	 * @see #getOnChainModel()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = false;
+	protected static final Boolean ON_CHAIN_MODEL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
+	 * The cached value of the '{@link #getOnChainModel() <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOnChainModel()
+	 * @see #getOnChainModel()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean onChainModel = ON_CHAIN_MODEL_EDEFAULT;
+	protected Boolean onChainModel = ON_CHAIN_MODEL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,7 +70,7 @@ public class ProcessImpl extends it.unitn.disi.sweng.secbpmn.model.impl.ProcessI
 	 * @generated
 	 */
 	@Override
-	public boolean isOnChainModel() {
+	public Boolean getOnChainModel() {
 		return onChainModel;
 	}
 
@@ -80,8 +80,8 @@ public class ProcessImpl extends it.unitn.disi.sweng.secbpmn.model.impl.ProcessI
 	 * @generated
 	 */
 	@Override
-	public void setOnChainModel(boolean newOnChainModel) {
-		boolean oldOnChainModel = onChainModel;
+	public void setOnChainModel(Boolean newOnChainModel) {
+		Boolean oldOnChainModel = onChainModel;
 		onChainModel = newOnChainModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SecBPMN2BCPackage.PROCESS__ON_CHAIN_MODEL,
@@ -97,7 +97,7 @@ public class ProcessImpl extends it.unitn.disi.sweng.secbpmn.model.impl.ProcessI
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.PROCESS__ON_CHAIN_MODEL:
-			return isOnChainModel();
+			return getOnChainModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,7 +141,8 @@ public class ProcessImpl extends it.unitn.disi.sweng.secbpmn.model.impl.ProcessI
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.PROCESS__ON_CHAIN_MODEL:
-			return onChainModel != ON_CHAIN_MODEL_EDEFAULT;
+			return ON_CHAIN_MODEL_EDEFAULT == null ? onChainModel != null
+					: !ON_CHAIN_MODEL_EDEFAULT.equals(onChainModel);
 		}
 		return super.eIsSet(featureID);
 	}

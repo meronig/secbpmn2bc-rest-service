@@ -4,7 +4,6 @@ package it.polimi.isgroup.secbpmn2bc.model.impl;
 
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
 import it.polimi.isgroup.secbpmn2bc.model.Definitions;
-
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
 import it.unitn.disi.sweng.gmt.model.impl.GMTNamedNodeImpl;
 import org.eclipse.emf.common.notify.Notification;
@@ -20,7 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.DefinitionsImpl#getBlockchainType <em>Blockchain Type</em>}</li>
- *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.DefinitionsImpl#isOnChainModel <em>On Chain Model</em>}</li>
+ *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.DefinitionsImpl#getOnChainModel <em>On Chain Model</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,14 +55,14 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	protected boolean blockchainTypeESet;
 
 	/**
-	 * The default value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
+	 * The default value of the '{@link #getOnChainModel() <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOnChainModel()
+	 * @see #getOnChainModel()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ON_CHAIN_MODEL_EDEFAULT = false;
+	protected static final Boolean ON_CHAIN_MODEL_EDEFAULT = null;
 
 	/**
 	 * The default value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
@@ -75,14 +74,14 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 */
 
 	/**
-	 * The cached value of the '{@link #isOnChainModel() <em>On Chain Model</em>}' attribute.
+	 * The cached value of the '{@link #getOnChainModel() <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOnChainModel()
+	 * @see #getOnChainModel()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean onChainModel = ON_CHAIN_MODEL_EDEFAULT;
+	protected Boolean onChainModel = ON_CHAIN_MODEL_EDEFAULT;
 
 	/**
 	 * This is true if the On Chain Model attribute has been set.
@@ -170,7 +169,7 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 * @generated
 	 */
 	@Override
-	public boolean isOnChainModel() {
+	public Boolean getOnChainModel() {
 		return onChainModel;
 	}
 
@@ -180,8 +179,8 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 * @generated
 	 */
 	@Override
-	public void setOnChainModel(boolean newOnChainModel) {
-		boolean oldOnChainModel = onChainModel;
+	public void setOnChainModel(Boolean newOnChainModel) {
+		Boolean oldOnChainModel = onChainModel;
 		onChainModel = newOnChainModel;
 		boolean oldOnChainModelESet = onChainModelESet;
 		onChainModelESet = true;
@@ -197,7 +196,7 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 */
 	@Override
 	public void unsetOnChainModel() {
-		boolean oldOnChainModel = onChainModel;
+		Boolean oldOnChainModel = onChainModel;
 		boolean oldOnChainModelESet = onChainModelESet;
 		onChainModel = ON_CHAIN_MODEL_EDEFAULT;
 		onChainModelESet = false;
@@ -227,7 +226,7 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 		case SecBPMN2BCPackage.DEFINITIONS__BLOCKCHAIN_TYPE:
 			return getBlockchainType();
 		case SecBPMN2BCPackage.DEFINITIONS__ON_CHAIN_MODEL:
-			return isOnChainModel();
+			return getOnChainModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -237,7 +236,6 @@ public class DefinitionsImpl extends GMTNamedNodeImpl implements Definitions {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

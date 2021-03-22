@@ -7,6 +7,7 @@ import it.unitn.disi.sweng.secbpmn.model.meta.SecBPMNPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -2103,6 +2104,16 @@ public interface SecBPMN2BCPackage extends EPackage {
 	int BLOCKCHAIN_TYPE = 16;
 
 	/**
+	 * The meta object id for the '<em>Boolean With Null</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Boolean
+	 * @see it.polimi.isgroup.secbpmn2bc.model.impl.SecBPMN2BCPackageImpl#getBooleanWithNull()
+	 * @generated
+	 */
+	int BOOLEAN_WITH_NULL = 17;
+
+	/**
 	 * Returns the meta object for class '{@link it.polimi.isgroup.secbpmn2bc.model.PrivitySphere <em>Privity Sphere</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2166,11 +2177,11 @@ public interface SecBPMN2BCPackage extends EPackage {
 	EClass getProcess();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.Process#isOnChainModel <em>On Chain Model</em>}'.
+	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.Process#getOnChainModel <em>On Chain Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>On Chain Model</em>'.
-	 * @see it.polimi.isgroup.secbpmn2bc.model.Process#isOnChainModel()
+	 * @see it.polimi.isgroup.secbpmn2bc.model.Process#getOnChainModel()
 	 * @see #getProcess()
 	 * @generated
 	 */
@@ -2208,11 +2219,11 @@ public interface SecBPMN2BCPackage extends EPackage {
 	EClass getTask();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.Task#isOnChainExecution <em>On Chain Execution</em>}'.
+	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.Task#getOnChainExecution <em>On Chain Execution</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>On Chain Execution</em>'.
-	 * @see it.polimi.isgroup.secbpmn2bc.model.Task#isOnChainExecution()
+	 * @see it.polimi.isgroup.secbpmn2bc.model.Task#getOnChainExecution()
 	 * @see #getTask()
 	 * @generated
 	 */
@@ -2240,11 +2251,11 @@ public interface SecBPMN2BCPackage extends EPackage {
 	EAttribute getDefinitions_BlockchainType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel <em>On Chain Model</em>}'.
+	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getOnChainModel <em>On Chain Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>On Chain Model</em>'.
-	 * @see it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel()
+	 * @see it.polimi.isgroup.secbpmn2bc.model.Definitions#getOnChainModel()
 	 * @see #getDefinitions()
 	 * @generated
 	 */
@@ -2321,11 +2332,11 @@ public interface SecBPMN2BCPackage extends EPackage {
 	EClass getSubProcess();
 
 	/**
-	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.SubProcess#isOnChainModel <em>On Chain Model</em>}'.
+	 * Returns the meta object for the attribute '{@link it.polimi.isgroup.secbpmn2bc.model.SubProcess#getOnChainModel <em>On Chain Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>On Chain Model</em>'.
-	 * @see it.polimi.isgroup.secbpmn2bc.model.SubProcess#isOnChainModel()
+	 * @see it.polimi.isgroup.secbpmn2bc.model.SubProcess#getOnChainModel()
 	 * @see #getSubProcess()
 	 * @generated
 	 */
@@ -2370,6 +2381,18 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getBlockchainType();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.Boolean <em>Boolean With Null</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Boolean With Null</em>'.
+	 * @see java.lang.Boolean
+	 * @model instanceClass="java.lang.Boolean"
+	 *        extendedMetaData="baseType='EBooleanObject\r\n'"
+	 * @generated
+	 */
+	EDataType getBooleanWithNull();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2635,6 +2658,16 @@ public interface SecBPMN2BCPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum BLOCKCHAIN_TYPE = eINSTANCE.getBlockchainType();
+
+		/**
+		 * The meta object literal for the '<em>Boolean With Null</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Boolean
+		 * @see it.polimi.isgroup.secbpmn2bc.model.impl.SecBPMN2BCPackageImpl#getBooleanWithNull()
+		 * @generated
+		 */
+		EDataType BOOLEAN_WITH_NULL = eINSTANCE.getBooleanWithNull();
 
 	}
 

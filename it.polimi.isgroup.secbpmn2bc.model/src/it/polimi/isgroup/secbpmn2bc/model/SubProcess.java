@@ -11,7 +11,7 @@ package it.polimi.isgroup.secbpmn2bc.model;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.SubProcess#isOnChainModel <em>On Chain Model</em>}</li>
+ *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.SubProcess#getOnChainModel <em>On Chain Model</em>}</li>
  * </ul>
  *
  * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getSubProcess()
@@ -21,7 +21,7 @@ package it.polimi.isgroup.secbpmn2bc.model;
 public interface SubProcess extends it.unitn.disi.sweng.secbpmn.model.SubProcess {
 	/**
 	 * Returns the value of the '<em><b>On Chain Model</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>On Chain Model</em>' attribute isn't clear,
@@ -29,21 +29,21 @@ public interface SubProcess extends it.unitn.disi.sweng.secbpmn.model.SubProcess
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>On Chain Model</em>' attribute.
-	 * @see #setOnChainModel(boolean)
+	 * @see #setOnChainModel(Boolean)
 	 * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getSubProcess_OnChainModel()
-	 * @model default="false"
+	 * @model default="" dataType="it.polimi.isgroup.secbpmn2bc.model.BooleanWithNull"
 	 * @generated
 	 */
-	boolean isOnChainModel();
+	Boolean getOnChainModel();
 
 	/**
-	 * Sets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.SubProcess#isOnChainModel <em>On Chain Model</em>}' attribute.
+	 * Sets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.SubProcess#getOnChainModel <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>On Chain Model</em>' attribute.
-	 * @see #isOnChainModel()
+	 * @see #getOnChainModel()
 	 * @generated
 	 */
-	void setOnChainModel(boolean value);
+	void setOnChainModel(Boolean value);
 
 } // SubProcess

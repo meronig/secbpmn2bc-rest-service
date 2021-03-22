@@ -58,13 +58,13 @@ public enum OnChainData implements Enumerator {
 	 */
 	UNENCRYPTED(3, "Unencrypted", "Unencrypted"),
 	/**
-	* The '<em><b>Undefined</b></em>' literal object.
-	* <!-- begin-user-doc -->
+	 * The '<em><b>Undefined</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	* <!-- end-user-doc -->
-	* @see #UNDEFINED_VALUE
-	* @generated
-	* @ordered
-	*/
+	 * @see #UNDEFINED_VALUE
+	 * @generated
+	 * @ordered
+	 */
 	UNDEFINED(-1, "Undefined", "Undefined"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**

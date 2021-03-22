@@ -20,31 +20,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.TaskImpl#isOnChainExecution <em>On Chain Execution</em>}</li>
+ *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.impl.TaskImpl#getOnChainExecution <em>On Chain Execution</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl implements Task {
 	/**
-	 * The default value of the '{@link #isOnChainExecution() <em>On Chain Execution</em>}' attribute.
+	 * The default value of the '{@link #getOnChainExecution() <em>On Chain Execution</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOnChainExecution()
+	 * @see #getOnChainExecution()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ON_CHAIN_EXECUTION_EDEFAULT = false;
+	protected static final Boolean ON_CHAIN_EXECUTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isOnChainExecution() <em>On Chain Execution</em>}' attribute.
+	 * The cached value of the '{@link #getOnChainExecution() <em>On Chain Execution</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOnChainExecution()
+	 * @see #getOnChainExecution()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean onChainExecution = ON_CHAIN_EXECUTION_EDEFAULT;
+	protected Boolean onChainExecution = ON_CHAIN_EXECUTION_EDEFAULT;
 
 	/**
 	 * This is true if the On Chain Execution attribute has been set.
@@ -80,7 +80,7 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	 * @generated
 	 */
 	@Override
-	public boolean isOnChainExecution() {
+	public Boolean getOnChainExecution() {
 		return onChainExecution;
 	}
 
@@ -90,8 +90,8 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	 * @generated
 	 */
 	@Override
-	public void setOnChainExecution(boolean newOnChainExecution) {
-		boolean oldOnChainExecution = onChainExecution;
+	public void setOnChainExecution(Boolean newOnChainExecution) {
+		Boolean oldOnChainExecution = onChainExecution;
 		onChainExecution = newOnChainExecution;
 		boolean oldOnChainExecutionESet = onChainExecutionESet;
 		onChainExecutionESet = true;
@@ -107,7 +107,7 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	 */
 	@Override
 	public void unsetOnChainExecution() {
-		boolean oldOnChainExecution = onChainExecution;
+		Boolean oldOnChainExecution = onChainExecution;
 		boolean oldOnChainExecutionESet = onChainExecutionESet;
 		onChainExecution = ON_CHAIN_EXECUTION_EDEFAULT;
 		onChainExecutionESet = false;
@@ -135,7 +135,7 @@ public class TaskImpl extends it.unitn.disi.sweng.secbpmn.model.impl.TaskImpl im
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case SecBPMN2BCPackage.TASK__ON_CHAIN_EXECUTION:
-			return isOnChainExecution();
+			return getOnChainExecution();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

@@ -57,7 +57,7 @@
   <xsd:complexType name="Process">
     <xsd:complexContent>
       <xsd:extension base="secbpmn:Process">
-        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
+        <xsd:attribute name="OnChainModel" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -73,7 +73,7 @@
   <xsd:complexType name="Task">
     <xsd:complexContent>
       <xsd:extension base="secbpmn:Task">
-        <xsd:attribute name="OnChainExecution" type="xsd:boolean"/>
+        <xsd:attribute name="OnChainExecution" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -82,7 +82,7 @@
     <xsd:complexContent>
       <xsd:extension base="gmt:GMTNamedNode">
         <xsd:attribute name="BlockchainType" type="secbpmn2bc:BlockchainType"/>
-        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
+        <xsd:attribute name="OnChainModel" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -139,7 +139,7 @@
   <xsd:complexType name="SubProcess">
     <xsd:complexContent>
       <xsd:extension base="secbpmn:SubProcess">
-        <xsd:attribute name="OnChainModel" type="xsd:boolean"/>
+        <xsd:attribute name="OnChainModel" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>

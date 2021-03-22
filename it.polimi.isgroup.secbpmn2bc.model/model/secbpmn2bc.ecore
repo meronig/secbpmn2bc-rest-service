@@ -25,8 +25,8 @@
     <eLiterals name="StrongDynamic" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Process">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="#//BooleanWithNull"
+        defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OnChainData">
     <eLiterals name="None"/>
@@ -45,14 +45,14 @@
         defaultValueLiteral="Undefined" unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Task">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainExecution" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainExecution" eType="#//BooleanWithNull"
+        defaultValueLiteral="" unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definitions" eSuperTypes="../../it.unitn.disi.sweng.gmt.model/model/GMT.ecore#//GMTNamedNode">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="BlockchainType" eType="#//BlockchainType"
-        defaultValueLiteral="Undefined" unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false" unsettable="true"/>
+        defaultValueLiteral="Undefined" unsettable="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="#//BooleanWithNull"
+        defaultValueLiteral="" unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataStore" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataStore #//DataItems"/>
   <eClassifiers xsi:type="ecore:EClass" name="DataObject" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataObject #//DataItems"/>
@@ -61,7 +61,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//DataItems ../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Message"/>
   <eClassifiers xsi:type="ecore:EClass" name="MessageRef" eSuperTypes="#//Message"/>
   <eClassifiers xsi:type="ecore:EClass" name="SubProcess" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//SubProcess">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="#//BooleanWithNull"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="BooleanWithNull" instanceClassName="java.lang.Boolean">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EBooleanObject&#xD;&#xA;"/>
+    </eAnnotations>
   </eClassifiers>
 </ecore:EPackage>

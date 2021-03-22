@@ -20,7 +20,6 @@ import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCFactory;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -121,6 +120,8 @@ public class SecBPMN2BCFactoryImpl extends EFactoryImpl implements SecBPMN2BCFac
 			return createOnChainDataFromString(eDataType, initialValue);
 		case SecBPMN2BCPackage.BLOCKCHAIN_TYPE:
 			return createBlockchainTypeFromString(eDataType, initialValue);
+		case SecBPMN2BCPackage.BOOLEAN_WITH_NULL:
+			return createBooleanWithNullFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -142,6 +143,8 @@ public class SecBPMN2BCFactoryImpl extends EFactoryImpl implements SecBPMN2BCFac
 			return convertOnChainDataToString(eDataType, instanceValue);
 		case SecBPMN2BCPackage.BLOCKCHAIN_TYPE:
 			return convertBlockchainTypeToString(eDataType, instanceValue);
+		case SecBPMN2BCPackage.BOOLEAN_WITH_NULL:
+			return convertBooleanWithNullToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -456,6 +459,44 @@ public class SecBPMN2BCFactoryImpl extends EFactoryImpl implements SecBPMN2BCFac
 	 */
 	public String convertBlockchainTypeToString(EDataType eDataType, Object instanceValue) {
 		return convertBlockchainType((BlockchainType) instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Boolean createBooleanWithNull(String literal) {
+		return (Boolean) super.createFromString(SecBPMN2BCPackage.Literals.BOOLEAN_WITH_NULL, literal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean createBooleanWithNullFromString(EDataType eDataType, String initialValue) {
+		return createBooleanWithNull(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertBooleanWithNull(Boolean instanceValue) {
+		return super.convertToString(SecBPMN2BCPackage.Literals.BOOLEAN_WITH_NULL, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBooleanWithNullToString(EDataType eDataType, Object instanceValue) {
+		return convertBooleanWithNull((Boolean) instanceValue);
 	}
 
 	/**

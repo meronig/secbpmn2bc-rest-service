@@ -23,9 +23,9 @@ import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCFactory;
 import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
 import it.unitn.disi.sweng.gmt.model.meta.GMTPackage;
 import it.unitn.disi.sweng.secbpmn.model.meta.SecBPMNPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -157,6 +157,13 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 	 * @generated
 	 */
 	private EEnum blockchainTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType booleanWithNullEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -490,6 +497,16 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 	 * @generated
 	 */
 	@Override
+	public EDataType getBooleanWithNull() {
+		return booleanWithNullEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public SecBPMN2BCFactory getSecBPMN2BCFactory() {
 		return (SecBPMN2BCFactory) getEFactoryInstance();
 	}
@@ -554,6 +571,9 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 		privityScopeEEnum = createEEnum(PRIVITY_SCOPE);
 		onChainDataEEnum = createEEnum(ON_CHAIN_DATA);
 		blockchainTypeEEnum = createEEnum(BLOCKCHAIN_TYPE);
+
+		// Create data types
+		booleanWithNullEDataType = createEDataType(BOOLEAN_WITH_NULL);
 	}
 
 	/**
@@ -626,7 +646,7 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 
 		initEClass(processEClass, it.polimi.isgroup.secbpmn2bc.model.Process.class, "Process", !IS_ABSTRACT, //$NON-NLS-1$
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProcess_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+		initEAttribute(getProcess_OnChainModel(), this.getBooleanWithNull(), "OnChainModel", "", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
 				it.polimi.isgroup.secbpmn2bc.model.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -637,16 +657,15 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskEClass, Task.class, "Task", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getTask_OnChainExecution(), ecorePackage.getEBoolean(), "OnChainExecution", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
-				Task.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEAttribute(getTask_OnChainExecution(), this.getBooleanWithNull(), "OnChainExecution", "", 0, 1, Task.class, //$NON-NLS-1$//$NON-NLS-2$
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(definitionsEClass, Definitions.class, "Definitions", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDefinitions_BlockchainType(), this.getBlockchainType(), "BlockchainType", "Undefined", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
 				Definitions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDefinitions_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+				IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDefinitions_OnChainModel(), this.getBooleanWithNull(), "OnChainModel", "", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
 				Definitions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
@@ -669,7 +688,7 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 
 		initEClass(subProcessEClass, SubProcess.class, "SubProcess", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSubProcess_OnChainModel(), ecorePackage.getEBoolean(), "OnChainModel", "false", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
+		initEAttribute(getSubProcess_OnChainModel(), this.getBooleanWithNull(), "OnChainModel", "", 0, 1, //$NON-NLS-1$//$NON-NLS-2$
 				SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
@@ -698,8 +717,28 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 		addEEnumLiteral(blockchainTypeEEnum, BlockchainType.PRIVATE);
 		addEEnumLiteral(blockchainTypeEEnum, BlockchainType.UNDEFINED);
 
+		// Initialize data types
+		initEDataType(booleanWithNullEDataType, Boolean.class, "BooleanWithNull", IS_SERIALIZABLE, //$NON-NLS-1$
+				!IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+		createExtendedMetaDataAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$	
+		addAnnotation(booleanWithNullEDataType, source, new String[] { "baseType", "EBooleanObject\r\n" //$NON-NLS-1$ //$NON-NLS-2$
+		});
 	}
 
 } //SecBPMN2BCPackageImpl

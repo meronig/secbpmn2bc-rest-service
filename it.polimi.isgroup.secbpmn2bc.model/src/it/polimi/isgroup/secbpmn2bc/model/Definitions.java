@@ -14,7 +14,7 @@ import it.unitn.disi.sweng.gmt.model.GMTNamedNode;
  * </p>
  * <ul>
  *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getBlockchainType <em>Blockchain Type</em>}</li>
- *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel <em>On Chain Model</em>}</li>
+ *   <li>{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getOnChainModel <em>On Chain Model</em>}</li>
  * </ul>
  *
  * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getDefinitions()
@@ -38,7 +38,7 @@ public interface Definitions extends GMTNamedNode {
 	 * @see #unsetBlockchainType()
 	 * @see #setBlockchainType(BlockchainType)
 	 * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getDefinitions_BlockchainType()
-	 * @model default="Undefined" unsettable="true"
+	 * @model default="Undefined" unsettable="true" derived="true"
 	 * @generated
 	 */
 	BlockchainType getBlockchainType();
@@ -81,7 +81,7 @@ public interface Definitions extends GMTNamedNode {
 
 	/**
 	 * Returns the value of the '<em><b>On Chain Model</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>On Chain Model</em>' attribute isn't clear,
@@ -91,44 +91,44 @@ public interface Definitions extends GMTNamedNode {
 	 * @return the value of the '<em>On Chain Model</em>' attribute.
 	 * @see #isSetOnChainModel()
 	 * @see #unsetOnChainModel()
-	 * @see #setOnChainModel(boolean)
+	 * @see #setOnChainModel(Boolean)
 	 * @see it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage#getDefinitions_OnChainModel()
-	 * @model default="false" unsettable="true"
+	 * @model default="" unsettable="true" dataType="it.polimi.isgroup.secbpmn2bc.model.BooleanWithNull"
 	 * @generated
 	 */
-	boolean isOnChainModel();
+	Boolean getOnChainModel();
 
 	/**
-	 * Sets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel <em>On Chain Model</em>}' attribute.
+	 * Sets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getOnChainModel <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>On Chain Model</em>' attribute.
 	 * @see #isSetOnChainModel()
 	 * @see #unsetOnChainModel()
-	 * @see #isOnChainModel()
+	 * @see #getOnChainModel()
 	 * @generated
 	 */
-	void setOnChainModel(boolean value);
+	void setOnChainModel(Boolean value);
 
 	/**
-	 * Unsets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel <em>On Chain Model</em>}' attribute.
+	 * Unsets the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getOnChainModel <em>On Chain Model</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isSetOnChainModel()
-	 * @see #isOnChainModel()
-	 * @see #setOnChainModel(boolean)
+	 * @see #getOnChainModel()
+	 * @see #setOnChainModel(Boolean)
 	 * @generated
 	 */
 	void unsetOnChainModel();
 
 	/**
-	 * Returns whether the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#isOnChainModel <em>On Chain Model</em>}' attribute is set.
+	 * Returns whether the value of the '{@link it.polimi.isgroup.secbpmn2bc.model.Definitions#getOnChainModel <em>On Chain Model</em>}' attribute is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return whether the value of the '<em>On Chain Model</em>' attribute is set.
 	 * @see #unsetOnChainModel()
-	 * @see #isOnChainModel()
-	 * @see #setOnChainModel(boolean)
+	 * @see #getOnChainModel()
+	 * @see #setOnChainModel(Boolean)
 	 * @generated
 	 */
 	boolean isSetOnChainModel();
