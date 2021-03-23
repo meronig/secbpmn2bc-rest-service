@@ -66,7 +66,7 @@ public class InferBCProperties {
 		return messages;
 	}
 	
-	public List<ConsoleMessage> inferResource(Resource resource){
+	public List<ConsoleMessage> inferResource(Resource resource, Boolean override){
 		Definitions def = (Definitions) resource.getContents().get(0);
 		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage> ();
 		
@@ -98,7 +98,7 @@ public class InferBCProperties {
 	    System.out.println(result);
 	    
 	    // Find admissible combinations for the whole process (check for indirect dependencies)
-	    messages.addAll(determineAdmissibleCombinations(def,result,true));
+	    messages.addAll(determineAdmissibleCombinations(def,result,override));
 	    
 	    // Check if something went wrong, e.g., properties are incompatible with upper elements in the process tree
 	    if(checkForErrors(messages)){
@@ -259,11 +259,11 @@ public class InferBCProperties {
 					if(localCombinations.size()==0){
 						System.out.println("Errors were found evaluating security annotations");
 						messages.add(new ConsoleMessage(Severity.ERROR, node.getUuid(), "Conflicting privacy constraints hold for element "));
+						//TODO decidere se terminare l'esecuzione della funzione.
 					}
 				//child has some local constraints
 				} else if (localConstraints.size()>0){
 					localCombinations = factorize(localConstraints);
-					sets.put(node.getUuid(), localCombinations);
 				}
 				//a combination for the parent node already exists
 				if(parentCombinations!=null){
@@ -279,6 +279,7 @@ public class InferBCProperties {
 				}
 			}
 		}
+		sets.put(node.getUuid(), localCombinations);
 		System.out.println("Analyzing: "+node.getUuid());
 		System.out.println("Parent combinations: "+parentCombinations);
 		System.out.println("Local combinations: "+sets.get(node.getUuid()));
@@ -328,26 +329,7 @@ public class InferBCProperties {
 
 	private List<Combination> constrain(List<Combination> nodeCombinations, GMTNode node) {
 		List<Combination> result = new ArrayList<Combination>();
-		if (nodeCombinations.size() > 0) {
-			//Constrain admissible combinations 
-			for (Combination c : nodeCombinations){
-				if (node instanceof Definitions)
-					if (((Definitions) node).getBlockchainType()==BlockchainType.UNDEFINED || ((Definitions) node).getBlockchainType() == c.blockchainType)
-						result.add(c);
-				if (node instanceof SubProcess)
-					if (((SubProcess) node).getOnChainModel()==null || ((SubProcess) node).getOnChainModel() == c.onChainModel)
-						result.add(c);
-				if (node instanceof Process)
-					if (((Process) node).getOnChainModel()==null || ((Process) node).getOnChainModel() == c.onChainModel)
-						result.add(c);
-				if (node instanceof DataItems)
-					if (((DataItems) node).getOnChainData()==OnChainData.UNDEFINED || ((DataItems) node).getOnChainData() == c.onChainData)
-						result.add(c);
-				if (node instanceof Task)
-					if (((Task) node).getOnChainExecution()==null || ((Task) node).getOnChainExecution() == c.onChainExecution)
-						result.add(c);	
-			}
-		} else {
+		if (nodeCombinations==null) {
 			//Create combinations
 			if (node instanceof Definitions) {
 				if (((Definitions) node).getBlockchainType()!=BlockchainType.UNDEFINED)
@@ -377,6 +359,27 @@ public class InferBCProperties {
 					result.add(new Combination(((Task) node).getOnChainExecution(), BlockchainType.PRIVATE, false, Enforcement.NATIVE));
 					result.add(new Combination(((Task) node).getOnChainExecution(), BlockchainType.PUBLIC, false, Enforcement.NATIVE));
 				}
+			if (result.size()==0)
+				return null;
+		} else {
+			//Constrain admissible combinations 
+			for (Combination c : nodeCombinations){
+				if (node instanceof Definitions)
+					if (((Definitions) node).getBlockchainType()==BlockchainType.UNDEFINED || ((Definitions) node).getBlockchainType() == c.blockchainType)
+						result.add(c);
+				if (node instanceof SubProcess)
+					if (((SubProcess) node).getOnChainModel()==null || ((SubProcess) node).getOnChainModel() == c.onChainModel)
+						result.add(c);
+				if (node instanceof Process)
+					if (((Process) node).getOnChainModel()==null || ((Process) node).getOnChainModel() == c.onChainModel)
+						result.add(c);
+				if (node instanceof DataItems)
+					if (((DataItems) node).getOnChainData()==OnChainData.UNDEFINED || ((DataItems) node).getOnChainData() == c.onChainData)
+						result.add(c);
+				if (node instanceof Task)
+					if (((Task) node).getOnChainExecution()==null || ((Task) node).getOnChainExecution() == c.onChainExecution)
+						result.add(c);	
+			}
 		}
 		return result;
 	}

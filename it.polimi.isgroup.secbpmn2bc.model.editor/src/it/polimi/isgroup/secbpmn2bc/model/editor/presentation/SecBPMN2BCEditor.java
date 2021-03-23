@@ -1400,7 +1400,9 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 			MessageConsole myConsole = SecBPMN2BCActionBarContributor.findConsole("MyConsole");
 			MessageConsoleStream out = myConsole.newMessageStream();
 
-			List<ConsoleMessage> log = p.inferResource(resource);
+			Boolean preserve = MessageDialog.openQuestion(getSite().getShell(), "Annotate with BC properties", "Do you want to preserve the values currently assigned to blockchain properties");
+			
+			List<ConsoleMessage> log = p.inferResource(resource, !preserve);
 			for (ConsoleMessage m : log) {
 				out.println(m.toString());
 			}
