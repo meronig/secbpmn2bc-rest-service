@@ -15,30 +15,53 @@ import it.unitn.disi.sweng.secbpmn.model.TaskType;
 
 public class InferBCProperties {
 	
+	/**
+	 * Infer admissible attribute combinations for each element subject to a security constraint
+	 * @param element security property
+	 * @param result set of admissible attribute combinations for each element (element uuid, combinations)
+	 * @return information regarding the execution of this function (e.g., conflicting properties)
+	 */
 	private List<ConsoleMessage> inferElement(GMTNode element, HashMap<String, List<Combination>> result){
 		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
 		
-		SeparationOfDutyInference sdi = new SeparationOfDutyInference();
-		AvailabilityInference ai = new AvailabilityInference();
-		IntegrityInference ii = new IntegrityInference();
-		PrivityInference pi = new PrivityInference();
+		AuditabilityInference aui = new AuditabilityInference();
+		AuthenticityInference ati = new AuthenticityInference();
+		AvailabilityInference avi = new AvailabilityInference();
+		BindOfDutyInference bdi = new BindOfDutyInference();
 		FlowEnforceabilityInference fei = new FlowEnforceabilityInference();
-		GatewayEnforceabilityInference gei = new GatewayEnforceabilityInference(); 
+		GatewayEnforceabilityInference gei = new GatewayEnforceabilityInference();
+		IntegrityInference ii = new IntegrityInference();
+		NonDelegationInference ndi = new NonDelegationInference();
+		NonRepudiationInference nri = new NonRepudiationInference();
+		PrivityInference pi = new PrivityInference();
+		SeparationOfDutyInference sdi = new SeparationOfDutyInference();
 		
-		sdi.infer(element, result, messages);
-    	ii.infer(element, result, messages);
-    	ai.infer(element, result, messages);
-    	pi.infer(element, result, messages);
-    	fei.infer(element, result, messages);
+		aui.infer(element, result, messages);
+		ati.infer(element, result, messages);
+		avi.infer(element, result, messages);
+		bdi.infer(element, result, messages);
+		fei.infer(element, result, messages);
     	gei.infer(element, result, messages);
+    	ii.infer(element, result, messages);
+    	ndi.infer(element, result, messages);
+    	nri.infer(element, result, messages);
+    	pi.infer(element, result, messages);
+    	sdi.infer(element, result, messages);
     	
     	return messages;
 	}
 	
+	/**
+	 * Determine the admissible attribute combinations that satisfy all security constraints in the model 
+	 * @param def process definitions (root node in process tree)
+	 * @param sets set of admissible attribute combinations for each element (element uuid, combinations)
+	 * @param override if true, ignores previously assigned property values
+	 * @return information regarding the execution of this function (e.g., conflicting properties)
+	 */
 	private List<ConsoleMessage> determineAdmissibleCombinations(Definitions def,
-			HashMap<String, List<Combination>> sets) {
+			HashMap<String, List<Combination>> sets, Boolean override) {
 		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
-		propagateUp((GMTNode) def, sets, messages);
+		propagateUp((GMTNode) def, sets, messages, override);
 		propagateDown((GMTNode) def, sets, messages);
 		return messages;
 	}
@@ -46,18 +69,23 @@ public class InferBCProperties {
 	public List<ConsoleMessage> inferResource(Resource resource){
 		Definitions def = (Definitions) resource.getContents().get(0);
 		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage> ();
+		
+		// Admissible combinations
 		HashMap<String, List<Combination>> result = new HashMap<String, List<Combination>>();
 	    
 		List<GMTNode> nodes = ModelNavigator.getChildNodes(def);
 		
 		System.out.println(nodes.toString());
-	    System.out.println("a test");
 	    
+		// Find admissible combinations for each process element (independent from each other)
 	    for (GMTNode node : nodes){
 	    	System.out.println(node.toString());
 	    	messages.addAll(inferElement(node,result));
 	    }
 	    
+	    System.out.println(messages.toString());
+	    
+	    // Check if something went wrong, e.g., conflicting properties hold for the same element
 	    if(checkForErrors(messages)){
 	    	messages.add(new ConsoleMessage(Severity.ERROR, null, "Errors were found evaluating security annotations"));
 		    System.out.println("Errors were found evaluating security annotations");
@@ -69,8 +97,10 @@ public class InferBCProperties {
 	    System.out.println("Finished evaluating security annotations");
 	    System.out.println(result);
 	    
-	    messages.addAll(determineAdmissibleCombinations(def,result));
+	    // Find admissible combinations for the whole process (check for indirect dependencies)
+	    messages.addAll(determineAdmissibleCombinations(def,result,true));
 	    
+	    // Check if something went wrong, e.g., properties are incompatible with upper elements in the process tree
 	    if(checkForErrors(messages)){
 	    	messages.add(new ConsoleMessage(Severity.ERROR, null, "Errors were found determining admissible properties"));
 		    System.out.println("Errors were found determining admissible properties");
@@ -82,6 +112,7 @@ public class InferBCProperties {
 	    System.out.println("Finished determining admissible properties");
 	    System.out.println(result);
 	    
+	    // Find best assignment for each element
 	    setBCProperties(nodes,result);
 	    
 	    return messages;
@@ -99,6 +130,7 @@ public class InferBCProperties {
 					return;
 			} else
 				c = new Combination(null,null);
+			
 			if (node instanceof Definitions){
 				if (c.blockchainType!=null)
 					((Definitions) node).setBlockchainType(c.blockchainType);
@@ -165,11 +197,16 @@ public class InferBCProperties {
 	}
 	
 	private List<Combination> propagateUp(GMTNode node, HashMap<String, List<Combination>> sets,
-			List<ConsoleMessage> messages) {
+			List<ConsoleMessage> messages, Boolean override) {
 		
 		List<Combination> parentCombinations = null; 
 		//node has local combinations
-		List<Combination> localCombinations = sets.get(node.getUuid()); 
+		List<Combination> localCombinations = sets.get(node.getUuid());
+		//TODO mechanism to handle preset values
+		if (!override)
+			//constrain combinations based on current property assignments
+			localCombinations = constrain(localCombinations, node);
+		//TODO end
 		if(localCombinations!=null){
 			parentCombinations = new ArrayList<Combination>();
 			for (Combination c : localCombinations){
@@ -188,7 +225,7 @@ public class InferBCProperties {
 		for (GMTNode child : node.getNodes()){
 			List<Combination> parentConstraints = new ArrayList<Combination>();
 			List<Combination> localConstraints = new ArrayList<Combination>();
-			List<Combination> childConstraints = propagateUp(child, sets, messages); 
+			List<Combination> childConstraints = propagateUp(child, sets, messages, override); 
 			if(childConstraints != null){
 				//compute constraints list
 				for (Combination cc : childConstraints){
@@ -270,7 +307,13 @@ public class InferBCProperties {
 			
 		//no combinations exist for parent node, do nothing
 		}
+//		//TODO validate here local attributes
+//		if (!override)
+//			nodeCombinations = constrain(nodeCombinations, node);
+//		//TODO end
+		
 		Combination best = getBestCombination(nodeCombinations);
+		
 		if (best!=null)
 			sets.put(node.getUuid(), new ArrayList<Combination>(Arrays.asList(best)));
 		
@@ -281,6 +324,61 @@ public class InferBCProperties {
 		
 		for(GMTNode child : node.getNodes())
 			propagateDown(child,sets,messages);		
+	}
+
+	private List<Combination> constrain(List<Combination> nodeCombinations, GMTNode node) {
+		List<Combination> result = new ArrayList<Combination>();
+		if (nodeCombinations.size() > 0) {
+			//Constrain admissible combinations 
+			for (Combination c : nodeCombinations){
+				if (node instanceof Definitions)
+					if (((Definitions) node).getBlockchainType()==BlockchainType.UNDEFINED || ((Definitions) node).getBlockchainType() == c.blockchainType)
+						result.add(c);
+				if (node instanceof SubProcess)
+					if (((SubProcess) node).getOnChainModel()==null || ((SubProcess) node).getOnChainModel() == c.onChainModel)
+						result.add(c);
+				if (node instanceof Process)
+					if (((Process) node).getOnChainModel()==null || ((Process) node).getOnChainModel() == c.onChainModel)
+						result.add(c);
+				if (node instanceof DataItems)
+					if (((DataItems) node).getOnChainData()==OnChainData.UNDEFINED || ((DataItems) node).getOnChainData() == c.onChainData)
+						result.add(c);
+				if (node instanceof Task)
+					if (((Task) node).getOnChainExecution()==null || ((Task) node).getOnChainExecution() == c.onChainExecution)
+						result.add(c);	
+			}
+		} else {
+			//Create combinations
+			if (node instanceof Definitions) {
+				if (((Definitions) node).getBlockchainType()!=BlockchainType.UNDEFINED)
+					result.add(new Combination(((Definitions) node).getBlockchainType(), Enforcement.NATIVE));
+			}
+			if (node instanceof SubProcess)
+				if (((SubProcess) node).getOnChainModel()!=null) {
+					result.add(new Combination(BlockchainType.PRIVATE, ((SubProcess) node).getOnChainModel(), Enforcement.NATIVE));
+					result.add(new Combination(BlockchainType.PUBLIC, ((SubProcess) node).getOnChainModel(), Enforcement.NATIVE));
+				}
+			if (node instanceof Process)
+				if (((Process) node).getOnChainModel()!=null) {
+					result.add(new Combination(BlockchainType.PRIVATE, ((Process) node).getOnChainModel(), Enforcement.NATIVE));
+					result.add(new Combination(BlockchainType.PUBLIC, ((Process) node).getOnChainModel(), Enforcement.NATIVE));
+				}
+			if (node instanceof DataItems)
+				if (((DataItems) node).getOnChainData()!=OnChainData.UNDEFINED){
+					result.add(new Combination(((DataItems) node).getOnChainData(), BlockchainType.PRIVATE, true, Enforcement.NATIVE));
+					result.add(new Combination(((DataItems) node).getOnChainData(), BlockchainType.PUBLIC, true, Enforcement.NATIVE));
+					result.add(new Combination(((DataItems) node).getOnChainData(), BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+					result.add(new Combination(((DataItems) node).getOnChainData(), BlockchainType.PUBLIC, false, Enforcement.NATIVE));
+				}
+			if (node instanceof Task)
+				if (((Task) node).getOnChainExecution()!=null){
+					result.add(new Combination(((Task) node).getOnChainExecution(), BlockchainType.PRIVATE, true, Enforcement.NATIVE));
+					result.add(new Combination(((Task) node).getOnChainExecution(), BlockchainType.PUBLIC, true, Enforcement.NATIVE));
+					result.add(new Combination(((Task) node).getOnChainExecution(), BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+					result.add(new Combination(((Task) node).getOnChainExecution(), BlockchainType.PUBLIC, false, Enforcement.NATIVE));
+				}
+		}
+		return result;
 	}
 
 	private Combination getBestCombination(List<Combination> nodeCombinations) {
@@ -329,7 +427,7 @@ public class InferBCProperties {
 			for (Combination newC: newSet){
 				Combination moreStringent = oldC.compareTo(newC);
 				if (moreStringent!=null){
-					//replace current combination with more stringen one
+					//replace current combination with more stringent one
 					newC = moreStringent;
 					keep=false;
 				}
