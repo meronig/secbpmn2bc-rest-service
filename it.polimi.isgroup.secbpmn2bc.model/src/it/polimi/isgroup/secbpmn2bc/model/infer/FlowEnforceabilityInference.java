@@ -7,6 +7,7 @@ import java.util.List;
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
 import it.polimi.isgroup.secbpmn2bc.model.Definitions;
 import it.polimi.isgroup.secbpmn2bc.model.Enforceability;
+import it.polimi.isgroup.secbpmn2bc.model.SubProcess;
 import it.unitn.disi.sweng.gmt.model.GMTNode;
 
 public class FlowEnforceabilityInference implements SecurityAnnotationInference {
@@ -30,7 +31,7 @@ public class FlowEnforceabilityInference implements SecurityAnnotationInference 
 		if (node instanceof Enforceability) {
 			GMTNode element = node.getParent();
 			List<Combination> result = null;
-			if (element instanceof Definitions) {
+			if (element instanceof Definitions || element instanceof Process || element instanceof SubProcess) {
 				result = getProcessCombinations();
 			} else {
 				return;

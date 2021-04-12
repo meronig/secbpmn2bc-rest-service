@@ -129,6 +129,15 @@ public class SecBPMN2BCActionBarContributor extends EditingDomainActionBarContri
 		}
 	};
 	
+	protected IAction checkAction = new Action ("Check BC properties") {
+		@Override
+		public void run() {
+			IWorkbenchPage page = getPage();
+			SecBPMN2BCEditor editor = (SecBPMN2BCEditor) page.getActiveEditor();
+			editor.doCheck();
+		}
+	};
+	
 	protected IAction showConsoleAction = new Action(
 			"Show Console") //$NON-NLS-1$
 	{
@@ -246,9 +255,9 @@ public class SecBPMN2BCActionBarContributor extends EditingDomainActionBarContri
 	 */
 	public SecBPMN2BCActionBarContributor() {
 		super(ADDITIONS_LAST_STYLE);
-		loadResourceAction = new LoadResourceAction();
-		validateAction = new ValidateAction();
-		controlAction = new ControlAction();
+//		loadResourceAction = new LoadResourceAction();
+//		validateAction = new ValidateAction();
+//		controlAction = new ControlAction();
 	}
 
 	/**
@@ -583,6 +592,7 @@ public class SecBPMN2BCActionBarContributor extends EditingDomainActionBarContri
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
 		menuManager.insertBefore("additions", enrichAction); //$NON-NLS-1$
+		menuManager.insertBefore("additions", checkAction); //$NON-NLS-1$
 		menuManager.insertAfter("additions-end", new Separator("ui-actions")); //$NON-NLS-1$ //$NON-NLS-2$
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction); //$NON-NLS-1$
 

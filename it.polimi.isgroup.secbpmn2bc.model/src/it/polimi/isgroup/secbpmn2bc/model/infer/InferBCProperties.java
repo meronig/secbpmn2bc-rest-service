@@ -15,6 +15,175 @@ import it.unitn.disi.sweng.secbpmn.model.TaskType;
 
 public class InferBCProperties {
 	
+	public boolean checkForErrors(List<ConsoleMessage> messages) {
+		for (ConsoleMessage m : messages){
+			if (m.severity == Severity.ERROR){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkForWarnings(List<ConsoleMessage> messages) {
+		for (ConsoleMessage m : messages){
+			if (m.severity == Severity.WARNING){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public List<ConsoleMessage> annotate(Resource resource, Boolean override){
+		
+		Definitions def = (Definitions) resource.getContents().get(0);
+		
+		// Admissible combinations
+		HashMap<String, List<Combination>> result = new HashMap<String, List<Combination>>();
+		
+		// Find admissible combinations for the whole process (check for indirect dependencies)
+		List<ConsoleMessage> messages = determineAdmissibleCombinations(def,result,override);
+	    
+		if(checkForErrors(messages)){
+			return messages;
+		}
+		
+	    // Find best assignment for each element
+		propagateDown((GMTNode) def, result, true);
+		
+	    setBCProperties(def,result);
+	    
+	    return messages;
+	}
+	
+	public List<ConsoleMessage> checkConstraint(Resource resource){
+		
+		Definitions def = (Definitions) resource.getContents().get(0);
+		
+		// Admissible combinations
+		HashMap<String, List<Combination>> result = new HashMap<String, List<Combination>>();
+		
+		// Find admissible combinations for the whole process (check for indirect dependencies)
+		List<ConsoleMessage> messages = determineAdmissibleCombinations(def,result,false);
+		
+		if(checkForErrors(messages)){
+			return messages;
+		}
+		
+		propagateDown((GMTNode) def, result, false);
+    	
+		System.out.println(result);
+		
+		List<GMTNode> nodes = ModelNavigator.getChildNodes(def);
+		
+		
+		for (GMTNode node : nodes){
+			if (node instanceof Definitions) {
+				if (((Definitions) node).getOnChainModel() == null) { 
+					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "Property onChainModel has not been specified for element "));
+					System.out.println("Property onChainModel has not been specified for element " + node.toString());
+				}
+				if (((Definitions) node).getBlockchainType() == BlockchainType.UNDEFINED) {
+					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "Property blockchainType has not been specified for element "));
+					System.out.println("Property blockchainType has not been specified for element " + node.toString());
+				}
+			} else if (node instanceof Process) {
+				if (((Process) node).getOnChainModel() == null) {
+					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "Property onChainModel has not been specified for element "));
+					System.out.println("Property onChainModel has not been specified for element " + node.toString());
+				}
+			} else if (node instanceof SubProcess) {
+				if (((SubProcess) node).getOnChainModel() == null) {
+					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "Property onChainModel has not been specified for element "));
+					System.out.println("Property onChainModel has not been specified for element " + node.toString());
+				}
+			} else if (node instanceof DataItems) {
+				if (((DataItems) node).getOnChainData() == OnChainData.UNDEFINED) {
+					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "Property onChainData has not been specified for element "));
+					System.out.println("Property onChainData has not been specified for element " + node.toString());
+				}
+			} else if (node instanceof Task) {
+				if (((Task) node).getOnChainExecution() == null) {
+					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "Property onChainExecution has not been specified for element "));
+					System.out.println("Property onChainExecution has not been specified for element " + node.toString());
+				}
+			}
+			
+//			if (node instanceof Definitions || node instanceof Process || 
+//					node instanceof SubProcess || node instanceof DataItems ||
+//					node instanceof Task) {
+//
+//				List<Combination> list = result.get(node.getUuid());
+//				
+//				if (list == null || list.size() == 0) {
+//					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "Empty set for element "));
+//					System.out.println("Empty set for element " + node.toString());
+//				} else if (list.size() > 1) {
+//					messages.add(new ConsoleMessage(Severity.WARNING, node.getUuid(), "One or more properties have not been specified for element "));
+//					System.out.println("One or more properties for element " + node.toString() + " have not been specified");
+//					
+//					//TODO: ignorare duplicati o combinazioni non pertinenti per il nodo corrente
+//				};
+//			}
+		}
+	    
+	    return messages;
+	}
+	
+	
+	/**
+	 * Determine the admissible attribute combinations that satisfy all security constraints in the model 
+	 * @param def process definitions (root node in process tree)
+	 * @param result 
+	 * @param sets set of admissible attribute combinations for each element (element uuid, combinations)
+	 * @param override if true, ignores previously assigned property values
+	 * @return information regarding the execution of this function (e.g., conflicting properties)
+	 */
+	private List<ConsoleMessage> determineAdmissibleCombinations(Definitions def,
+			HashMap<String, List<Combination>> result, Boolean override) {
+		
+		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
+		
+		List<GMTNode> nodes = ModelNavigator.getChildNodes(def);
+
+		System.out.println(nodes.toString());
+	    
+		// Find admissible combinations for each process element (independent from each other)
+	    for (GMTNode node : nodes){
+	    	System.out.println(node.toString());
+	    	messages.addAll(inferElement(node,result));
+	    }
+	    
+	    System.out.println(messages.toString());
+	    
+	    // Check if something went wrong, e.g., conflicting properties hold for the same element
+	    if(checkForErrors(messages)){
+	    	messages.add(new ConsoleMessage(Severity.ERROR, null, "Errors were found evaluating security annotations"));
+		    System.out.println("Errors were found evaluating security annotations");
+	    	System.out.println(result);
+		    return messages;
+	    }
+	    
+	    messages.add(new ConsoleMessage(Severity.INFORMATION, null, "Finished evaluating security annotations"));
+	    System.out.println("Finished evaluating security annotations");
+	    System.out.println(result);
+	    
+	    propagateUp((GMTNode) def, result, messages, override);
+	    
+		// Check if something went wrong, e.g., properties are incompatible with upper elements in the process tree
+	    if(checkForErrors(messages)){
+	    	messages.add(new ConsoleMessage(Severity.ERROR, null, "Errors were found determining admissible properties"));
+		    System.out.println("Errors were found determining admissible properties");
+	    	System.out.println(result);
+		    return messages;
+	    }
+	    
+	    messages.add(new ConsoleMessage(Severity.INFORMATION, null, "Finished determining admissible properties"));
+	    System.out.println("Finished determining admissible properties");
+	    System.out.println(result);
+	    
+		return messages;
+	}
+	
 	/**
 	 * Infer admissible attribute combinations for each element subject to a security constraint
 	 * @param element security property
@@ -51,74 +220,11 @@ public class InferBCProperties {
     	return messages;
 	}
 	
-	/**
-	 * Determine the admissible attribute combinations that satisfy all security constraints in the model 
-	 * @param def process definitions (root node in process tree)
-	 * @param sets set of admissible attribute combinations for each element (element uuid, combinations)
-	 * @param override if true, ignores previously assigned property values
-	 * @return information regarding the execution of this function (e.g., conflicting properties)
-	 */
-	private List<ConsoleMessage> determineAdmissibleCombinations(Definitions def,
-			HashMap<String, List<Combination>> sets, Boolean override) {
-		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage>();
-		propagateUp((GMTNode) def, sets, messages, override);
-		propagateDown((GMTNode) def, sets, messages);
-		return messages;
-	}
 	
-	public List<ConsoleMessage> inferResource(Resource resource, Boolean override){
-		Definitions def = (Definitions) resource.getContents().get(0);
-		List<ConsoleMessage> messages = new ArrayList<ConsoleMessage> ();
+	private void setBCProperties(Definitions def, HashMap<String, List<Combination>> result) {
 		
-		// Admissible combinations
-		HashMap<String, List<Combination>> result = new HashMap<String, List<Combination>>();
-	    
 		List<GMTNode> nodes = ModelNavigator.getChildNodes(def);
-		
-		System.out.println(nodes.toString());
-	    
-		// Find admissible combinations for each process element (independent from each other)
-	    for (GMTNode node : nodes){
-	    	System.out.println(node.toString());
-	    	messages.addAll(inferElement(node,result));
-	    }
-	    
-	    System.out.println(messages.toString());
-	    
-	    // Check if something went wrong, e.g., conflicting properties hold for the same element
-	    if(checkForErrors(messages)){
-	    	messages.add(new ConsoleMessage(Severity.ERROR, null, "Errors were found evaluating security annotations"));
-		    System.out.println("Errors were found evaluating security annotations");
-	    	System.out.println(result);
-		    return messages;
-	    }
-	    
-	    messages.add(new ConsoleMessage(Severity.INFORMATION, null, "Finished evaluating security annotations"));
-	    System.out.println("Finished evaluating security annotations");
-	    System.out.println(result);
-	    
-	    // Find admissible combinations for the whole process (check for indirect dependencies)
-	    messages.addAll(determineAdmissibleCombinations(def,result,override));
-	    
-	    // Check if something went wrong, e.g., properties are incompatible with upper elements in the process tree
-	    if(checkForErrors(messages)){
-	    	messages.add(new ConsoleMessage(Severity.ERROR, null, "Errors were found determining admissible properties"));
-		    System.out.println("Errors were found determining admissible properties");
-	    	System.out.println(result);
-		    return messages;
-	    }
-	    
-	    messages.add(new ConsoleMessage(Severity.INFORMATION, null, "Finished determining admissible properties"));
-	    System.out.println("Finished determining admissible properties");
-	    System.out.println(result);
-	    
-	    // Find best assignment for each element
-	    setBCProperties(nodes,result);
-	    
-	    return messages;
-	}
 
-	private void setBCProperties(List<GMTNode> nodes, HashMap<String, List<Combination>> result) {
 		for (GMTNode node : nodes){
 			Combination c = null;
 			List<Combination> list = result.get(node.getUuid());
@@ -178,24 +284,6 @@ public class InferBCProperties {
 		
 	}
 
-	public boolean checkForErrors(List<ConsoleMessage> messages) {
-		for (ConsoleMessage m : messages){
-			if (m.severity == Severity.ERROR){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean checkForWarnings(List<ConsoleMessage> messages) {
-		for (ConsoleMessage m : messages){
-			if (m.severity == Severity.WARNING){
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	private List<Combination> propagateUp(GMTNode node, HashMap<String, List<Combination>> sets,
 			List<ConsoleMessage> messages, Boolean override) {
 		
@@ -235,8 +323,8 @@ public class InferBCProperties {
 						//parent attribute is blockchainType
 						parentConstraints.add(new Combination(cc.blockchainType,cc.enforcement));
 					} else if (node instanceof Definitions) {
-						//local attribute is blockchainType
-						localConstraints.add(new Combination(cc.blockchainType,cc.enforcement)); 
+						//local attributes are blockchainType and onChainModel
+						localConstraints.add(new Combination(cc.blockchainType,cc.onChainModel,cc.enforcement)); 
 					} else if (node instanceof Task) {
 						//local attribute is onChainExecution
 						localConstraints.add(new Combination(cc.onChainExecution,cc.blockchainType,cc.onChainModel,cc.enforcement));
@@ -270,7 +358,7 @@ public class InferBCProperties {
 					constrain(parentCombinations,parentConstraints);
 //					//a conflict exists among parent constraints
 //					if(parentCombinations.size()==0){
-//						NON DOVREBBE CAPITARE MAI
+//						SHOULD NEVER HAPPEN
 //					}
 				//no parent node combination has been defined yet
 				} else {
@@ -286,16 +374,31 @@ public class InferBCProperties {
 		return parentCombinations;
 	}
 	
-	private void propagateDown(GMTNode node, HashMap<String, List<Combination>> sets,
-			List<ConsoleMessage> messages) {
+	private void propagateDown(GMTNode node, HashMap<String, List<Combination>> sets, Boolean findBest) {
 		//parent vincolato, figlio vincolato -> calcola
 		//parent libero, figlio vincolato -> non fare nulla
 		//parent vincolato, figlio libero -> vincola figlio
 		//parent libero, figlio libero -> non fare nulla
 		
+		System.out.println();
+		System.out.println("Analyzing: "+node.getUuid());
+		
 		List<Combination> nodeCombinations = sets.get(node.getUuid());
+		List<Combination> parentCombinations;
+		
 		if(node.getParent()!=null){
-			List<Combination> parentCombinations = sets.get(node.getParent().getUuid());
+			parentCombinations = new ArrayList<Combination>();
+		
+			System.out.println("Parent combinations: "+parentCombinations);
+			
+			for (Combination parentCombination: sets.get(node.getParent().getUuid())) {
+				if (node instanceof Process || node instanceof SubProcess) {
+					parentCombinations.add(new Combination(parentCombination.blockchainType, parentCombination.enforcement));
+				} else {
+					parentCombinations.add(new Combination(parentCombination.blockchainType, parentCombination.onChainModel, parentCombination.enforcement));
+				}
+			}
+					
 			//some combinations exist for parent node
 			if (parentCombinations != null)
 				//some combinations exist for current node
@@ -305,26 +408,24 @@ public class InferBCProperties {
 				else
 					nodeCombinations = parentCombinations;
 			
-			
 		//no combinations exist for parent node, do nothing
 		}
-//		//TODO validate here local attributes
-//		if (!override)
-//			nodeCombinations = constrain(nodeCombinations, node);
-//		//TODO end
 		
-		Combination best = getBestCombination(nodeCombinations);
-		
-		if (best!=null)
-			sets.put(node.getUuid(), new ArrayList<Combination>(Arrays.asList(best)));
-		
-		System.out.println();
-		System.out.println("Analyzing: "+node.getUuid());
+		System.out.println("Current combinations: "+sets.get(node.getUuid()));
 		System.out.println("Local combinations: "+nodeCombinations);
-		System.out.println("Best combination: "+sets.get(node.getUuid()));
 		
+		if(findBest){
+			Combination best = getBestCombination(nodeCombinations);
+			
+			if (best!=null)
+				sets.put(node.getUuid(), new ArrayList<Combination>(Arrays.asList(best)));
+			
+			System.out.println("Best combination: "+sets.get(node.getUuid()));
+		} else
+			sets.put(node.getUuid(), nodeCombinations); 
+				
 		for(GMTNode child : node.getNodes())
-			propagateDown(child,sets,messages);		
+			propagateDown(child,sets,findBest);		
 	}
 
 	private List<Combination> constrain(List<Combination> nodeCombinations, GMTNode node) {
@@ -332,8 +433,24 @@ public class InferBCProperties {
 		if (nodeCombinations==null) {
 			//Create combinations
 			if (node instanceof Definitions) {
-				if (((Definitions) node).getBlockchainType()!=BlockchainType.UNDEFINED)
-					result.add(new Combination(((Definitions) node).getBlockchainType(), Enforcement.NATIVE));
+				if (((Definitions) node).getBlockchainType()!=BlockchainType.UNDEFINED) {
+					if (((Definitions) node).getOnChainModel()!=null)
+						result.add(new Combination(((Definitions) node).getBlockchainType(), ((Definitions) node).getOnChainModel(), Enforcement.NATIVE));
+					else {
+						result.add(new Combination(((Definitions) node).getBlockchainType(), true, Enforcement.NATIVE));
+						result.add(new Combination(((Definitions) node).getBlockchainType(), false, Enforcement.NATIVE));
+					}
+				} else {
+					if (((Definitions) node).getOnChainModel()!=null) {
+						result.add(new Combination(BlockchainType.PUBLIC, ((Definitions) node).getOnChainModel(), Enforcement.NATIVE));
+						result.add(new Combination(BlockchainType.PRIVATE, ((Definitions) node).getOnChainModel(), Enforcement.NATIVE));
+					} else {
+						result.add(new Combination(BlockchainType.PUBLIC, true, Enforcement.NATIVE));
+						result.add(new Combination(BlockchainType.PUBLIC, false, Enforcement.NATIVE));
+						result.add(new Combination(BlockchainType.PRIVATE, true, Enforcement.NATIVE));
+						result.add(new Combination(BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+					}
+				}
 			}
 			if (node instanceof SubProcess)
 				if (((SubProcess) node).getOnChainModel()!=null) {
@@ -365,19 +482,20 @@ public class InferBCProperties {
 			//Constrain admissible combinations 
 			for (Combination c : nodeCombinations){
 				if (node instanceof Definitions)
-					if (((Definitions) node).getBlockchainType()==BlockchainType.UNDEFINED || ((Definitions) node).getBlockchainType() == c.blockchainType)
+					if ((((Definitions) node).getBlockchainType() == BlockchainType.UNDEFINED || ((Definitions) node).getBlockchainType() == c.blockchainType) &&
+							(((Definitions) node).getOnChainModel() == null || ((Definitions) node).getOnChainModel() == c.onChainModel))
 						result.add(c);
 				if (node instanceof SubProcess)
-					if (((SubProcess) node).getOnChainModel()==null || ((SubProcess) node).getOnChainModel() == c.onChainModel)
+					if (((SubProcess) node).getOnChainModel() == null || ((SubProcess) node).getOnChainModel() == c.onChainModel)
 						result.add(c);
 				if (node instanceof Process)
-					if (((Process) node).getOnChainModel()==null || ((Process) node).getOnChainModel() == c.onChainModel)
+					if (((Process) node).getOnChainModel() == null || ((Process) node).getOnChainModel() == c.onChainModel)
 						result.add(c);
 				if (node instanceof DataItems)
-					if (((DataItems) node).getOnChainData()==OnChainData.UNDEFINED || ((DataItems) node).getOnChainData() == c.onChainData)
+					if (((DataItems) node).getOnChainData() == OnChainData.UNDEFINED || ((DataItems) node).getOnChainData() == c.onChainData)
 						result.add(c);
 				if (node instanceof Task)
-					if (((Task) node).getOnChainExecution()==null || ((Task) node).getOnChainExecution() == c.onChainExecution)
+					if (((Task) node).getOnChainExecution() == null || ((Task) node).getOnChainExecution() == c.onChainExecution)
 						result.add(c);	
 			}
 		}

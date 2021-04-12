@@ -1402,7 +1402,7 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 
 			Boolean preserve = MessageDialog.openQuestion(getSite().getShell(), "Annotate with BC properties", "Do you want to preserve the values currently assigned to blockchain properties");
 			
-			List<ConsoleMessage> log = p.inferResource(resource, !preserve);
+			List<ConsoleMessage> log = p.annotate(resource, !preserve);
 			for (ConsoleMessage m : log) {
 				out.println(m.toString());
 			}
@@ -1415,6 +1415,29 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 			} else {
 				MessageDialog.openInformation(getSite().getShell(), "Annotate with BC properties", 
 						"Model was succesfully annotated with blockchain properties.");
+			}
+		}
+	}
+	
+	public void doCheck() {
+		for (Resource resource : editingDomain.getResourceSet().getResources()) {
+			InferBCProperties p = new InferBCProperties();
+			MessageConsole myConsole = SecBPMN2BCActionBarContributor.findConsole("MyConsole");
+			MessageConsoleStream out = myConsole.newMessageStream();
+
+			List<ConsoleMessage> log = p.checkConstraint(resource);
+			for (ConsoleMessage m : log) {
+				out.println(m.toString());
+			}
+			if (p.checkForErrors(log)) {
+				MessageDialog.openError(getSite().getShell(), "Check BC properties", 
+						"One or more security annotation conflicts were detected. Please check the console log for further details.");
+			} else if (p.checkForWarnings(log)) {
+				MessageDialog.openWarning(getSite().getShell(), "Check BC properties", 
+						"Blockchain properties validation completed with warnings. Please check the console log for further details.");
+			} else {
+				MessageDialog.openInformation(getSite().getShell(), "Check BC properties", 
+						"Blockchain properties validation completed successfully.");
 			}
 		}
 	}
