@@ -51,9 +51,36 @@ public class PrivityInference implements SecurityAnnotationInference {
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, true, Enforcement.NO_ENFORCEMENT));
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, false, Enforcement.NO_ENFORCEMENT));
 		
-		//strong-dynamic sphere
-		} else if (scope==PrivityScope.STRONG_DYNAMIC){
+		//private sphere
+		} else if (scope==PrivityScope.PRIVATE){
 			
+			//data unencrypted, bc public, model any, violated
+			//no combination should be provided in this case
+			
+			//data encrypted, bc public, model any, possible enf
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, false, Enforcement.POSSIBLE));
+			
+			//data (un)encrypted, bc private, model any, native enf
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+			
+			//data digest, bc any, model any, possible enf
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PUBLIC, false, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PRIVATE, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PRIVATE, false, Enforcement.POSSIBLE));
+			
+			//data none, bc any, model any, no enf
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PUBLIC, true, Enforcement.NO_ENFORCEMENT));
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PUBLIC, false, Enforcement.NO_ENFORCEMENT));
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, true, Enforcement.NO_ENFORCEMENT));
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, false, Enforcement.NO_ENFORCEMENT));
+			
+		//static, weak-dynamic and strong-dynamic spheres
+		} else {
 			//data unencrypted, bc public, model any, violated
 			//no combination should be provided in this case
 			
@@ -79,9 +106,43 @@ public class PrivityInference implements SecurityAnnotationInference {
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, true, Enforcement.NO_ENFORCEMENT));
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, false, Enforcement.NO_ENFORCEMENT));
 		
-		//private, static and weak-dynamic spheres
-		} else {
+		}
+		return result;
+	}
+
+	private List<Combination> getMessageCombinations(Message dataObject, PrivityScope scope) {
+		List<Combination> result = new ArrayList<Combination>();
+		
+		//public sphere
+		if(scope==PrivityScope.PUBLIC){
+			//data unencrypted, bc public, model any, native enf
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PUBLIC, true, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PUBLIC, false, Enforcement.NATIVE));
 			
+			//data encrypted, bc public, model any, native enf
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, false, Enforcement.POSSIBLE));
+			
+			//data (un)encrypted, bc private, model any, native enf
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+			
+			//data digest, bc any, model any, possible enf
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PUBLIC, false, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PRIVATE, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PRIVATE, false, Enforcement.POSSIBLE));
+			
+			//data none, bc any, model any, no enf
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PUBLIC, true, Enforcement.NO_ENFORCEMENT));
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PUBLIC, false, Enforcement.NO_ENFORCEMENT));
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, true, Enforcement.NO_ENFORCEMENT));
+			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, false, Enforcement.NO_ENFORCEMENT));
+		
+		// private sphere
+		} else if(scope==PrivityScope.PRIVATE){
 			//data unencrypted, bc public, model any, violated
 			//no combination should be provided in this case
 			
@@ -107,28 +168,20 @@ public class PrivityInference implements SecurityAnnotationInference {
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, true, Enforcement.NO_ENFORCEMENT));
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, false, Enforcement.NO_ENFORCEMENT));
 			
-		}
-		return result;
-	}
-
-	private List<Combination> getMessageCombinations(Message dataObject, PrivityScope scope) {
-		List<Combination> result = new ArrayList<Combination>();
-		
-		//public sphere
-		if(scope==PrivityScope.PUBLIC){
-			//data unencrypted, bc public, model any, native enf
-			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PUBLIC, true, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PUBLIC, false, Enforcement.NATIVE));
+		//strong-dynamic sphere
+		} else if(scope==PrivityScope.STRONG_DYNAMIC){
+			//data unencrypted, bc public, model any, violated
+			//no combination should be provided in this case
 			
 			//data encrypted, bc public, model any, native enf
 			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, true, Enforcement.NATIVE));
 			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, false, Enforcement.NATIVE));
 			
 			//data (un)encrypted, bc private, model any, native enf
-			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.POSSIBLE));
 			
 			//data digest, bc any, model any, possible enf
 			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
@@ -141,22 +194,22 @@ public class PrivityInference implements SecurityAnnotationInference {
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PUBLIC, false, Enforcement.NO_ENFORCEMENT));
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, true, Enforcement.NO_ENFORCEMENT));
 			result.add(new Combination(OnChainData.NONE, BlockchainType.PRIVATE, false, Enforcement.NO_ENFORCEMENT));
-			
-		//private, static, weak-dynamic and strong-dynamic spheres
+		
+		//static and weak-dynamic spheres
 		} else {
 			
 			//data unencrypted, bc public, model any, violated
 			//no combination should be provided in this case
 			
-			//data encrypted, bc public, model any, native enf
-			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, true, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, false, Enforcement.NATIVE));
+			//data encrypted, bc public, model any, possible enf
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PUBLIC, false, Enforcement.POSSIBLE));
 			
-			//data (un)encrypted, bc private, model any, native enf
-			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.NATIVE));
-			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.NATIVE));
+			//data (un)encrypted, bc private, model any, possible enf
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.UNENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, true, Enforcement.POSSIBLE));
+			result.add(new Combination(OnChainData.ENCRYPTED, BlockchainType.PRIVATE, false, Enforcement.POSSIBLE));
 			
 			//data digest, bc any, model any, possible enf
 			result.add(new Combination(OnChainData.DIGEST, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
@@ -176,6 +229,8 @@ public class PrivityInference implements SecurityAnnotationInference {
 	
 	private List<Combination> getTaskCombinations(Task task, PrivityScope scope) {
 		List<Combination> result = new ArrayList<Combination>();
+		
+		//TODO: revise once rules have been finalized
 		
 		//public sphere
 		if(scope==PrivityScope.PUBLIC){

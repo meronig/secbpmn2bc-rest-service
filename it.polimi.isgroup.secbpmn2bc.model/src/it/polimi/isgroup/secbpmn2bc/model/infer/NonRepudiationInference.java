@@ -48,10 +48,10 @@ private List<Combination> getMessageCombinations(Message dataItem){
 	private List<Combination> getTaskCombinations(Task task){
 		List<Combination> result = new ArrayList<Combination>();
 		//taskexec false, bc any, model any, no enf
-		result.add(new Combination(false, BlockchainType.PUBLIC, false, Enforcement.NO_ENFORCEMENT));
-		result.add(new Combination(false, BlockchainType.PRIVATE, false, Enforcement.NO_ENFORCEMENT));
-		result.add(new Combination(false, BlockchainType.PUBLIC, true, Enforcement.NO_ENFORCEMENT));
-		result.add(new Combination(false, BlockchainType.PRIVATE, true, Enforcement.NO_ENFORCEMENT));
+		result.add(new Combination(false, BlockchainType.PUBLIC, false, Enforcement.POSSIBLE));
+		result.add(new Combination(false, BlockchainType.PRIVATE, false, Enforcement.POSSIBLE));
+		result.add(new Combination(false, BlockchainType.PUBLIC, true, Enforcement.POSSIBLE));
+		result.add(new Combination(false, BlockchainType.PRIVATE, true, Enforcement.POSSIBLE));
 		
 		if(task.getType() != TaskType.MANUAL && task.getType() != TaskType.USER) {
 			//taskexec true, bc any, model any, native enf
