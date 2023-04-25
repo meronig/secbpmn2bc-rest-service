@@ -4,9 +4,7 @@ package it.polimi.isgroup.secbpmn2bc.model.editor.internal;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.Map;
 
-import javax.swing.JOptionPane;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -47,19 +45,12 @@ import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.ui.action.WorkbenchWindowActionDelegate;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
 
-import it.polimi.isgroup.secbpmn2bc.model.Process;
-import it.polimi.isgroup.secbpmn2bc.model.infer.InferBCProperties;
 import it.polimi.isgroup.secbpmn2bc.model.editor.internal.Activator;
 import it.polimi.isgroup.secbpmn2bc.model.editor.presentation.SecBPMN2BCEditor;
 

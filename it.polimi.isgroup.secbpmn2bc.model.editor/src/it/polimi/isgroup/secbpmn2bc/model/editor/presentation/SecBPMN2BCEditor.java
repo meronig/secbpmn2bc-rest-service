@@ -62,7 +62,10 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
@@ -139,6 +142,7 @@ import it.polimi.isgroup.secbpmn2bc.model.edit.provider.SecBPMN2BCItemProviderAd
 
 import it.polimi.isgroup.secbpmn2bc.model.editor.internal.Activator;
 import it.polimi.isgroup.secbpmn2bc.model.editor.internal.Secbpmn2bcEditorAdvisor;
+import it.polimi.isgroup.secbpmn2bc.model.importer.SecBPMNImporter;
 import it.polimi.isgroup.secbpmn2bc.model.infer.ConsoleMessage;
 import it.polimi.isgroup.secbpmn2bc.model.infer.InferBCProperties;
 import it.unitn.disi.sweng.gmt.model.edit.provider.GMTItemProviderAdapterFactory;
@@ -1392,6 +1396,44 @@ public class SecBPMN2BCEditor extends MultiPageEditorPart
 	@Override
 	public boolean isDirty() {
 		return ((BasicCommandStack) editingDomain.getCommandStack()).isSaveNeeded();
+	}
+	
+	//NEW
+	public void doImportSecBPMN() {
+		//for (Resource resource : editingDomain.getResourceSet().getResources()) {
+			SecBPMNImporter i = new SecBPMNImporter();
+			FileDialog dialog = new FileDialog(getSite().getShell(), SWT.OPEN);
+			String [] filterNames = new String [] {"SecBPMN diagrams", "All Files (*)"};
+			String [] filterExtensions = new String [] {"*.secbpmn", "*"};
+			String filterPath = "/";
+			String platform = SWT.getPlatform();
+			if (platform.equals("win32")) {
+				filterPath = "c:\\";
+			}
+			dialog.setFilterNames (filterNames);
+			dialog.setFilterExtensions (filterExtensions);
+			dialog.setFilterPath (filterPath);
+			String inputModelPath = dialog.open();
+			System.out.println ("Open from: " + inputModelPath);
+			
+			dialog = new FileDialog (getSite().getShell(), SWT.SAVE);
+			filterNames = new String [] {"SecBPMN2BC diagrams", "All Files (*)"};
+			filterExtensions = new String [] {"*.secbpmn2bc", "*"};
+			filterPath = "/";
+			platform = SWT.getPlatform();
+			if (platform.equals("win32")) {
+				filterPath = "c:\\";
+			}
+			dialog.setFilterNames (filterNames);
+			dialog.setFilterExtensions (filterExtensions);
+			dialog.setFilterPath (filterPath);
+			dialog.setFileName ("myfile");
+			String outputModelPath = dialog.open();
+			
+			i.importDiagram(inputModelPath, outputModelPath);
+			
+		//	i.importDiagram(inputModelPath, resource);
+		//}
 	}
 
 	public void doAnnotate() {

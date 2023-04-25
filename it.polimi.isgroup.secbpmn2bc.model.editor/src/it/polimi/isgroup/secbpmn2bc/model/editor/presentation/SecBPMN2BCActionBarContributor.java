@@ -120,6 +120,17 @@ public class SecBPMN2BCActionBarContributor extends EditingDomainActionBarContri
 	protected ISelectionProvider selectionProvider;
 
 	
+	//NEW
+	protected IAction importAction = new Action ("Import SecBPMN diagram") {
+		@Override
+		public void run() {
+			IWorkbenchPage page = getPage();
+			SecBPMN2BCEditor editor = (SecBPMN2BCEditor) page.getActiveEditor();
+			editor.doImportSecBPMN();
+		}
+	};
+	
+	
 	protected IAction enrichAction = new Action ("Annotate with BC properties") {
 		@Override
 		public void run() {
@@ -591,6 +602,10 @@ public class SecBPMN2BCActionBarContributor extends EditingDomainActionBarContri
 	 */
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
+		//NEW
+		menuManager.insertBefore("additions", importAction); //$NON-NLS-1$
+		menuManager.insertAfter("additions-end", new Separator("ui-actions")); //$NON-NLS-1$ //$NON-NLS-2$
+		//END NEW
 		menuManager.insertBefore("additions", enrichAction); //$NON-NLS-1$
 		menuManager.insertBefore("additions", checkAction); //$NON-NLS-1$
 		menuManager.insertAfter("additions-end", new Separator("ui-actions")); //$NON-NLS-1$ //$NON-NLS-2$
