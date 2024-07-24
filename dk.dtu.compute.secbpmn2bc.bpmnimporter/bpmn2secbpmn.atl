@@ -247,6 +247,34 @@ rule ComplexGateway {
 
 -- tasks
 
+rule SubProcess {
+	from
+		stask: BPMN!SubProcess
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		ttask: SEC!SubProcess (
+			uuid <- stask.id,
+			name <- stask.name,
+			nodes <- if (stask.laneSets.size() > 0) then 
+				Set{(stask.laneSets -> collect(ls | ls.lanes) -> flatten() -> 			
+					iterate(e; ret: Set(SEC!Lane) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tlane'))))}
+			else
+				Set{(stask.flowElements -> iterate(e; ret: Set(SEC!FlowElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'ttask')) 
+						-> including(thisModule.resolveTemp(e, 'tgw'))
+						-> including(thisModule.resolveTemp(e, 'tevent'))))}
+			endif,
+			relations <- Set{(stask.flowElements -> iterate(e; ret: Set(SEC!SecBpmnElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tsf'))))},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
 rule Tasks {
 	from
 		stask: BPMN!Task
