@@ -1,0 +1,411 @@
+-- @nsURI BPMN=http://www.omg.org/spec/BPMN/20100524/MODEL
+-- @nsURI DC=http://www.omg.org/spec/DD/20100524/DC
+-- @nsURI DI=http://www.omg.org/spec/DD/20100524/DI
+-- @nsURI BPMNDI=http://www.omg.org/spec/BPMN/20100524/DI
+-- @path BC=/it.polimi.isgroup.secbpmn2bc.model/model/secbpmn2bc.ecore
+-- @path SEC=/it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore
+-- @path GMT=/it.unitn.disi.sweng.gmt.model/model/GMT.ecore
+
+module bpmn2secbpmn;
+create OUT : SEC from IN : BPMN;
+
+
+helper context BPMN!Task def: getTaskType(): String = 
+	if (self.oclIsTypeOf(BPMN!BusinessRuleTask)) then
+		'BusinessRule'
+	else
+		if (self.oclIsTypeOf(BPMN!ManualTask)) then
+			'Manual'
+		else 
+			if (self.oclIsTypeOf(BPMN!ReceiveTask)) then
+				'Receive'
+			else 
+				if (self.oclIsTypeOf(BPMN!ScriptTask)) then
+					'Script'
+				else 
+					if (self.oclIsTypeOf(BPMN!SendTask)) then
+						'Send'
+					else
+						if (self.oclIsTypeOf(BPMN!ServiceTask)) then
+							'Service'
+						else
+							if (self.oclIsTypeOf(BPMN!UserTask)) then
+								'User'
+							else 
+								'Default'
+							endif
+						endif
+					endif
+				endif
+			endif
+		endif
+	endif;
+	
+
+rule Definitions {
+	from
+		sdef: BPMN!Definitions
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tdef: SEC!Definitions (
+			uuid <- sdef.id,
+			nodes <- Set{(sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) 
+					-> collect(c | c.participants) -> flatten() 
+					-> iterate(e; ret: Set(SEC!Lane) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tpart'))))},
+			relations <- Set{(sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) 
+					-> collect(c | c.messageFlows) -> flatten() 
+					-> iterate(e; ret: Set(SEC!MessageFlow) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tmf'))))},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+-- events
+
+rule StartEvent {
+	from
+		sevent: BPMN!CatchEvent (
+			sevent.oclIsTypeOf(BPMN!StartEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!StartEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			-- TODO: add event definition
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule EndEvent {
+	from
+		sevent: BPMN!ThrowEvent (
+			sevent.oclIsTypeOf(BPMN!EndEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!EndEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			-- TODO: add event definition
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule CatchEvent {
+	from
+		sevent: BPMN!CatchEvent (
+			not sevent.oclIsTypeOf(BPMN!StartEvent) and not sevent.oclIsTypeOf(BPMN!BoundaryEvent) 
+		)
+		
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!CatchEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			-- TODO: add event definition
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule ThrowEvent {
+	from
+		sevent: BPMN!ThrowEvent (
+			not sevent.oclIsTypeOf(BPMN!EndEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!ThrowEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			-- TODO: add event definition
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule BoundaryEvent {
+	from
+		sevent: BPMN!CatchEvent (
+			sevent.oclIsTypeOf(BPMN!BoundaryEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tbevent: SEC!BoundaryEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			-- TODO: add event definition
+			graphicalsConstraints <- Set{tgcm}
+		)
+}
+
+-- gateways
+
+rule ExclusiveGateway {
+	from
+		sgw: BPMN!ExclusiveGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!ExclusiveGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule InclusiveGateway {
+	from
+		sgw: BPMN!InclusiveGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!InclusiveGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule ParallelGateway {
+	from
+		sgw: BPMN!ParallelGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!ParallelGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule EventBasedGateway {
+	from
+		sgw: BPMN!EventBasedGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!EventBasedGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule ComplexGateway {
+	from
+		sgw: BPMN!ComplexGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!ComplexGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+-- tasks
+
+rule Tasks {
+	from
+		stask: BPMN!Task
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		ttask: SEC!Task (
+			uuid <- stask.id,
+			name <- stask.name,
+			type <- stask.getTaskType(),
+			nodes <- Set{(stask.boundaryEventRefs -> iterate(e; ret: Set(SEC!BoundaryEvent) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tbevent'))))},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Lane {
+	from 
+		slane: BPMN!Lane
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tlane: SEC!Lane (
+			uuid <- slane.id,
+			name <- slane.name,
+			nodes <- Set{(slane.flowNodeRefs -> iterate(e; ret: Set(SEC!FlowNode) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'ttask'))
+						-> including(thisModule.resolveTemp(e, 'tgw'))
+						-> including(thisModule.resolveTemp(e, 'tevent'))))},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+		
+}
+
+rule MessageFlow {
+	from
+		smf: BPMN!MessageFlow
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tmf:SEC!MessageFlow (
+			uuid <- smf.id,
+			source <- 
+			if (smf.sourceRef.oclIsKindOf(BPMN!Activity)) then
+				thisModule.resolveTemp(smf.sourceRef, 'ttask')
+			else
+				if (smf.sourceRef.oclIsKindOf(BPMN!Gateway)) then
+					thisModule.resolveTemp(smf.sourceRef, 'tgw')
+				else
+					if (smf.sourceRef.oclIsKindOf(BPMN!BoundaryEvent)) then
+						thisModule.resolveTemp(smf.sourceRef, 'tbevent')
+					else
+						thisModule.resolveTemp(smf.sourceRef, 'tevent')
+					endif
+				endif
+			endif,
+			target <- 
+			if (smf.targetRef.oclIsKindOf(BPMN!Task)) then
+				thisModule.resolveTemp(smf.targetRef, 'ttask')
+			else
+				if (smf.targetRef.oclIsKindOf(BPMN!Task)) then
+					thisModule.resolveTemp(smf.targetRef, 'tgw')
+				else
+					thisModule.resolveTemp(smf.targetRef, 'tevent')
+				endif
+			endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule SequenceFlow {
+	from
+		ssf: BPMN!SequenceFlow
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tsf: SEC!SequenceFlow (
+			uuid <- ssf.id,
+			source <- 
+			if (ssf.sourceRef.oclIsKindOf(BPMN!Activity)) then
+				thisModule.resolveTemp(ssf.sourceRef, 'ttask')
+			else
+				if (ssf.sourceRef.oclIsKindOf(BPMN!Gateway)) then
+					thisModule.resolveTemp(ssf.sourceRef, 'tgw')
+				else
+					thisModule.resolveTemp(ssf.sourceRef, 'tevent')
+				endif
+			endif,
+			target <- 
+			if (ssf.targetRef.oclIsKindOf(BPMN!Activity)) then
+				thisModule.resolveTemp(ssf.targetRef, 'ttask')
+			else
+				if (ssf.targetRef.oclIsKindOf(BPMN!Gateway)) then
+					thisModule.resolveTemp(ssf.targetRef, 'tgw')
+				else
+					thisModule.resolveTemp(ssf.targetRef, 'tevent')
+				endif
+			endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Participant {
+	from
+		spart: BPMN!Participant
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tpart: SEC!Participant (
+			uuid <- spart.id,
+			name <- spart.name,
+			processRef <- thisModule.resolveTemp(spart.processRef, 'tproc'),
+			nodes <- Set{thisModule.resolveTemp(spart.processRef, 'tproc')},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+		
+}
+
+rule Process {
+	from
+		sproc: BPMN!Process
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tproc: SEC!Process (
+			uuid <- sproc.id,
+			name <- sproc.name,
+			nodes <- if (sproc.laneSets.size() > 0) then 
+				Set{(sproc.laneSets -> collect(ls | ls.lanes) -> flatten() -> 			
+					iterate(e; ret: Set(SEC!Lane) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tlane'))))}
+			else
+				Set{(sproc.flowElements -> iterate(e; ret: Set(SEC!FlowElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'ttask')) 
+						-> including(thisModule.resolveTemp(e, 'tgw'))
+						-> including(thisModule.resolveTemp(e, 'tevent'))))}
+			endif,
+			relations <- Set{(sproc.flowElements -> iterate(e; ret: Set(SEC!SecBpmnElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tsf'))))},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+		
+		
+}
