@@ -1,0 +1,1166 @@
+-- @nsURI BPMN=http://www.omg.org/spec/BPMN/20100524/MODEL
+-- @nsURI DC=http://www.omg.org/spec/DD/20100524/DC
+-- @nsURI DI=http://www.omg.org/spec/DD/20100524/DI
+-- @nsURI BPMNDI=http://www.omg.org/spec/BPMN/20100524/DI
+-- @path SEC=/it.polimi.isgroup.secbpmn2bc.model/model/secbpmn2bc.ecore
+-- @path BC=/it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore
+-- @path GMT=/it.unitn.disi.sweng.gmt.model/model/GMT.ecore
+
+module bpmn2secbpmn;
+create OUT : SEC from IN : BPMN;
+
+helper context BPMN!TextAnnotation def: getAnnotation(): String = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'type')->isEmpty()) then
+		''
+	else
+		self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'type')->first()->getValue()
+	endif; 
+
+helper context BPMN!TextAnnotation def: getEnforceabilityScope(): String = 	
+	if (self.getAnnotation() = 'EnforceabilityPublic') then
+		'Public'
+	else
+		if (self.getAnnotation() = 'EnforceabilityPrivate') then
+			'Private'
+		else
+			if (self.getAnnotation() = 'EnforceabilityUserDefined') then
+				'UserDefined'
+			else
+				OclUndefined
+			endif
+		endif
+	endif; 
+
+helper context BPMN!TextAnnotation def: getPrivityScope(): String = 	
+	if (self.getAnnotation() = 'PrivityPublic') then
+		'Public'
+	else
+		if (self.getAnnotation() = 'PrivityPrivate') then
+			'Private'
+		else
+			if (self.getAnnotation() = 'PrivityStatic') then
+				'Static'
+			else
+				if (self.getAnnotation() = 'PrivityWeakDynamic') then
+					'WeakDynamic'
+				else
+					if (self.getAnnotation() = 'PrivityStrongDynamic') then
+						'StrongDynamic'
+					else
+						OclUndefined
+					endif
+				endif
+			endif
+		endif
+	endif; 
+
+helper context BPMN!ItemAwareElement def: getOnChainData(): String = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainData')->isEmpty()) then
+		OclUndefined
+	else
+		self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainData')->first()->getValue()
+	endif; 
+
+helper context BPMN!MessageFlow def: getOnChainData(): String = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainData')->isEmpty()) then
+		OclUndefined
+	else
+		self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainData')->first()->getValue()
+	endif; 
+
+helper context BPMN!Task def: getOnChainExecution(): Boolean = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainExecution')->isEmpty()) then
+		OclUndefined
+	else
+		if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainExecution')->first()->getValue()='true') then
+			true
+		else
+			false
+		endif
+	endif; 
+
+helper context BPMN!Collaboration def: getBlockchainType(): String = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'blockchainType')->isEmpty()) then
+		OclUndefined
+	else
+		self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'blockchainType')->first()->getValue()
+	endif; 
+
+helper context BPMN!Collaboration def: getOnChainModel(): Boolean = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainModel')->isEmpty()) then
+		OclUndefined
+	else
+		if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainModel')->first()->getValue()='true') then
+			true
+		else
+			false
+		endif
+	endif;
+
+helper context BPMN!Participant def: getOnChainModel(): Boolean = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainModel')->isEmpty()) then
+		OclUndefined
+	else
+		if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainModel')->first()->getValue()='true') then
+			true
+		else
+			false
+		endif
+	endif;
+
+helper context BPMN!SubProcess def: getOnChainModel(): Boolean = 	
+	if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainModel')->isEmpty()) then
+		OclUndefined
+	else
+		if (self.anyAttribute->select(e | e->getEStructuralFeature()->getName() = 'onChainModel')->first()->getValue()='true') then
+			true
+		else
+			false
+		endif
+	endif;
+
+helper context BPMN!Association def: hasAnnotation(value: String): Boolean = 
+	if (self.targetRef.oclIsTypeOf(BPMN!TextAnnotation)) then
+		if(self.targetRef.getAnnotation() = value) then
+			true
+		else
+			false
+		endif
+	else
+		if (self.sourceRef.oclIsTypeOf(BPMN!TextAnnotation)) then
+			if(self.sourceRef.getAnnotation() = value) then
+				true
+			else
+				false
+			endif
+		else
+			false
+		endif
+	endif;
+		
+helper context BPMN!Task def: getTaskType(): String = 
+	if (self.oclIsTypeOf(BPMN!BusinessRuleTask)) then
+		'BusinessRule'
+	else
+		if (self.oclIsTypeOf(BPMN!ManualTask)) then
+			'Manual'
+		else 
+			if (self.oclIsTypeOf(BPMN!ReceiveTask)) then
+				'Receive'
+			else 
+				if (self.oclIsTypeOf(BPMN!ScriptTask)) then
+					'Script'
+				else 
+					if (self.oclIsTypeOf(BPMN!SendTask)) then
+						'Send'
+					else
+						if (self.oclIsTypeOf(BPMN!ServiceTask)) then
+							'Service'
+						else
+							if (self.oclIsTypeOf(BPMN!UserTask)) then
+								'User'
+							else 
+								'Default'
+							endif
+						endif
+					endif
+				endif
+			endif
+		endif
+	endif;
+
+helper context BPMN!Process def:getParticipant(): BPMN!Participant =
+	BPMN!Participant.allInstances()->select(e | e.processRef = self)->first();
+
+helper context BPMN!DataInputAssociation def:getTargetTask(): BPMN!Task =
+	BPMN!Task.allInstances()->select(e | e.dataInputAssociations->includes(self))->first();
+	
+helper context BPMN!DataOutputAssociation def:getSourceTask(): BPMN!Task =
+	BPMN!Task.allInstances()->select(e | e.dataOutputAssociations->includes(self))->first();
+
+helper context BPMN!CatchEvent def:getCatchEventType(): String = 
+	if ((self.eventDefinitions->first()).oclIsTypeOf(BPMN!TimerEventDefinition)) then
+		'Timer'
+	else
+		if ((self.eventDefinitions->first()).oclIsTypeOf(BPMN!MessageEventDefinition)) then
+			'Message'
+		else
+			if ((self.eventDefinitions->first()).oclIsTypeOf(BPMN!SignalEventDefinition)) then
+				'Signal'
+			else
+				if ((self.eventDefinitions->first()).oclIsTypeOf(BPMN!ConditionalEventDefinition)) then
+					'Conditional'
+				else
+					'Default'
+				endif
+			endif
+		endif
+	endif;
+
+helper context BPMN!ThrowEvent def:getThrowEventType(): String = 
+	if ((self.eventDefinitions->first()).oclIsTypeOf(BPMN!TerminateEventDefinition)) then
+		'Terminate'
+	else
+		if ((self.eventDefinitions->first()).oclIsTypeOf(BPMN!MessageEventDefinition)) then
+			'Message'
+		else
+			if ((self.eventDefinitions->first()).oclIsTypeOf(BPMN!SignalEventDefinition)) then
+				'Signal'
+			else
+				'Default'
+			endif
+		endif
+	endif;
+
+rule Definitions {
+	from
+		sdef: BPMN!Definitions
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tdef: SEC!Definitions (
+		--tdef: SEC!Process (
+			OnChainModel <- (sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) -> first()).getOnChainModel(),
+			BlockchainType <- (sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) -> first()).getBlockchainType(),
+			uuid <- sdef.id,
+			nodes <- Set{(sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) 
+					-> collect(c | c.participants) -> flatten() 
+					-> iterate(e; ret: Set(SEC!Lane) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tpart'))))
+					
+					-> union((sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) 
+					-> collect(c | c.messageFlows) -> flatten() 
+					-> iterate(e; ret: Set(SEC!Message) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tmsg')))))
+					
+					-> union((sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) 
+					-> collect(c | c.artifacts) -> flatten() 
+					-> iterate(e; ret: Set(SEC!SecurityAnnotation) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tann')))))
+					
+					->flatten()},
+			relations <- Set{(sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) 
+					-> collect(c | c.messageFlows) -> flatten() 
+					-> iterate(e; ret: Set(SEC!MessageFlow) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tmf'))))
+					
+					-> union((sdef.rootElements -> select(e| e -> oclIsKindOf(BPMN!Collaboration)) 
+					-> collect(c | c.artifacts) -> flatten() 
+					-> iterate(e; ret: Set(SEC!SecurityAssociation) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tass')))))
+					
+					->flatten()},
+			graphicalsConstraints <- Set{tgcm} 
+		),
+		-- we always enforce the control flow for the whole model
+		tgce: SEC!GraphicalConstraint,
+		tgcme: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgce
+		),
+		tenf: SEC!Enforceability (
+			uuid <- sdef.id + '_enf',
+			parent <- tdef,
+			graphicalsConstraints <- Set{tgcme}
+		)
+}
+
+-- events
+
+rule StartEvent {
+	from
+		sevent: BPMN!CatchEvent (
+			sevent.oclIsTypeOf(BPMN!StartEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!StartEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			definition <- sevent.getCatchEventType(),
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule EndEvent {
+	from
+		sevent: BPMN!ThrowEvent (
+			sevent.oclIsTypeOf(BPMN!EndEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!EndEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			definition <- sevent.getThrowEventType(),
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule CatchEvent {
+	from
+		sevent: BPMN!CatchEvent (
+			not sevent.oclIsTypeOf(BPMN!StartEvent) and not sevent.oclIsTypeOf(BPMN!BoundaryEvent) 
+		)
+		
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!CatchEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			definition <- sevent.getCatchEventType(),
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule ThrowEvent {
+	from
+		sevent: BPMN!ThrowEvent (
+			not sevent.oclIsTypeOf(BPMN!EndEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tevent: SEC!ThrowEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			definition <- sevent.getThrowEventType(),
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule BoundaryEvent {
+	from
+		sevent: BPMN!CatchEvent (
+			sevent.oclIsTypeOf(BPMN!BoundaryEvent)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tbevent: SEC!BoundaryEvent (
+			uuid <- sevent.id,
+			name <- sevent.name,
+			-- TODO: add event definition
+			graphicalsConstraints <- Set{tgcm}
+		)
+}
+
+-- gateways
+
+rule ExclusiveGateway {
+	from
+		sgw: BPMN!ExclusiveGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!ExclusiveGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule InclusiveGateway {
+	from
+		sgw: BPMN!InclusiveGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!InclusiveGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule ParallelGateway {
+	from
+		sgw: BPMN!ParallelGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!ParallelGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule EventBasedGateway {
+	from
+		sgw: BPMN!EventBasedGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!EventBasedGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+rule ComplexGateway {
+	from
+		sgw: BPMN!ComplexGateway
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tgw: SEC!ComplexGateway (
+			uuid <- sgw.id,
+			name <- sgw.name,
+			graphicalsConstraints <- Set{tgcm} 	
+		)	
+}
+
+-- tasks
+
+rule SubProcess {
+	from
+		stask: BPMN!SubProcess
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		ttask: SEC!SubProcess (
+			uuid <- stask.id,
+			name <- stask.name,
+			OnChainModel <- stask.getOnChainModel(),
+			nodes <- if (stask.laneSets.size() > 0) then 
+				Set{(stask.laneSets -> collect(ls | ls.lanes) -> flatten() -> 			
+					iterate(e; ret: Set(SEC!Lane) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tlane'))))}
+			else
+				Set{(stask.flowElements -> iterate(e; ret: Set(SEC!FlowElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'ttask')) 
+						-> including(thisModule.resolveTemp(e, 'tgw'))
+						-> including(thisModule.resolveTemp(e, 'tdi'))
+						-> including(thisModule.resolveTemp(e, 'tevent'))))}
+			endif,
+			relations <- Set{(stask.flowElements -> iterate(e; ret: Set(SEC!SecBpmnElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tsf'))))->union((stask.dataInputAssociations -> iterate(e; ret: Set(SEC!DataAssociation) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tdf'))))->union((stask.dataOutputAssociations -> 
+							iterate(e; ret: Set(SEC!DataAssociation) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tdf'))))))->flatten()},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Tasks {
+	from
+		stask: BPMN!Task
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		ttask: SEC!Task (
+			uuid <- stask.id,
+			name <- stask.name,
+			type <- stask.getTaskType(),
+			OnChainExecution <- stask.getOnChainExecution(),
+			nodes <- Set{(stask.boundaryEventRefs -> iterate(e; ret: Set(SEC!BoundaryEvent) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tbevent'))))},
+			relations <- Set{(stask.dataInputAssociations -> iterate(e; ret: Set(SEC!DataAssociation) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tdf'))))->union((stask.dataOutputAssociations -> 
+							iterate(e; ret: Set(SEC!DataAssociation) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tdf')))))->flatten()},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+-- data
+
+rule DataObjects {
+	from
+		sdi: BPMN!DataObjectReference
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tdi: SEC!DataObject (
+			uuid <- sdi.id,
+			name <- sdi.name,
+			OnChainData <- sdi.getOnChainData(),
+			-- TODO: data state
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Lane {
+	from 
+		slane: BPMN!Lane
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tlane: SEC!Lane (
+			uuid <- slane.id,
+			name <- slane.name,
+			nodes <- Set{(slane.flowNodeRefs -> iterate(e; ret: Set(SEC!FlowNode) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'ttask'))
+						-> including(thisModule.resolveTemp(e, 'tgw'))
+						-> including(thisModule.resolveTemp(e, 'tdi'))
+						-> including(thisModule.resolveTemp(e, 'tevent'))))},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+		
+}
+
+rule OutputDataFlow {
+	from
+		sdf: BPMN!DataOutputAssociation
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tdf: SEC!DataAssociation (
+			uuid <- sdf.id,
+			source <- thisModule.resolveTemp(sdf.getSourceTask(), 'ttask'),
+			target <- thisModule.resolveTemp(sdf.targetRef, 'tdi'),
+			graphicalsConstraints <- Set{tgcm}
+		)
+}
+
+rule InputDataFlow {
+	from
+		sdf: BPMN!DataInputAssociation
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tdf: SEC!DataAssociation (
+			uuid <- sdf.id,
+			source <- thisModule.resolveTemp(sdf.sourceRef.first(), 'tdi'),
+			target <- thisModule.resolveTemp(sdf.getTargetTask(), 'ttask'),
+			graphicalsConstraints <- Set{tgcm}
+		)
+}
+
+rule MessageFlow {
+	from
+		smf: BPMN!MessageFlow
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		--note: there is no way to generate messages in bpmn.js, hence we make our own from message flows
+		tmsg: SEC!Message (
+			uuid <- smf.id + '_msg',
+			name <- smf.name
+		),
+		tgcmr: SEC!GraphicalConstraint,
+		tgcmmr: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgcmr
+		),
+		tdi: SEC!MessageRef (
+			uuid <- smf.id + '_msgref',
+			name <- smf.name,
+			OnChainData <- smf.getOnChainData(),
+			reference <- tmsg,
+			graphicalsConstraints <- Set{tgcmmr}
+		),
+		tmf:SEC!MessageFlow (
+			uuid <- smf.id,
+			source <- 
+			if (smf.sourceRef.oclIsKindOf(BPMN!Activity)) then
+				thisModule.resolveTemp(smf.sourceRef, 'ttask')
+			else
+				thisModule.resolveTemp(smf.sourceRef, 'tevent')
+			endif,
+			target <- 
+			if (smf.targetRef.oclIsKindOf(BPMN!Activity)) then
+				thisModule.resolveTemp(smf.targetRef, 'ttask')
+			else
+				if (smf.targetRef.oclIsKindOf(BPMN!BoundaryEvent)) then
+					thisModule.resolveTemp(smf.targetRef, 'tbevent')
+				else
+					thisModule.resolveTemp(smf.targetRef, 'tevent')
+				endif
+			endif,
+			messageRef <- tdi,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+		
+}
+
+rule SequenceFlow {
+	from
+		ssf: BPMN!SequenceFlow
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tsf: SEC!SequenceFlow (
+			uuid <- ssf.id,
+			source <- 
+			if (ssf.sourceRef.oclIsKindOf(BPMN!Activity)) then
+				thisModule.resolveTemp(ssf.sourceRef, 'ttask')
+			else
+				if (ssf.sourceRef.oclIsKindOf(BPMN!Gateway)) then
+					thisModule.resolveTemp(ssf.sourceRef, 'tgw')
+				else
+					if (ssf.sourceRef.oclIsKindOf(BPMN!BoundaryEvent)) then
+						thisModule.resolveTemp(ssf.sourceRef, 'tbevent')
+					else
+						thisModule.resolveTemp(ssf.sourceRef, 'tevent')
+					endif
+				endif
+			endif,
+			target <- 
+			if (ssf.targetRef.oclIsKindOf(BPMN!Activity)) then
+				thisModule.resolveTemp(ssf.targetRef, 'ttask')
+			else
+				if (ssf.targetRef.oclIsKindOf(BPMN!Gateway)) then
+					thisModule.resolveTemp(ssf.targetRef, 'tgw')
+				else
+					thisModule.resolveTemp(ssf.targetRef, 'tevent')
+				endif
+			endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Participant {
+	from
+		spart: BPMN!Participant
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tpart: SEC!Participant (
+			uuid <- spart.id,
+			name <- spart.name,
+			processRef <- thisModule.resolveTemp(spart.processRef, 'tproc'),
+			nodes <- Set{thisModule.resolveTemp(spart.processRef, 'tproc')},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+		
+}
+
+rule Process {
+	from
+		sproc: BPMN!Process
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tproc: SEC!Process (
+			uuid <- sproc.id,
+			name <- sproc.name,
+			OnChainModel <- sproc.getParticipant().getOnChainModel(),
+			nodes <- if (sproc.laneSets.size() > 0) then 
+				Set{(sproc.laneSets -> collect(ls | ls.lanes) -> flatten() -> 			
+					iterate(e; ret: Set(SEC!Lane) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tlane'))))}
+			else
+				Set{(sproc.flowElements -> iterate(e; ret: Set(SEC!FlowElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'ttask')) 
+						-> including(thisModule.resolveTemp(e, 'tdi'))
+						-> including(thisModule.resolveTemp(e, 'tgw'))
+						-> including(thisModule.resolveTemp(e, 'tevent'))))}
+			endif,
+			relations <- Set{(sproc.flowElements -> iterate(e; ret: Set(SEC!SecBpmnElement) = Set{}
+					| ret -> including(thisModule.resolveTemp(e, 'tsf'))))},
+			graphicalsConstraints <- Set{tgcm} 
+		)
+		
+		
+}
+
+rule Auditability {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('Auditability') and (sass.sourceRef.oclIsKindOf(BPMN!Activity) or
+				sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.sourceRef.oclIsKindOf(BPMN!MessageFlow) or 
+				sass.targetRef.oclIsKindOf(BPMN!Activity) or 
+				sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.targetRef.oclIsKindOf(BPMN!MessageFlow)
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!Auditability (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!Activity)) then
+					thisModule.resolveTemp(sass.sourceRef,'ttask')
+				else if (sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or sass.sourceRef.oclIsKindOf(BPMN!MessageFlow)) then
+					thisModule.resolveTemp(sass.sourceRef,'tdi')
+					else
+						if (sass.targetRef.oclIsKindOf(BPMN!Activity)) then
+							thisModule.resolveTemp(sass.targetRef,'ttask')
+						else if (sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or sass.targetRef.oclIsKindOf(BPMN!MessageFlow)) then
+							thisModule.resolveTemp(sass.targetRef,'tdi')
+							else
+								OclUndefined
+							endif
+						endif
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Authenticity {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('Authenticity') and (sass.sourceRef.oclIsKindOf(BPMN!Activity) or
+				sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.targetRef.oclIsKindOf(BPMN!Activity) or 
+				sass.targetRef.oclIsKindOf(BPMN!DataObjectReference)
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!Authenticity (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!Activity)) then
+					thisModule.resolveTemp(sass.sourceRef,'ttask')
+				else if (sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference)) then
+					thisModule.resolveTemp(sass.sourceRef,'tdi')
+					else
+						if (sass.targetRef.oclIsKindOf(BPMN!Activity)) then
+							thisModule.resolveTemp(sass.targetRef,'ttask')
+						else if (sass.targetRef.oclIsKindOf(BPMN!DataObjectReference)) then
+							thisModule.resolveTemp(sass.targetRef,'tdi')
+							else
+								OclUndefined
+							endif
+						endif
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Availability {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('Availability') and (sass.sourceRef.oclIsKindOf(BPMN!Activity) or
+				sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.sourceRef.oclIsKindOf(BPMN!MessageFlow) or 
+				sass.targetRef.oclIsKindOf(BPMN!Activity) or 
+				sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.targetRef.oclIsKindOf(BPMN!MessageFlow)
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!Availability (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!Activity)) then
+					thisModule.resolveTemp(sass.sourceRef,'ttask')
+				else if (sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or sass.sourceRef.oclIsKindOf(BPMN!MessageFlow)) then
+					thisModule.resolveTemp(sass.sourceRef,'tdi')
+					else
+						if (sass.targetRef.oclIsKindOf(BPMN!Activity)) then
+							thisModule.resolveTemp(sass.targetRef,'ttask')
+						else if (sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or sass.targetRef.oclIsKindOf(BPMN!MessageFlow)) then
+							thisModule.resolveTemp(sass.targetRef,'tdi')
+							else
+								OclUndefined
+							endif
+						endif
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Integrity {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('Integrity') and (sass.sourceRef.oclIsKindOf(BPMN!Activity) or
+				sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.sourceRef.oclIsKindOf(BPMN!MessageFlow) or 
+				sass.targetRef.oclIsKindOf(BPMN!Activity) or 
+				sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.targetRef.oclIsKindOf(BPMN!MessageFlow)
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!Integrity (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!Activity)) then
+					thisModule.resolveTemp(sass.sourceRef,'ttask')
+				else if (sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or sass.sourceRef.oclIsKindOf(BPMN!MessageFlow)) then
+					thisModule.resolveTemp(sass.sourceRef,'tdi')
+					else
+						if (sass.targetRef.oclIsKindOf(BPMN!Activity)) then
+							thisModule.resolveTemp(sass.targetRef,'ttask')
+						else if (sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or sass.targetRef.oclIsKindOf(BPMN!MessageFlow)) then
+							thisModule.resolveTemp(sass.targetRef,'tdi')
+							else
+								OclUndefined
+							endif
+						endif
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+-- not implemented in SecBPMN2BC
+--rule Confidentiality {
+--	from
+--		sass: BPMN!Association (
+--			sass.hasAnnotation('Confidentiality') and (
+--				sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or 
+--				sass.sourceRef.oclIsKindOf(BPMN!MessageFlow) or 
+--				sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or 
+--				sass.targetRef.oclIsKindOf(BPMN!MessageFlow)
+--				)
+--		)
+--	to
+--		tgc: SEC!GraphicalConstraint,
+--		tgcm: SEC!StringToGraphicalConstraintMap (
+--			key <- 'it.unitn.disi.sweng.secbpmn.view',
+--			value <- tgc
+--		),
+--		tann: SEC!Confidentiality (
+--			uuid <- sass.id,
+--			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or sass.sourceRef.oclIsKindOf(BPMN!MessageFlow)) then
+--						thisModule.resolveTemp(sass.sourceRef,'tdi')
+--				else
+--					if (sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or sass.targetRef.oclIsKindOf(BPMN!MessageFlow)) then
+--						thisModule.resolveTemp(sass.targetRef,'tdi')
+--					else
+--						OclUndefined
+--					endif
+--				endif,
+--			graphicalsConstraints <- Set{tgcm} 
+--		)
+--}
+
+rule NonRepudiation {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('NonRepudiation') and (sass.sourceRef.oclIsKindOf(BPMN!Activity) or
+				sass.sourceRef.oclIsKindOf(BPMN!MessageFlow) or 
+				sass.targetRef.oclIsKindOf(BPMN!Activity) or 
+				sass.targetRef.oclIsKindOf(BPMN!MessageFlow)
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!NonRepudiation (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!Activity)) then
+					thisModule.resolveTemp(sass.sourceRef,'ttask')
+				else if (sass.sourceRef.oclIsKindOf(BPMN!MessageFlow)) then
+					thisModule.resolveTemp(sass.sourceRef,'tdi')
+					else
+						if (sass.targetRef.oclIsKindOf(BPMN!Activity)) then
+							thisModule.resolveTemp(sass.targetRef,'ttask')
+						else if (sass.targetRef.oclIsKindOf(BPMN!MessageFlow)) then
+							thisModule.resolveTemp(sass.targetRef,'tdi')
+							else
+								OclUndefined
+							endif
+						endif
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule NonDelegation {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('NonDelegation') and (sass.sourceRef.oclIsKindOf(BPMN!Activity) or
+				sass.targetRef.oclIsKindOf(BPMN!Activity) 
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!NonDelegation (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!Activity)) then
+					thisModule.resolveTemp(sass.sourceRef,'ttask')
+				else
+					if (sass.targetRef.oclIsKindOf(BPMN!Activity)) then
+						thisModule.resolveTemp(sass.targetRef,'ttask')
+					else
+						OclUndefined
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule SeparationOfDutyAnnotation {
+	from
+		sann: BPMN!TextAnnotation (
+			sann.getAnnotation() = 'SoD'
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!SeparationOfDuty (
+			uuid <- sann.id,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule SeparationOfDutyAssociation {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('SoD') and (sass.sourceRef.oclIsKindOf(BPMN!Participant) or
+				sass.targetRef.oclIsKindOf(BPMN!Participant) 
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tass: SEC!SecurityAssociation (
+			uuid <- sass.id,
+			source <- if (sass.sourceRef.oclIsKindOf(BPMN!Participant)) then
+					thisModule.resolveTemp(sass.sourceRef,'tpart')
+				else
+					if (sass.sourceRef.oclIsKindOf(BPMN!TextAnnotation)) then
+						thisModule.resolveTemp(sass.sourceRef,'tann')
+					else
+						OclUndefined
+					endif
+				endif,
+			target <- if (sass.targetRef.oclIsKindOf(BPMN!Participant)) then
+					thisModule.resolveTemp(sass.targetRef,'tpart')
+				else
+					if (sass.targetRef.oclIsKindOf(BPMN!TextAnnotation)) then
+						thisModule.resolveTemp(sass.targetRef,'tann')
+					else
+						OclUndefined
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+
+}
+
+rule BindOfDutyAnnotation {
+	from
+		sann: BPMN!TextAnnotation (
+			sann.getAnnotation() = 'BoD'
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!BindOfDuty (
+			uuid <- sann.id,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule BindOfDutyAssociation {
+	from
+		sass: BPMN!Association (
+			sass.hasAnnotation('BoD') and (sass.sourceRef.oclIsKindOf(BPMN!Participant) or
+				sass.targetRef.oclIsKindOf(BPMN!Participant) 
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tass: SEC!SecurityAssociation (
+			uuid <- sass.id,
+			source <- if (sass.sourceRef.oclIsKindOf(BPMN!Participant)) then
+					thisModule.resolveTemp(sass.sourceRef,'tpart')
+				else
+					if (sass.sourceRef.oclIsKindOf(BPMN!TextAnnotation)) then
+						thisModule.resolveTemp(sass.sourceRef,'tann')
+					else
+						OclUndefined
+					endif
+				endif,
+			target <- if (sass.targetRef.oclIsKindOf(BPMN!Participant)) then
+					thisModule.resolveTemp(sass.targetRef,'tpart')
+				else
+					if (sass.targetRef.oclIsKindOf(BPMN!TextAnnotation)) then
+						thisModule.resolveTemp(sass.targetRef,'tann')
+					else
+						OclUndefined
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+
+}
+
+-- SecBPMN2BC-specific properties
+rule Enforceability {
+	from
+		sass: BPMN!Association (
+			(sass.hasAnnotation('EnforceabilityPublic') or 
+				sass.hasAnnotation('EnforceabilityPrivate') or
+				sass.hasAnnotation('EnforceabilityUserDefined')) and 
+				(sass.sourceRef.oclIsKindOf(BPMN!Gateway) or
+				sass.targetRef.oclIsKindOf(BPMN!Gateway) 
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!Enforceability (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!Gateway)) then
+					thisModule.resolveTemp(sass.sourceRef,'tgw')
+				else
+					if (sass.targetRef.oclIsKindOf(BPMN!Gateway)) then
+						thisModule.resolveTemp(sass.targetRef,'tgw')
+					else
+						OclUndefined
+					endif
+				endif,
+			Scope <- if (sass.sourceRef.oclIsKindOf(BPMN!TextAnnotation)) then 
+					sass.sourceRef.getEnforceabilityScope()
+				else
+					if (sass.targetRef.oclIsKindOf(BPMN!TextAnnotation)) then
+						sass.targetRef.getEnforceabilityScope()
+					else
+						OclUndefined
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
+
+rule Privity {
+	from
+		sass: BPMN!Association (
+				(sass.hasAnnotation('PrivityPublic') or 
+				sass.hasAnnotation('PrivityPrivate') or 
+				sass.hasAnnotation('PrivityStatic') or 
+				sass.hasAnnotation('PrivityWeakDynamic') or 
+				sass.hasAnnotation('PrivityStrongDynamic')
+				) and (
+				sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.sourceRef.oclIsKindOf(BPMN!MessageFlow) or 
+				sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or 
+				sass.targetRef.oclIsKindOf(BPMN!MessageFlow)
+				)
+		)
+	to
+		tgc: SEC!GraphicalConstraint,
+		tgcm: SEC!StringToGraphicalConstraintMap (
+			key <- 'it.unitn.disi.sweng.secbpmn.view',
+			value <- tgc
+		),
+		tann: SEC!PrivitySphere (
+			uuid <- sass.id,
+			parent <- if (sass.sourceRef.oclIsKindOf(BPMN!DataObjectReference) or sass.sourceRef.oclIsKindOf(BPMN!MessageFlow)) then
+						thisModule.resolveTemp(sass.sourceRef,'tdi')
+				else
+					if (sass.targetRef.oclIsKindOf(BPMN!DataObjectReference) or sass.targetRef.oclIsKindOf(BPMN!MessageFlow)) then
+						thisModule.resolveTemp(sass.targetRef,'tdi')
+					else
+						OclUndefined
+					endif
+				endif,
+			Scope <- if (sass.sourceRef.oclIsKindOf(BPMN!TextAnnotation)) then 
+					sass.sourceRef.getPrivityScope()
+				else
+					if (sass.targetRef.oclIsKindOf(BPMN!TextAnnotation)) then
+						sass.targetRef.getPrivityScope()
+					else
+						OclUndefined
+					endif
+				endif,
+			graphicalsConstraints <- Set{tgcm} 
+		)
+}
