@@ -294,9 +294,7 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 			MessageRef messageRef = (MessageRef) theEObject;
 			T result = caseMessageRef(messageRef);
 			if (result == null)
-				result = caseMessage(messageRef);
-			if (result == null)
-				result = caseDataItems(messageRef);
+				result = caseSecBPMN_MessageRef(messageRef);
 			if (result == null)
 				result = caseSecBPMN_Message(messageRef);
 			if (result == null)
@@ -756,6 +754,21 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSecBPMN_Message(it.unitn.disi.sweng.secbpmn.model.Message object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Message Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Message Ref</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecBPMN_MessageRef(it.unitn.disi.sweng.secbpmn.model.MessageRef object) {
 		return null;
 	}
 

@@ -86,7 +86,7 @@ public class DefinitionsItemProvider extends GMTNamedNodeItemProvider {
 						getString("_UI_PropertyDescriptor_description", "_UI_Definitions_OnChainModel_feature", //$NON-NLS-1$//$NON-NLS-2$
 								"_UI_Definitions_type"), //$NON-NLS-1$
 						SecBPMN2BCPackage.Literals.DEFINITIONS__ON_CHAIN_MODEL, true, false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**

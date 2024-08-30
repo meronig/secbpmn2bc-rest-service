@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
-import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.OnChainData;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import it.unitn.disi.sweng.gmt.model.GMTNode;
@@ -14,7 +14,7 @@ import it.unitn.disi.sweng.secbpmn.model.TaskType;
 
 public class NonRepudiationInference implements SecurityAnnotationInference {
 
-private List<Combination> getMessageCombinations(Message dataItem){
+private List<Combination> getMessageCombinations(MessageRef dataItem){
 		
 		List<Combination> result = new ArrayList<Combination>();
 		
@@ -71,8 +71,8 @@ private List<Combination> getMessageCombinations(Message dataItem){
 			List<Combination> result = null;
 			if (element instanceof Task) {
 				result = getTaskCombinations((Task) element);
-			} else if (element instanceof Message){
-				result = getMessageCombinations((Message) element);
+			} else if (element instanceof MessageRef){
+				result = getMessageCombinations((MessageRef) element);
 			} else {
 				return;
 			}

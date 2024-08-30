@@ -6,7 +6,7 @@ import java.util.List;
 
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
 import it.polimi.isgroup.secbpmn2bc.model.DataItems;
-import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.OnChainData;
 import it.polimi.isgroup.secbpmn2bc.model.PrivityScope;
 import it.polimi.isgroup.secbpmn2bc.model.PrivitySphere;
@@ -110,7 +110,7 @@ public class PrivityInference implements SecurityAnnotationInference {
 		return result;
 	}
 
-	private List<Combination> getMessageCombinations(Message dataObject, PrivityScope scope) {
+	private List<Combination> getMessageCombinations(MessageRef dataObject, PrivityScope scope) {
 		List<Combination> result = new ArrayList<Combination>();
 		
 		//public sphere
@@ -280,8 +280,8 @@ public class PrivityInference implements SecurityAnnotationInference {
 			
 			if (dataItem instanceof DataItems){
 				
-				if (dataItem instanceof Message)
-					result = getMessageCombinations((Message) dataItem, ((PrivitySphere) node).getScope());
+				if (dataItem instanceof MessageRef)
+					result = getMessageCombinations((MessageRef) dataItem, ((PrivitySphere) node).getScope());
 				else  
 					result = getDOCombinations((DataItems) dataItem, ((PrivitySphere) node).getScope());
 				
@@ -305,7 +305,7 @@ public class PrivityInference implements SecurityAnnotationInference {
 
 	private List<Task> getTasks(DataItems dataItem) {
 		List<Task> result = new ArrayList<Task>();
-		if(dataItem instanceof Message){
+		if(dataItem instanceof MessageRef){
 			//TODO: define logic for messages
 		} else {
 			for(GMTRelation edge: dataItem.getOutgoingConnections()){

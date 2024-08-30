@@ -6,7 +6,7 @@ import java.util.List;
 
 import it.polimi.isgroup.secbpmn2bc.model.BlockchainType;
 import it.polimi.isgroup.secbpmn2bc.model.DataItems;
-import it.polimi.isgroup.secbpmn2bc.model.Message;
+import it.polimi.isgroup.secbpmn2bc.model.MessageRef;
 import it.polimi.isgroup.secbpmn2bc.model.OnChainData;
 import it.polimi.isgroup.secbpmn2bc.model.Task;
 import it.unitn.disi.sweng.gmt.model.GMTNode;
@@ -47,7 +47,7 @@ public class AvailabilityInference implements SecurityAnnotationInference {
 		return result;
 	}
 	
-	private List<Combination> getMessageCombinations(Message dataItem){
+	private List<Combination> getMessageCombinations(MessageRef dataItem){
 		
 		List<Combination> result = new ArrayList<Combination>();
 		
@@ -105,8 +105,8 @@ public class AvailabilityInference implements SecurityAnnotationInference {
 			if (element instanceof Task) {
 				result = getTaskCombinations((Task) element);
 			} else if (element instanceof DataItems){
-				if (element instanceof Message){
-					result = getMessageCombinations((Message) element);
+				if (element instanceof MessageRef){
+					result = getMessageCombinations((MessageRef) element);
 				} else {
 					result = getDOCombinations((DataItems) element);
 				}

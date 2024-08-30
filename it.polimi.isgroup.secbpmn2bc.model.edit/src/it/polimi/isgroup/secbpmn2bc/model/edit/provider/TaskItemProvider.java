@@ -72,7 +72,7 @@ public class TaskItemProvider extends it.unitn.disi.sweng.secbpmn.model.edit.pro
 						getString("_UI_PropertyDescriptor_description", "_UI_Task_OnChainExecution_feature", //$NON-NLS-1$//$NON-NLS-2$
 								"_UI_Task_type"), //$NON-NLS-1$
 						SecBPMN2BCPackage.Literals.TASK__ON_CHAIN_EXECUTION, true, false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**

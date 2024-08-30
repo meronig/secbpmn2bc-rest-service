@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class MessageRefImpl extends MessageImpl implements MessageRef {
+public class MessageRefImpl extends it.unitn.disi.sweng.secbpmn.model.impl.MessageRefImpl implements MessageRef {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

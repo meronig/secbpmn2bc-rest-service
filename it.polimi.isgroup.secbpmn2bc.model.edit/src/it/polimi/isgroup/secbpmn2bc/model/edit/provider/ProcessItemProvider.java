@@ -68,7 +68,7 @@ public class ProcessItemProvider extends it.unitn.disi.sweng.secbpmn.model.edit.
 						getString("_UI_PropertyDescriptor_description", "_UI_Process_OnChainModel_feature", //$NON-NLS-1$//$NON-NLS-2$
 								"_UI_Process_type"), //$NON-NLS-1$
 						SecBPMN2BCPackage.Literals.PROCESS__ON_CHAIN_MODEL, true, false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**

@@ -1736,7 +1736,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__UUID = MESSAGE__UUID;
+	int MESSAGE_REF__UUID = SecBPMNPackage.MESSAGE_REF__UUID;
 
 	/**
 	 * The feature id for the '<em><b>Graphicals Constraints</b></em>' map.
@@ -1745,7 +1745,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__GRAPHICALS_CONSTRAINTS = MESSAGE__GRAPHICALS_CONSTRAINTS;
+	int MESSAGE_REF__GRAPHICALS_CONSTRAINTS = SecBPMNPackage.MESSAGE_REF__GRAPHICALS_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connections</b></em>' reference list.
@@ -1754,7 +1754,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__INCOMING_CONNECTIONS = MESSAGE__INCOMING_CONNECTIONS;
+	int MESSAGE_REF__INCOMING_CONNECTIONS = SecBPMNPackage.MESSAGE_REF__INCOMING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
@@ -1763,7 +1763,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__OUTGOING_CONNECTIONS = MESSAGE__OUTGOING_CONNECTIONS;
+	int MESSAGE_REF__OUTGOING_CONNECTIONS = SecBPMNPackage.MESSAGE_REF__OUTGOING_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -1772,7 +1772,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__PARENT = MESSAGE__PARENT;
+	int MESSAGE_REF__PARENT = SecBPMNPackage.MESSAGE_REF__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -1781,7 +1781,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__NODES = MESSAGE__NODES;
+	int MESSAGE_REF__NODES = SecBPMNPackage.MESSAGE_REF__NODES;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -1790,7 +1790,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__RELATIONS = MESSAGE__RELATIONS;
+	int MESSAGE_REF__RELATIONS = SecBPMNPackage.MESSAGE_REF__RELATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1799,7 +1799,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__NAME = MESSAGE__NAME;
+	int MESSAGE_REF__NAME = SecBPMNPackage.MESSAGE_REF__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -1808,7 +1808,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__DOCUMENTATION = MESSAGE__DOCUMENTATION;
+	int MESSAGE_REF__DOCUMENTATION = SecBPMNPackage.MESSAGE_REF__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1817,16 +1817,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__DESCRIPTION = MESSAGE__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>On Chain Data</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_REF__ON_CHAIN_DATA = MESSAGE__ON_CHAIN_DATA;
+	int MESSAGE_REF__DESCRIPTION = SecBPMNPackage.MESSAGE_REF__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' reference list.
@@ -1835,7 +1826,16 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF__REFERENCES = MESSAGE__REFERENCES;
+	int MESSAGE_REF__REFERENCES = SecBPMNPackage.MESSAGE_REF__REFERENCES;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_REF__REFERENCE = SecBPMNPackage.MESSAGE_REF__REFERENCE;
 
 	/**
 	 * The number of structural features of the '<em>Message Ref</em>' class.
@@ -1844,7 +1844,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF_FEATURE_COUNT = MESSAGE_FEATURE_COUNT + 0;
+	int MESSAGE_REF_FEATURE_COUNT = SecBPMNPackage.MESSAGE_REF_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Get Root Parent</em>' operation.
@@ -1853,7 +1853,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF___GET_ROOT_PARENT = MESSAGE___GET_ROOT_PARENT;
+	int MESSAGE_REF___GET_ROOT_PARENT = SecBPMNPackage.MESSAGE_REF___GET_ROOT_PARENT;
 
 	/**
 	 * The number of operations of the '<em>Message Ref</em>' class.
@@ -1862,7 +1862,7 @@ public interface SecBPMN2BCPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF_OPERATION_COUNT = MESSAGE_OPERATION_COUNT + 0;
+	int MESSAGE_REF_OPERATION_COUNT = SecBPMNPackage.MESSAGE_REF_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link it.polimi.isgroup.secbpmn2bc.model.impl.SubProcessImpl <em>Sub Process</em>}' class.

@@ -59,7 +59,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DataInput" eSuperTypes="#//DataItems ../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataInput"/>
   <eClassifiers xsi:type="ecore:EClass" name="DataOutput" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//DataOutput #//DataItems"/>
   <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//DataItems ../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//Message"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MessageRef" eSuperTypes="#//Message"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageRef" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//MessageRef"/>
   <eClassifiers xsi:type="ecore:EClass" name="SubProcess" eSuperTypes="../../it.unitn.disi.sweng.secbpmn.model/model/secbpmn.ecore#//SubProcess">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="OnChainModel" eType="#//BooleanWithNull"
         defaultValueLiteral=""/>

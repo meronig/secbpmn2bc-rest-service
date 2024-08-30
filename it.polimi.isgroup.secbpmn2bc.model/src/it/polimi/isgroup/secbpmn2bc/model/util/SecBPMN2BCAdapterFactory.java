@@ -228,6 +228,11 @@ public class SecBPMN2BCAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseSecBPMN_MessageRef(it.unitn.disi.sweng.secbpmn.model.MessageRef object) {
+			return createSecBPMN_MessageRefAdapter();
+		}
+
+		@Override
 		public Adapter caseSecBPMN_SubProcess(it.unitn.disi.sweng.secbpmn.model.SubProcess object) {
 			return createSecBPMN_SubProcessAdapter();
 		}
@@ -640,6 +645,20 @@ public class SecBPMN2BCAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSecBPMN_MessageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.sweng.secbpmn.model.MessageRef <em>Message Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see it.unitn.disi.sweng.secbpmn.model.MessageRef
+	 * @generated
+	 */
+	public Adapter createSecBPMN_MessageRefAdapter() {
 		return null;
 	}
 
