@@ -12,5 +12,5 @@ package it.polimi.isgroup.secbpmn2bc.model;
  * @model
  * @generated
  */
-public interface MessageRef extends it.unitn.disi.sweng.secbpmn.model.MessageRef {
+public interface MessageRef extends it.unitn.disi.sweng.secbpmn.model.MessageRef, Message {
 } // MessageRef

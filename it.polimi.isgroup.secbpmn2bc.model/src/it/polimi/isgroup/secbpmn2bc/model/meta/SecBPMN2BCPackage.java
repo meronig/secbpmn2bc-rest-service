@@ -1838,13 +1838,22 @@ public interface SecBPMN2BCPackage extends EPackage {
 	int MESSAGE_REF__REFERENCE = SecBPMNPackage.MESSAGE_REF__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>On Chain Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_REF__ON_CHAIN_DATA = SecBPMNPackage.MESSAGE_REF_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Message Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_REF_FEATURE_COUNT = SecBPMNPackage.MESSAGE_REF_FEATURE_COUNT + 0;
+	int MESSAGE_REF_FEATURE_COUNT = SecBPMNPackage.MESSAGE_REF_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Get Root Parent</em>' operation.

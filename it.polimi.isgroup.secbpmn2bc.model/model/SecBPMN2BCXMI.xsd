@@ -132,7 +132,9 @@
   <xsd:element name="Message" type="secbpmn2bc:Message"/>
   <xsd:complexType name="MessageRef">
     <xsd:complexContent>
-      <xsd:extension base="secbpmn:MessageRef"/>
+      <xsd:extension base="secbpmn:MessageRef">
+        <xsd:attribute name="OnChainData" type="secbpmn2bc:OnChainData"/>
+      </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="MessageRef" type="secbpmn2bc:MessageRef"/>

@@ -627,6 +627,7 @@ public class SecBPMN2BCPackageImpl extends EPackageImpl implements SecBPMN2BCPac
 		messageEClass.getESuperTypes().add(this.getDataItems());
 		messageEClass.getESuperTypes().add(theSecBPMNPackage.getMessage());
 		messageRefEClass.getESuperTypes().add(theSecBPMNPackage.getMessageRef());
+		messageRefEClass.getESuperTypes().add(this.getMessage());
 		subProcessEClass.getESuperTypes().add(theSecBPMNPackage.getSubProcess());
 
 		// Initialize classes, features, and operations; add parameters

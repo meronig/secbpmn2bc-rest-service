@@ -296,7 +296,11 @@ public class SecBPMN2BCSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseSecBPMN_MessageRef(messageRef);
 			if (result == null)
+				result = caseMessage(messageRef);
+			if (result == null)
 				result = caseSecBPMN_Message(messageRef);
+			if (result == null)
+				result = caseDataItems(messageRef);
 			if (result == null)
 				result = caseSecBPMN_DataItems(messageRef);
 			if (result == null)
