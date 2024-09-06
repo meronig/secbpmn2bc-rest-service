@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rest
+Bundle-SymbolicName: dk.dtu.compute.secbpmn2bc.rest
+Bundle-Version: 1.0.0.qualifier
+Export-Package: dk.dtu.compute.secbpmn2bc.bpmnimporter.rest
+Require-Bundle: dk.dtu.compute.secbpmn2bc.bpmnimporter;bundle-version="1.0.0",
+ org.eclipse.m2m.atl.core,
+ org.eclipse.m2m.atl.common

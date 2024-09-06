@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ATL dk.dtu.compute.secbpmn2bc.bpmnimporter Transformation Runtime Plug-in
+Bundle-SymbolicName: dk.dtu.compute.secbpmn2bc.bpmnimporter
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: dk.dtu.compute.secbpmn2bc.bpmnimporter.Activator
+Bundle-Vendor: Eclipse Modeling Project
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.bpmn2,
+ org.eclipse.m2m.atl.engine.emfvm,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ it.polimi.isgroup.secbpmn2bc.model;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Eclipse-LazyStart: true
+Export-Package: dk.dtu.compute.secbpmn2bc.bpmnimporter.files

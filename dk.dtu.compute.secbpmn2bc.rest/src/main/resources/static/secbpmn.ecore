@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="secbpmn" nsURI="http://it.unitn.disi.sweng.secbpmn.model/1.0"
+    nsPrefix="secbpmn">
+  <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTNamedNode #//SecBpmnElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="global" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateProcess" eSuperTypes="#//Process">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="templateId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecBpmnElement" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Participant" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTNamedNode #//SecBpmnElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lanes" upperBound="-1"
+        eType="#//Lane" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowNodes" upperBound="-1"
+        eType="#//FlowNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processRef" eType="#//Process"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Lane" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTNamedNode #//SecBpmnElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participantRef" eType="#//Participant"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lanes" upperBound="-1"
+        eType="#//Lane" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowNodes" upperBound="-1"
+        eType="#//FlowNode" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowNode" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTNamedNode #//SecBpmnElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" abstract="true" eSuperTypes="#//FlowNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isForCompensation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loopCharacteristic" eType="#//LoopCharacteristic"
+        defaultValueLiteral="None"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startQuantity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="completitionQuantity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boundaryEventRefs" upperBound="-1"
+        eType="#//BoundaryEvent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//Activity">
+    <eOperations name="getDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="description">
+        <details key="body" value="return &quot;A Task is an atomic Activity that is included within a Process. A Task is used when the work in the Process is not broken down to a finer level of Process detail.&quot;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TaskType"
+        defaultValueLiteral="Default"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CallActivity" eSuperTypes="#//Activity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processRef" eType="#//Process"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubProcess" eSuperTypes="#//Activity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="triggeredByEvent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAdHoc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//FlowNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="definition" eType="#//EventDefinition"
+        defaultValueLiteral="Default" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CatchEvent" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ThrowEvent" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StartEvent" eSuperTypes="#//CatchEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EndEvent" eSuperTypes="#//ThrowEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BoundaryEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cancelActivity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Gateway" abstract="true" eSuperTypes="#//FlowNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExclusiveGateway" eSuperTypes="#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InclusiveGateway" eSuperTypes="#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParallelGateway" eSuperTypes="#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexGateway" eSuperTypes="#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventBasedGateway" eSuperTypes="#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataItems" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTNamedNode #//SecBpmnElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataObject" eSuperTypes="#//DataItems">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCollection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataStore" eSuperTypes="#//DataItems">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnlimited" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataInput" eSuperTypes="#//DataItems">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCollection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataOutput" eSuperTypes="#//DataItems">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCollection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//DataItems">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//MessageRef" eOpposite="#//MessageRef/reference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageRef" eSuperTypes="#//Message">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="#//Message" eOpposite="#//Message/references"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceFlow" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTRelation #//SecBpmnElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultFlow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageFlow" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTRelation #//SecBpmnElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" ordered="false"
+        lowerBound="1" eType="#//Message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messageRef" eType="#//MessageRef"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTRelation #//SecBpmnElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataAssociation" eSuperTypes="#//Association"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityAssociation" eSuperTypes="#//Association"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityAnnotation" abstract="true"
+      eSuperTypes="http://localhost:8080/GMT.ecore#//GMTNode #//SecBpmnElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityAssociation" lowerBound="1"
+        upperBound="-1" eType="#//SecurityAssociation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcedBy" upperBound="-1"
+        eType="#//Enforcer" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Accountability" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usersToMonitor" upperBound="-1"
+        eType="#//User" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Auditability" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="frequency" eType="#//Frequency"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Authenticity" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="authentication" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identification" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trustValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Availability" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="availabilityLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="authorizedEndUsers" upperBound="-1"
+        eType="#//User" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Confidentiality" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writers" upperBound="-1"
+        eType="#//Writer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="readers" upperBound="-1"
+        eType="#//Reader" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Integrity" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hardware" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="software" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="personnel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonRepudiation" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="execution" eType="#//ExecutionSpecification"
+        defaultValueLiteral="NotSpecified"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Privacy" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensitiveInformation" upperBound="-1"
+        eType="#//Information" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindOfDuty" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SeparationOfDuty" eSuperTypes="#//SecurityAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dynamic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonDelegation" eSuperTypes="#//SecurityAnnotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnNote" eSuperTypes="http://localhost:8080/GMT.ecore#//Note">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//BpmnNoteColor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="http://localhost:8080/GMT.ecore#//GMTNamedNode #//SecBpmnElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processRef" eType="#//Process"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EventDefinition">
+    <eLiterals name="Default" literal="Default"/>
+    <eLiterals name="Terminate" value="1"/>
+    <eLiterals name="Conditional" value="2"/>
+    <eLiterals name="Timer" value="3"/>
+    <eLiterals name="Signal" value="4"/>
+    <eLiterals name="Message" value="5"/>
+    <eLiterals name="Escalation" value="6"/>
+    <eLiterals name="Compensate" value="7"/>
+    <eLiterals name="Link" value="8"/>
+    <eLiterals name="Error" value="9"/>
+    <eLiterals name="Cancel" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TaskType">
+    <eLiterals name="Default"/>
+    <eLiterals name="BusinessRule" value="1"/>
+    <eLiterals name="Manual" value="2"/>
+    <eLiterals name="Receive" value="3"/>
+    <eLiterals name="Script" value="4"/>
+    <eLiterals name="Send" value="5"/>
+    <eLiterals name="Service" value="6"/>
+    <eLiterals name="User" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LoopCharacteristic">
+    <eLiterals name="None"/>
+    <eLiterals name="Standard" value="1"/>
+    <eLiterals name="MultiInstanceParallel" value="2"/>
+    <eLiterals name="MultiInstanceSequential" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BpmnNoteColor">
+    <eLiterals name="Yellow"/>
+    <eLiterals name="Orange" value="1"/>
+    <eLiterals name="Purple" value="2" literal=""/>
+    <eLiterals name="Green" value="3"/>
+    <eLiterals name="Blue" value="4"/>
+    <eLiterals name="Red" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enforcer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Writer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reader">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Information">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Frequency">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frequencyValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frequencyPeriod" eType="#//FrequencyPeriod"
+        defaultValueLiteral="Seconds"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FrequencyPeriod">
+    <eLiterals name="Seconds"/>
+    <eLiterals name="Minutes" value="1"/>
+    <eLiterals name="Hours" value="2"/>
+    <eLiterals name="Days" value="3"/>
+    <eLiterals name="Months" value="4"/>
+    <eLiterals name="Years" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExecutionSpecification">
+    <eLiterals name="NotSpecified" value="2"/>
+    <eLiterals name="True" value="1"/>
+    <eLiterals name="False"/>
+  </eClassifiers>
+</ecore:EPackage>
