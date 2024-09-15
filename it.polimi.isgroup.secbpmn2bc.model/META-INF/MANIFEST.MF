@@ -14,6 +14,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: it.polimi.isgroup.secbpmn2bc.model.Activator
 Export-Package: it.polimi.isgroup.secbpmn2bc.model,
+ it.polimi.isgroup.secbpmn2bc.model.impl,
  it.polimi.isgroup.secbpmn2bc.model.importer,
  it.polimi.isgroup.secbpmn2bc.model.infer,
  it.polimi.isgroup.secbpmn2bc.model.meta,
