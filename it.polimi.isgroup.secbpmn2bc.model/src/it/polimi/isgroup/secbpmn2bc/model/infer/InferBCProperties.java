@@ -290,11 +290,9 @@ public class InferBCProperties {
 		List<Combination> parentCombinations = null; 
 		//node has local combinations
 		List<Combination> localCombinations = sets.get(node.getUuid());
-		//TODO mechanism to handle preset values
 		if (!override)
 			//constrain combinations based on current property assignments
 			localCombinations = constrain(localCombinations, node);
-		//TODO end
 		if(localCombinations!=null){
 			parentCombinations = new ArrayList<Combination>();
 			for (Combination c : localCombinations){
@@ -479,23 +477,23 @@ public class InferBCProperties {
 			if (result.size()==0)
 				return null;
 		} else {
-			//Constrain admissible combinations 
+			//Constrain admissible combinations
 			for (Combination c : nodeCombinations){
 				if (node instanceof Definitions)
-					if ((((Definitions) node).getBlockchainType() == BlockchainType.UNDEFINED || ((Definitions) node).getBlockchainType() == c.blockchainType) &&
-							(((Definitions) node).getOnChainModel() == null || ((Definitions) node).getOnChainModel() == c.onChainModel))
+					if ((((Definitions) node).getBlockchainType() == BlockchainType.UNDEFINED || ((Definitions) node).getBlockchainType().equals(c.blockchainType)) &&
+							(((Definitions) node).getOnChainModel() == null || ((Definitions) node).getOnChainModel().equals(c.onChainModel)))
 						result.add(c);
 				if (node instanceof SubProcess)
-					if (((SubProcess) node).getOnChainModel() == null || ((SubProcess) node).getOnChainModel() == c.onChainModel)
+					if (((SubProcess) node).getOnChainModel() == null || ((SubProcess) node).getOnChainModel().equals(c.onChainModel))
 						result.add(c);
 				if (node instanceof Process)
-					if (((Process) node).getOnChainModel() == null || ((Process) node).getOnChainModel() == c.onChainModel)
+					if (((Process) node).getOnChainModel() == null || ((Process) node).getOnChainModel().equals(c.onChainModel))
 						result.add(c);
 				if (node instanceof DataItems)
-					if (((DataItems) node).getOnChainData() == OnChainData.UNDEFINED || ((DataItems) node).getOnChainData() == c.onChainData)
+					if (((DataItems) node).getOnChainData() == OnChainData.UNDEFINED || ((DataItems) node).getOnChainData().equals(c.onChainData))
 						result.add(c);
 				if (node instanceof Task)
-					if (((Task) node).getOnChainExecution() == null || ((Task) node).getOnChainExecution() == c.onChainExecution)
+					if (((Task) node).getOnChainExecution() == null || ((Task) node).getOnChainExecution().equals(c.onChainExecution))
 						result.add(c);	
 			}
 		}

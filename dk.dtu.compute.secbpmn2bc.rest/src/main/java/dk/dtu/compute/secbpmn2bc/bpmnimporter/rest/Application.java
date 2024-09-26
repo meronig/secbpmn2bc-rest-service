@@ -6,7 +6,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -24,6 +31,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import dk.dtu.compute.secbpmn2bc.bpmnimporter.files.Bpmn2secbpmnbc;
 import it.polimi.isgroup.secbpmn2bc.model.infer.ConsoleMessage;
@@ -41,34 +50,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-	  
-		String arg0 = "../dk.dtu.compute.secbpmn2bc.bpmnimporter.model/ICRC_SendTokensToQRUser_simple.bpmn";
-		try {
-				Bpmn2secbpmnbc runner = new Bpmn2secbpmnbc();
-				//runner.loadModels(arg0);
-				
-				File file = new File(arg0);
-				InputStream is = new FileInputStream(file);
-				
-	            runner.loadModels(is);
-				
-				runner.doBpmn2secbpmnbc(new NullProgressMonitor());
-				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-				runner.saveModels(outputStream);
-				return outputStream.toString();
-		} catch (ATLCoreException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ATLExecutionException e) {
-			e.printStackTrace();
-		}
-		
-      return String.format("Hello %s!", name);
-    }
-	
 	@PostMapping(value="/convert", produces=MediaType.APPLICATION_XML_VALUE)
 	public String convert(@RequestParam("file") MultipartFile file) {
 		try {
@@ -161,5 +142,24 @@ public class Application {
 			return list.toString();
 		}
 		
+	}
+	
+	private void updateModel(Document input, Document result){
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+	    XPath xpath = xpathFactory.newXPath();
+	    
+	    try {
+
+	      XPathExpression expr = xpath.compile("//*");
+	      NodeList nodes = (NodeList) expr.evaluate(result, XPathConstants.NODESET);
+	      for (int i = 0; i < nodes.getLength(); i++) {
+
+	        
+	       //Customize the code to fetch the value based on the node type and hierarchy 
+	        
+	      }
+	    } catch (XPathExpressionException e) {
+	      e.printStackTrace();
+	    }
 	}
 }

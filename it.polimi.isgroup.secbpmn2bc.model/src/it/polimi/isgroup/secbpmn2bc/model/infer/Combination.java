@@ -66,23 +66,36 @@ public class Combination {
 
 	public boolean satisfies(Combination constraint) {
 		if(constraint.onChainExecution!=null)
-			if(constraint.onChainExecution != this.onChainExecution)
+			if(!(constraint.onChainExecution.equals(this.onChainExecution)))
 				return false;
 		if(constraint.onChainData!=null)
-			if(constraint.onChainData != this.onChainData)
+			if(!(constraint.onChainData.equals(this.onChainData)))
 				return false;
 		if(constraint.blockchainType!=null)
-			if(constraint.blockchainType != this.blockchainType)
+			if(!(constraint.blockchainType.equals(this.blockchainType)))
 				return false;
 		if(constraint.onChainModel!=null)
-			if(constraint.onChainModel != this.onChainModel)
+			if(!(constraint.onChainModel.equals(this.onChainModel)))
 				return false;
 		return true;
 	}
 	
+	public boolean isEqual(Boolean a, Boolean b){
+		if(a == null)
+			if(b == null)
+				return true;
+			else
+				return false;
+		else
+			if(a.equals(b))
+				return true;
+			else
+				return false;
+	}
+	
 	public Combination compareTo(Combination other){
-		if(this.onChainExecution == other.onChainExecution && 
-				this.onChainModel == other.onChainModel &&
+		if(isEqual(this.onChainExecution,other.onChainExecution) && 
+				isEqual(this.onChainModel,other.onChainModel) &&
 				this.onChainData == other.onChainData &&
 				this.blockchainType == other.blockchainType){
 			//old item more stringent or equal than new one
