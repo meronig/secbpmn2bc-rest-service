@@ -54,7 +54,7 @@ import it.polimi.isgroup.secbpmn2bc.model.meta.SecBPMN2BCPackage;
 import it.polimi.isgroup.secbpmn2bc.model.util.SecBPMN2BCResourceFactoryImpl;
 
 @SpringBootApplication
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin
 @RestController
 public class Application {
 
