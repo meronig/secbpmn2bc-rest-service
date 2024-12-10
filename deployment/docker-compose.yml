@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  secbpmn2bc-be:
+    build: .
+    image: secbpmn2bc/secbpmn2bc-be:v1
+    ports:
+      - "8080:8080"
+    
