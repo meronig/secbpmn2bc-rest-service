@@ -1,3 +1,7 @@
+-- Copyright © 2024 Technical University of Denmark
+-- 
+-- This version of the software was developed by Giovanni Meroni, Assistant Professor, DTU Compute 
+
 -- @nsURI BPMN=http://www.omg.org/spec/BPMN/20100524/MODEL
 -- @nsURI DC=http://www.omg.org/spec/DD/20100524/DC
 -- @nsURI DI=http://www.omg.org/spec/DD/20100524/DI

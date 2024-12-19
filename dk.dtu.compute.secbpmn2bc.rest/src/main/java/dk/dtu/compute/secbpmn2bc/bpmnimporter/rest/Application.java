@@ -1,3 +1,10 @@
+/*
+ *
+ * Copyright © 2024 Technical University of Denmark
+ * 
+ * This version of the software was developed by Giovanni Meroni, Assistant Professor, DTU Compute 
+ *
+ */
 package dk.dtu.compute.secbpmn2bc.bpmnimporter.rest;
 
 import java.io.ByteArrayOutputStream;
