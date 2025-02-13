@@ -18,9 +18,11 @@ This is the software configuration tested. Other software versions or operative 
 3. Import the repository in the workspace you just created
 4. Export the project dk.dtu.compute.secbpmn2bc.bpmnimporter as a Runnable JAR file.
 
-# Copyright notice
+# Acknowledgements
 
 Copyright (c) 2023 - 2025 Technical University of Denmark.
 
 Modules it.polimi.* copyright (c) 2020 - 2021 Giovanni Meroni, Politecnico di Milano.
+
+secbpmn2bc-rest-service has been developed as part of the project "Improving Business Processes with Blockchain: Model-driven Generation of Secure Smart Contract Code", funded by Copenhagen Fintech: https://www.copenhagenfintech.dk/projects/improving-business-processes-with-blockchain
 
