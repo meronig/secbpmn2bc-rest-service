@@ -1,6 +1,6 @@
 /*
  *
- * Copyright © 2024 Technical University of Denmark
+ * Copyright (c) 2024 Technical University of Denmark
  * 
  * This version of the software was developed by Giovanni Meroni, Assistant Professor, DTU Compute 
  *
