@@ -20,9 +20,11 @@ This is the software configuration tested. Other software versions or operative 
 
 # Acknowledgements
 
-Copyright (c) 2023 - 2025 Technical University of Denmark.
+Copyright © 2023 - 2025 Technical University of Denmark.
 
-Modules it.polimi.* copyright (c) 2020 - 2021 Giovanni Meroni, Politecnico di Milano.
+Modules it.polimi.* copyright © 2020 - 2021 Giovanni Meroni, Politecnico di Milano.
+
+Prerequisite library files copyright © 2020 University of Trento.
 
 secbpmn2bc-rest-service has been developed as part of the project "Improving Business Processes with Blockchain: Model-driven Generation of Secure Smart Contract Code", funded by Copenhagen Fintech: https://www.copenhagenfintech.dk/projects/improving-business-processes-with-blockchain
 
